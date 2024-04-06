@@ -157,6 +157,10 @@ namespace LiveSplit.ItTakesTwo {
             xmlResetTrigger.InnerText = ResetTrigger.ToString();
             xmlSettings.AppendChild(xmlResetTrigger);
 
+            XmlElement xmlCSRemover = document.CreateElement("CSRemover");
+            xmlCSRemover.InnerText = itt.Memory.CSRemover.ToString();
+            xmlSettings.AppendChild(xmlCSRemover);
+
             XmlElement xmlSplits = document.CreateElement("Splits");
             xmlSettings.AppendChild(xmlSplits);
 
@@ -173,11 +177,21 @@ namespace LiveSplit.ItTakesTwo {
             XmlNode orderedNode = settings.SelectSingleNode(".//Ordered");
             XmlNode StartTriggerNode = settings.SelectSingleNode(".//StartTrigger");
             XmlNode ResetTriggerNode = settings.SelectSingleNode(".//ResetTrigger");
+            XmlNode CSRemoverNode = settings.SelectSingleNode(".//CSRemover");
             bool isOrdered = false;
+            bool CSRemover = false;
 
             if (orderedNode != null) {
                 bool.TryParse(orderedNode.InnerText, out isOrdered);
             }
+
+            if (CSRemoverNode != null) { 
+                bool.TryParse(CSRemoverNode.InnerText, out CSRemover);
+            }
+
+            CSRemoverCheckBox.Checked = CSRemover;
+            itt.Memory.CSRemover = CSRemover;
+
             if (StartTriggerNode != null) {
                 string splitDescription = StartTriggerNode.InnerText.Trim();
                 if (!string.IsNullOrEmpty(splitDescription)) {
@@ -506,6 +520,10 @@ namespace LiveSplit.ItTakesTwo {
                 flowMain.Controls.Add(setting);
             }
             UpdateSplits();
+        }
+
+        private void CSRemover_CheckedChanged(object sender, EventArgs e) {
+            itt.Memory.CSRemover = CSRemoverCheckBox.Checked;
         }
     }
 }

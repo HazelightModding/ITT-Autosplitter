@@ -133,7 +133,10 @@ namespace LiveSplit.ItTakesTwo {
             "CS_Garden_Shrubbery_Shrubbery_Intro"
         };
 
+        public bool CSRemover = false;
+
         public bool IsSkippableCutscene() {
+            if (!CSRemover) return false;
             EHazeSkippableSetting maySkippable = (EHazeSkippableSetting)Players[0]["SkippableSetting"].Current;
             EHazeSkippableSetting codySkippable = (EHazeSkippableSetting)Players[1]["SkippableSetting"].Current;
             if (maySkippable == EHazeSkippableSetting.None && codySkippable == EHazeSkippableSetting.None) {

@@ -41,6 +41,7 @@
             this.rdAlpha = new System.Windows.Forms.RadioButton();
             this.rdType = new System.Windows.Forms.RadioButton();
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.CSRemoverCheckBox = new System.Windows.Forms.CheckBox();
             this.flowMain.SuspendLayout();
             this.flowOptions.SuspendLayout();
             this.Options_GroupBox.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // Options_GroupBox
             // 
+            this.Options_GroupBox.Controls.Add(this.CSRemoverCheckBox);
             this.Options_GroupBox.Controls.Add(this.PresetsButton);
             this.Options_GroupBox.Controls.Add(this.ClearAllButton);
             this.Options_GroupBox.Controls.Add(this.btnAddSplit);
@@ -242,6 +244,17 @@
             // 
             this.ToolTips.ShowAlways = true;
             // 
+            // CSRemoverCheckBox
+            // 
+            this.CSRemoverCheckBox.AutoSize = true;
+            this.CSRemoverCheckBox.Location = new System.Drawing.Point(205, 119);
+            this.CSRemoverCheckBox.Name = "CSRemoverCheckBox";
+            this.CSRemoverCheckBox.Size = new System.Drawing.Size(86, 17);
+            this.CSRemoverCheckBox.TabIndex = 10;
+            this.CSRemoverCheckBox.Text = "CS Remover";
+            this.CSRemoverCheckBox.UseVisualStyleBackColor = true;
+            this.CSRemoverCheckBox.CheckedChanged += new System.EventHandler(this.CSRemover_CheckedChanged);
+            // 
             // ItTakesTwoSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,6 +271,7 @@
             this.flowMain.PerformLayout();
             this.flowOptions.ResumeLayout(false);
             this.Options_GroupBox.ResumeLayout(false);
+            this.Options_GroupBox.PerformLayout();
             this.RunBehaviour_GroupBox.ResumeLayout(false);
             this.RunBehaviour_GroupBox.PerformLayout();
             this.SortBy_GroupBox.ResumeLayout(false);
@@ -285,5 +299,6 @@
         private System.Windows.Forms.ComboBox ResetTriggerComboBox;
         private System.Windows.Forms.Button PresetsButton;
         private System.Windows.Forms.Button ClearAllButton;
+        private System.Windows.Forms.CheckBox CSRemoverCheckBox;
     }
 }
