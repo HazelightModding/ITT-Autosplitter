@@ -129,7 +129,7 @@ namespace LiveSplit.ItTakesTwo {
             "CS_Tree_Escape_Chase_Outro",
             "CS_Tree_Escape_Plane_Combat", // Only skippable by Cody, capability blocked for May
 		    "CS_Tree_Escape_NoseDive_Intro", // Extremely short skippable window
-		    "CS_PlayRoom_Bookshelf_Elephant_Outro",
+		    "CS_PlayRoom_Bookshelf_Elephant_Outro", // Skippable is "EntireSequence" but cutscene is too short to be skipped
             "CS_Garden_Shrubbery_Shrubbery_Intro"
         };
 
@@ -139,9 +139,11 @@ namespace LiveSplit.ItTakesTwo {
             if (!CSRemover) return false;
             EHazeSkippableSetting maySkippable = (EHazeSkippableSetting)Players[0]["SkippableSetting"].Current;
             EHazeSkippableSetting codySkippable = (EHazeSkippableSetting)Players[1]["SkippableSetting"].Current;
-            if (maySkippable == EHazeSkippableSetting.None && codySkippable == EHazeSkippableSetting.None) {
+            EHazeSkippableSetting Skippable = maySkippable == codySkippable ? maySkippable : EHazeSkippableSetting.None;
+            if (Skippable == EHazeSkippableSetting.None || CurrentCutscene != OldCutscene) {
                 if (stopwatch.ElapsedMilliseconds > 0) {
                     removedTime.Add(stopwatch.Elapsed);
+                    ITT.WriteLogWithTime("Removed time: " + stopwatch.Elapsed.ToString("G").Substring(3, 11));
                 }
                 stopwatch.Reset();
                 return false;
