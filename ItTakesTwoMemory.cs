@@ -135,12 +135,13 @@ namespace LiveSplit.ItTakesTwo {
 
         public bool CSRemover = false;
 
+        // Remove up to 5 seconds of skippable cutscenes to balance out ping differences
         public bool IsSkippableCutscene() {
             if (!CSRemover) return false;
             EHazeSkippableSetting maySkippable = (EHazeSkippableSetting)Players[0]["SkippableSetting"].Current;
             EHazeSkippableSetting codySkippable = (EHazeSkippableSetting)Players[1]["SkippableSetting"].Current;
-            EHazeSkippableSetting Skippable = maySkippable == codySkippable ? maySkippable : EHazeSkippableSetting.None;
-            if (Skippable == EHazeSkippableSetting.None || CurrentCutscene != OldCutscene) {
+            bool Skippable = maySkippable != EHazeSkippableSetting.None && codySkippable != EHazeSkippableSetting.None;
+            if (!Skippable) {
                 if (stopwatch.ElapsedMilliseconds > 0) {
                     removedTime.Add(stopwatch.Elapsed);
                     ITT.WriteLogWithTime("Removed time: " + stopwatch.Elapsed.ToString("G").Substring(3, 11));
@@ -153,15 +154,24 @@ namespace LiveSplit.ItTakesTwo {
                 return false;
             }
 
-            if (stopwatch.ElapsedMilliseconds < maxTime) {
-                if (!stopwatch.IsRunning) {
-                    stopwatch.Start();
+            if (CurrentCutscene != OldCutscene) {
+                if (stopwatch.ElapsedMilliseconds > 0) {
+                    removedTime.Add(stopwatch.Elapsed);
+                    ITT.WriteLogWithTime("Removed time: " + stopwatch.Elapsed.ToString("G").Substring(3, 11));
                 }
-                return true;
+                stopwatch.Restart();
             }
 
-            stopwatch.Stop();
-            return false;
+            if (stopwatch.ElapsedMilliseconds >= maxTime) {
+                stopwatch.Stop();
+                return false;
+            }
+
+            if (!stopwatch.IsRunning) {
+                stopwatch.Start();
+            }
+
+            return true;
         }
 
         public bool Hook() {

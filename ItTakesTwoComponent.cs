@@ -200,16 +200,21 @@ namespace LiveSplit.ItTakesTwo {
                 }
                 failedValues.Clear();
             }
-            if (Memory.removedTime.Count > 0) {
+            int TotalCutscenes = Memory.removedTime.Count;
+            if (TotalCutscenes > 0) {
                 WriteLog("---------Removed time from cutscenes------------");
+                
                 TimeSpan TotalRemovedTime = TimeSpan.Zero;
                 foreach (var value in Memory.removedTime) {
                     TotalRemovedTime += value;
+                    if (value.TotalMilliseconds < 100 && TotalCutscenes > 2) {
+                        TotalCutscenes--;
+                    }
                 }
 
-                WriteLogWithTime("Skippable Cutscenes: " + Memory.removedTime.Count.ToString());
+                WriteLogWithTime("Skippable Cutscenes: " + TotalCutscenes.ToString());
                 WriteLogWithTime("Total removed time: " + TotalRemovedTime.ToString("G").Substring(3, 11));
-                WriteLogWithTime("Avg time removed per cutscene: " + TimeSpan.FromTicks(TotalRemovedTime.Ticks / Memory.removedTime.Count).ToString("G").Substring(3, 11));
+                WriteLogWithTime("Avg time removed per cutscene: " + TimeSpan.FromTicks(TotalRemovedTime.Ticks / TotalCutscenes).ToString("G").Substring(3, 11));
 
                 Memory.removedTime.Clear();
             }

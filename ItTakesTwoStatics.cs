@@ -72,106 +72,106 @@ namespace LiveSplit.ItTakesTwo {
         private readonly struct Level {
             public const string Format = "Splits on transition to {0}.";
 
-            public const string Menu = "Menu_BP";
+            public const string Menu = "Main Menu";
 
-            public const string Awakening = "Awakening_BP";
-            public const string Vacuum = "Vacuum_BP";
-            public const string Main_Hammernails = "Main_Hammernails_BP";
-            public const string Main_Grindsection = "Main_Grindsection_BP";
-            public const string RealWorld_Shed_StarGazing_Meet = "RealWorld_Shed_StarGazing_Meet_BP";
-            public const string Approach = "Approach_BP";
-            public const string RealWorld_House_Study_Friends = "RealWorld_House_Study_Friends_BP";
-            public const string SquirrelTurf_WarRoom = "SquirrelTurf_WarRoom_BP";
-            public const string SquirrelHome_BP_Mech = "SquirrelHome_BP_Mech";
-            public const string WaspsNest = "WaspsNest_BP";
-            public const string Tree_Boat = "Tree_Boat_BP";
-            public const string Tree_Darkroom = "Tree_Darkroom_BP";
-            public const string WaspsNest_Elevator = "WaspsNest_Elevator_BP";
-            public const string WaspsNest_Beetle = "WaspsNest_Beetle_BP";
-            public const string WaspsNest_BeetleRide = "WaspsNest_BeetleRide_BP";
-            public const string WaspQueenBoss = "WaspQueenBoss_BP";
-            public const string SquirrelTurf_Flight = "SquirrelTurf_Flight_BP";
-            public const string Escape = "Escape_BP";
-            public const string RealWorld_Exterior_Roof_Crash = "RealWorld_Exterior_Roof_Crash_BP";
-            public const string PillowFort = "PillowFort_BP";
-            public const string Spacestation_Hub = "Spacestation_Hub_BP";
-            public const string SpaceStation_MoonBaboon = "SpaceStation_MoonBaboon_BP";
-            public const string Realworld_SpaceStation_Bossfight_BeamOut = "Realworld_SpaceStation_Bossfight_BeamOut_BP";
-            public const string Hopscotch = "Hopscotch_BP";
-            public const string VoidWorld = "VoidWorld_BP";
-            public const string Kaleidoscope = "Kaleidoscope_BP";
-            public const string Goldberg_Trainstation = "Goldberg_Trainstation_BP";
-            public const string Goldberg_Dinoland = "Goldberg_Dinoland_BP";
-            public const string Goldberg_Pirate = "Goldberg_Pirate_BP";
+            public const string Awakening = "Wake-up Call";
+            public const string Vacuum = "Biting the Dust";
+            public const string Main_Hammernails = "The Depths";
+            public const string Main_Grindsection = "Wired Up";
+            public const string RealWorld_Shed_StarGazing_Meet = "Intermediary 1";//"RealWorld_Shed_StarGazing_Meet_BP";
+            public const string Approach = "Fresh Air";
+            public const string RealWorld_House_Study_Friends = "House Study Friends Cutscene";
+            public const string SquirrelTurf_WarRoom = "War Room Cutscene";
+            public const string SquirrelHome_BP_Mech = "Captured";
+            public const string WaspsNest = "Deeply Rooted";
+            public const string Tree_Boat = "Boat";
+            public const string Tree_Darkroom = "Darkroom";
+            public const string WaspsNest_Elevator = "Deeply Rooted Elevator";
+            public const string WaspsNest_Beetle = "Beetle";
+            public const string WaspsNest_BeetleRide = "Beetle Ride";
+            public const string WaspQueenBoss = "Extermination";
+            public const string SquirrelTurf_Flight = "Flight Cutscene";
+            public const string Escape = "Getaway";
+            public const string RealWorld_Exterior_Roof_Crash = "Intermediary 2";//"RealWorld_Exterior_Roof_Crash_BP";
+            public const string PillowFort = "Pillow Fort";
+            public const string Spacestation_Hub = "Spaced Out";
+            public const string SpaceStation_MoonBaboon = "Moon Baboon";
+            public const string Realworld_SpaceStation_Bossfight_BeamOut = "Beam Out Cutscene";
+            public const string Hopscotch = "Hopscotch";
+            public const string VoidWorld = "Void World";
+            public const string Kaleidoscope = "Kaleidoscope";
+            public const string Goldberg_Trainstation = "Trainstation";
+            public const string Goldberg_Dinoland = "Dino Land";
+            public const string Goldberg_Pirate = "Pirates Ahoy";
 
-            public const string Goldberg_Circus = "Goldberg_Circus_BP";
-            public const string Castle_Courtyard = "Castle_Courtyard_BP";
-            public const string Castle_Dungeon = "Castle_Dungeon_BP";
-            public const string Castle_Dungeon_Crusher = "Castle_Dungeon_Crusher_BP";
-            public const string Castle_Dungeon_Charger = "Castle_Dungeon_Charger_BP";
-            public const string Castle_Chessboard = "Castle_Chessboard_BP";
-            public const string Shelf = "Shelf_BP";
-            public const string RealWorld_RoseRoom_Bed_Tears = "RealWorld_RoseRoom_Bed_Tears_BP";
-            public const string TherapyRoom_Session_Theme_Time = "TherapyRoom_Session_Theme_Time_BP";
-            public const string Clockwork_Tutorial = "Clockwork_Tutorial_BP";
-            public const string Clockwork_ClockTown = "Clockwork_ClockTown_BP";
-            public const string Clockwork_Forest = "Clockwork_Forest_BP";
-            public const string Clockwork_ClockTowerLower_CrushingTrapRoom = "Clockwork_ClockTowerLower_CrushingTrapRoom_BP";
-            public const string Clockwork_ClockTowerLower_BridgeIntro = "Clockwork_ClockTowerLower_BridgeIntro_BP";
-            public const string Clockwork_ClockTowerLower = "Clockwork_ClockTowerLower_BP";
-            public const string Clockwork_ClockTowerMiniBossRoom = "Clockwork_ClockTowerMiniBossRoom_BP";
-            public const string Clockwork_ClockTowerLower_WallJumpCorridor = "Clockwork_ClockTowerLower_WallJumpCorridor_BP";
-            public const string Clockwork_ClockTowerLower_CuckooBirdRoom = "Clockwork_ClockTowerLower_CuckooBirdRoom_BP";
-            public const string Clockwork_ClockTowerLastBoss = "Clockwork_ClockTowerLastBoss_BP";
-            public const string Clockwork_ClockTowerCourtyardCutscene = "Clockwork_ClockTowerCourtyardCutscene_BP";
-            public const string RealWorld_House_LowerLevel_Clock = "RealWorld_House_LowerLevel_Clock_BP";
-            public const string TherapyRoom_Session_Theme_Attraction = "TherapyRoom_Session_Theme_Attraction_BP";
-            public const string SnowGlobe_Forest = "SnowGlobe_Forest_BP";
-            public const string SnowGlobe_Forest_TownGate = "SnowGlobe_Forest_TownGate_BP";
-            public const string SnowGlobe_Town = "SnowGlobe_Town_BP";
-            public const string SnowGlobe_Town_BobSled = "SnowGlobe_Town_BobSled";
-            public const string Snowglobe_Lake = "Snowglobe_Lake_BP";
-            public const string SnowGlobe_Lake_IceCave = "SnowGlobe_Lake_IceCave_BP";
-            public const string SnowGlobe_Mountain = "SnowGlobe_Mountain_BP";
-            public const string SnowGlobe_Mountain_Cave = "SnowGlobe_Mountain_Cave_BP";
-            public const string SnowGlobe_Mountain_Collapse = "SnowGlobe_Mountain_Collapse_BP";
-            public const string SnowGlobe_Mountain_PlayerAttraction = "SnowGlobe_Mountain_PlayerAttraction_BP";
-            public const string SnowGlobe_Mountain_WindWalk = "SnowGlobe_Mountain_WindWalk_BP";
-            public const string Tower = "Tower_BP";
-            public const string RealWorld_House_Kitchen_Sandwiches = "RealWorld_House_Kitchen_Sandwiches_BP";
-            public const string TherapyRoom_Session_Theme_Garden = "TherapyRoom_Session_Theme_Garden_BP";
-            public const string Garden_VegetablePatch = "Garden_VegetablePatch_BP";
-            public const string Garden_Shrubbery = "Garden_Shrubbery_BP";
-            public const string Garden_Shrubbery_SecondCombat = "Garden_Shrubbery_SecondCombat_BP";
-            public const string Garden_MoleTunnels_Stealth = "Garden_MoleTunnels_Stealth_BP";
-            public const string Garden_MoleTunnels_Chase = "Garden_MoleTunnels_Chase_BP";
-            public const string Garden_FrogPond = "Garden_FrogPond_BP";
-            public const string Garden_FrogPond_FountainPuzzle = "Garden_FrogPond_FountainPuzzle_BP";
-            public const string Garden_Greenhouse = "Garden_Greenhouse_BP";
-            public const string Garden_Greenhouse_JoysRoom = "Garden_Greenhouse_JoysRoom_BP";
-            public const string RealWorld_RoseRoom_FlowerPot = "RealWorld_RoseRoom_FlowerPot_BP";
-            public const string TherapyRoom_Session_Theme_Music = "TherapyRoom_Session_Theme_Music_BP";
-            public const string Music_ConcertHall = "Music_ConcertHall_BP";
-            public const string Music_Backstage_Tutorial = "Music_Backstage_Tutorial_BP";
-            public const string Music_Backstage_PortableSpeakerRoom = "Music_Backstage_PortableSpeakerRoom_BP";
-            public const string Music_Backstage_SubBassRoom = "Music_Backstage_SubBassRoom_BP";
-            public const string Music_Backstage_TrussRoom = "Music_Backstage_TrussRoom_BP";
-            public const string Music_Backstage_MusicTechWall = "Music_Backstage_MusicTechWall_BP";
-            public const string Music_Backstage_MurderMicrophoneRoom = "Music_Backstage_MurderMicrophoneRoom_BP";
-            public const string Music_Backstage_MicrophoneChase = "Music_Backstage_MicrophoneChase_BP";
-            public const string Music_Backstage_DrumMachineRoom = "Music_Backstage_DrumMachineRoom_BP";
-            public const string Music_Backstage_LightRoom = "Music_Backstage_LightRoom_BP";
-            public const string Music_Classic_Organ = "Music_Classic_Organ_BP";
-            public const string Music_Classic_Ending = "Music_Classic_Ending_BP";
-            public const string Music_Nightclub = "Music_Nightclub_BP";
-            public const string Music_Ending = "Music_Ending_BP";
-            public const string RealWorld_Ending = "RealWorld_Ending_BP";
-            public const string Credits = "Credits_BP";
+            public const string Goldberg_Circus = "The Greatest Show";
+            public const string Castle_Courtyard = "Once Upon a Time";
+            public const string Castle_Dungeon = "Dungeon Crawler";
+            public const string Castle_Dungeon_Crusher = "Dungeon Crusher";
+            public const string Castle_Dungeon_Charger = "Dungeon Charger";
+            public const string Castle_Chessboard = "Dungeon Chess";
+            public const string Shelf = "The Queen";
+            public const string RealWorld_RoseRoom_Bed_Tears = "Intermediary 3";//"RealWorld_RoseRoom_Bed_Tears_BP";
+            public const string TherapyRoom_Session_Theme_Time = "Therapy Room Time";
+            public const string Clockwork_Tutorial = "Gates of Time";
+            public const string Clockwork_ClockTown = "Clock Town";
+            public const string Clockwork_Forest = "Clock Forest";
+            public const string Clockwork_ClockTowerLower_CrushingTrapRoom = "Clockworks";
+            public const string Clockwork_ClockTowerLower_BridgeIntro = "Clockworks Bridge";
+            public const string Clockwork_ClockTowerLower = "Clockworks Statue Room";
+            public const string Clockwork_ClockTowerMiniBossRoom = "Clockworks Bull Boss";
+            public const string Clockwork_ClockTowerLower_WallJumpCorridor = "Clockworks Wall Jump Corridor";
+            public const string Clockwork_ClockTowerLower_CuckooBirdRoom = "Clockworks Pocket Watch Room";
+            public const string Clockwork_ClockTowerLastBoss = "A Blast from the Past";
+            public const string Clockwork_ClockTowerCourtyardCutscene = "Clock Ending Cutscene";
+            public const string RealWorld_House_LowerLevel_Clock = "Realworld Clock Cutscene";
+            public const string TherapyRoom_Session_Theme_Attraction = "Therapy Room Attraction";
+            public const string SnowGlobe_Forest = "Warming Up";
+            public const string SnowGlobe_Forest_TownGate = "Forest Town Gate";
+            public const string SnowGlobe_Town = "Winter Village";
+            public const string SnowGlobe_Town_BobSled = "Bobsled";
+            public const string Snowglobe_Lake = "Beneath the Ice";
+            public const string SnowGlobe_Lake_IceCave = "Ice Cave";
+            public const string SnowGlobe_Mountain = "Slippery Slopes";
+            public const string SnowGlobe_Mountain_Cave = "Slippery Caves";
+            public const string SnowGlobe_Mountain_Collapse = "Slippery Collapse";
+            public const string SnowGlobe_Mountain_PlayerAttraction = "Slippery Attraction";
+            public const string SnowGlobe_Mountain_WindWalk = "Slippery Wind Walk";
+            public const string Tower = "Tower Cutscene";
+            public const string RealWorld_House_Kitchen_Sandwiches = "Real World Kitchen Sandwiches";
+            public const string TherapyRoom_Session_Theme_Garden = "Therapy Room Garden";
+            public const string Garden_VegetablePatch = "Green Fingers";
+            public const string Garden_Shrubbery = "Weed Whacking";
+            public const string Garden_Shrubbery_SecondCombat = "Weed Whacking Second Combat";
+            public const string Garden_MoleTunnels_Stealth = "Trespassing";
+            public const string Garden_MoleTunnels_Chase = "Trespassing Chase";
+            public const string Garden_FrogPond = "Frog Pond";
+            public const string Garden_FrogPond_FountainPuzzle = "Frog Pond Fountain Puzzle";
+            public const string Garden_Greenhouse = "Affliction";
+            public const string Garden_Greenhouse_JoysRoom = "Affliction Joys Room";
+            public const string RealWorld_RoseRoom_FlowerPot = "Real World Flower Pot";
+            public const string TherapyRoom_Session_Theme_Music = "Therapy Room Music";
+            public const string Music_ConcertHall = "Setting the Stage";
+            public const string Music_Backstage_Tutorial = "Rehearsal";
+            public const string Music_Backstage_PortableSpeakerRoom = "Rehearsal Portable Speaker Room";
+            public const string Music_Backstage_SubBassRoom = "Rehearsal Sub Bass Room";
+            public const string Music_Backstage_TrussRoom = "Rehearsal Truss Room";
+            public const string Music_Backstage_MusicTechWall = "Rehearsal Music Tech Wall";
+            public const string Music_Backstage_MurderMicrophoneRoom = "Rehearsal Murder Microphone Room";
+            public const string Music_Backstage_MicrophoneChase = "Rehearsal Microphone Chase";
+            public const string Music_Backstage_DrumMachineRoom = "Rehearsal Drum Machine Room";
+            public const string Music_Backstage_LightRoom = "Rehearsal Light Room";
+            public const string Music_Classic_Organ = "Symphony";
+            public const string Music_Classic_Ending = "Symphony Ending";
+            public const string Music_Nightclub = "Turn Up";
+            public const string Music_Ending = "A Grand Finale";
+            public const string RealWorld_Ending = "Real World Ending";
+            public const string Credits = "Credits";
 
-            public const string TherapyRoom_Session_Theme_Love = "TherapyRoom_Session_Theme_Love_BP";
-            public const string Basement_Seekers = "Basement_Seekers_BP";
-            public const string Basement_HouseInterior = "Basement_HouseInterior_BP";
-            public const string Basement_Boss = "Basement_Boss_BP";
+            public const string TherapyRoom_Session_Theme_Love = "Therapy Room Basement";
+            public const string Basement_Seekers = "Basement Seekers";
+            public const string Basement_HouseInterior = "Basement House Interior";
+            public const string Basement_Boss = "Basement Boss";
 
         }
         private readonly struct Minigame {
@@ -207,7 +207,7 @@ namespace LiveSplit.ItTakesTwo {
             public const string Format = "Splits when obtaining the \"{0}\" checkpoint in {1}.";
 
             public struct Menu {
-                public const string MainMenu = "Main_Menu";
+                public const string MainMenu = "Main Menu";
             }
 
             public struct WakeUpCall {
@@ -708,7 +708,7 @@ namespace LiveSplit.ItTakesTwo {
 
             public struct WiredUp {
                 public const string ToolBoss_Door = "ToolBoss_Door";
-                public const string Stargazing_Meet = "Stargazing_Meet";
+                public const string Stargazing_Meet = "Intermediary 1";
             }
 
             public struct FreshAir {
@@ -748,7 +748,7 @@ namespace LiveSplit.ItTakesTwo {
                 public const string Plane_Combat = "Plane_Combat";
                 public const string NoseDive_Intro = "NoseDive_Intro";
                 public const string NoseDive_Crash = "NoseDive_Crash";
-                public const string LivingRoom_Headache = "LivingRoom_Headache";
+                public const string LivingRoom_Headache = "Intermediary 2";
                 public const string Roof_Crash = "Roof_Crash";
             }
 
@@ -832,16 +832,16 @@ namespace LiveSplit.ItTakesTwo {
             }
 
             public struct TheQueen {
-                public const string Elephant_Intro = "Elephant_Intro";
-                public const string CaughtByClaw = "CaughtByClaw";
-                public const string Towerhang_Finish = "Towerhang_Finish";
-                public const string LegPull_GetStuck = "LegPull_GetStuck";
-                public const string LegPull_EarRip = "LegPull_EarRip";
-                public const string ToEdgeHang = "ToEdgeHang";
-                public const string Elephant_Outro = "Elephant_Outro";
-                public const string Bed_Crack = "Bed_Crack";
-                public const string Bed_Tears = "Bed_Tears";
-                public const string TherapyRoom_Session_Theme_Time = "TherapyRoom_Session_Theme_Time";
+                public const string Elephant_Intro = "Elephant Intro";
+                public const string CaughtByClaw = "Caught By Claw";
+                public const string Towerhang_Finish = "Towerhang Finish";
+                public const string LegPull_GetStuck = "Leg Pull Get Stuck";
+                public const string LegPull_EarRip = "Leg Pull Ear Rip";
+                public const string ToEdgeHang = "To Edge Hang";
+                public const string Elephant_Outro = "Elephant Outro";
+                public const string Bed_Crack = "Intermediary 3";
+                public const string Bed_Tears = "Bed Tears";
+                public const string TherapyRoom_Session_Theme_Time = "Therapy Room Time";
             }
 
             public struct GatesOfTime {
@@ -870,24 +870,24 @@ namespace LiveSplit.ItTakesTwo {
             }
 
             public struct ABlastFromThePast {
-                public const string GlassWalkway_Intro = "GlassWalkway_Intro";
-                public const string LaunchingPlatform = "LaunchingPlatform";
-                public const string BuildingSmasherPlatform = "BuildingSmasherPlatform";
-                public const string AfterRewindSmash = "AfterRewindSmash";
-                public const string LastBoss_Explosion = "LastBoss_Explosion";
-                public const string Final_Explosion = "Final_Explosion";
-                public const string LandAfterExplosion = "LandAfterExplosion";
-                public const string CodyEndingPlatform = "CodyEndingPlatform";
-                public const string MayEndingPlatform = "MayEndingPlatform";
-                public const string EndingRewind = "EndingRewind";
-                public const string Time_Outro = "Time_Outro";
+                public const string GlassWalkway_Intro = "Glass Walkway Intro";
+                public const string LaunchingPlatform = "Launching Platform";
+                public const string BuildingSmasherPlatform = "Building Smasher Platform";
+                public const string AfterRewindSmash = "After Rewind Smash";
+                public const string LastBoss_Explosion = "Last Boss Explosion";
+                public const string Final_Explosion = "Final Explosion";
+                public const string LandAfterExplosion = "Land After Explosion";
+                public const string CodyEndingPlatform = "Cody Ending Platform";
+                public const string MayEndingPlatform = "May Ending Platform";
+                public const string EndingRewind = "Intermediary 4";
+                public const string Time_Outro = "Time Outro";
                 public const string RealWorld_House_LowerLevel_Clock = "RealWorld_House_LowerLevel_Clock";
-                public const string TherapyRoom_Session_Theme_Attraction = "TherapyRoom_Session_Theme_Attraction";
+                public const string TherapyRoom_Session_Theme_Attraction = "Therapy Room Attraction";
             }
 
             public struct WarmingUp {
-                public const string Entrance_Intro = "Entrance_Intro";
-                public const string Find_Skates = "Find_Skates";
+                public const string Entrance_Intro = "Entrance Intro";
+                public const string Find_Skates = "Find Skates";
             }
 
             public struct WinterVillage {
@@ -982,77 +982,77 @@ namespace LiveSplit.ItTakesTwo {
                 public const string BossRoom_CodyTakesControlPhaseThree = "BossRoom_CodyTakesControlPhaseThree";
                 public const string BossRoom_Outro = "BossRoom_Outro";
                 public const string RealWorld_House_RoseRoom_FlowerPot = "RealWorld_House_RoseRoom_FlowerPot";
-                public const string TherapyRoom_Session_Theme_Music = "TherapyRoom_Session_Theme_Music";
+                public const string TherapyRoom_Session_Theme_Music = "Therapy Room Music";
             }
 
             public struct SettingTheStage {
-                public const string Backstage_Intro = "Backstage_Intro";
-                public const string EnteringBackstage = "EnteringBackstage";
-                public const string Backstage_Orchestra = "Backstage_Orchestra";
-                public const string EnteringClassic = "EnteringClassic";
-                public const string Backstage_Audience = "Backstage_Audience";
-                public const string NightClub_Entrance = "NightClub_Entrance";
+                public const string Backstage_Intro = "Backstage Intro";
+                public const string EnteringBackstage = "Entering Backstage";
+                public const string Backstage_Orchestra = "Backstage Orchestra";
+                public const string EnteringClassic = "Entering Classic";
+                public const string Backstage_Audience = "Backstage Audience";
+                public const string NightClub_Entrance = "Entering Night Club";
             }
 
             public struct Rehearsal {
-                public const string PortableSpeakerRoom_Intro = "PortableSpeakerRoom_Intro";
-                public const string Jukebox_CoinSuck = "Jukebox_CoinSuck";
-                public const string PortableSpeakerRoom_WindowBlast = "PortableSpeakerRoom_WindowBlast";
-                public const string BassRoom_Landing = "BassRoom_Landing";
-                public const string MusicTechWall_GoingThroughTruss = "MusicTechWall_GoingThroughTruss";
-                public const string MusicTechWall_Reveal = "MusicTechWall_Reveal";
-                public const string MusicTechWall_PowerCableTravel = "MusicTechWall_PowerCableTravel";
-                public const string MicrophoneRoom_MotherReveal = "MicrophoneRoom_MotherReveal";
-                public const string MicrophoneChase_FallToGrind = "MicrophoneChase_FallToGrind";
-                public const string MicrophoneChase_BrokenTruss = "MicrophoneChase_BrokenTruss";
-                public const string MicrophoneChase_Landing = "MicrophoneChase_Landing";
-                public const string MicrophoneChase_Ending = "MicrophoneChase_Ending";
-                public const string LightRoom_Entrance = "LightRoom_Entrance";
-                public const string LightRoom_EndOfLightRoom = "LightRoom_EndOfLightRoom";
+                public const string PortableSpeakerRoom_Intro = "Portable Speaker Room Intro";
+                public const string Jukebox_CoinSuck = "Jukebox Coin Suck";
+                public const string PortableSpeakerRoom_WindowBlast = "Portable Speaker Room Window Blast";
+                public const string BassRoom_Landing = "Bass Room Landing";
+                public const string MusicTechWall_GoingThroughTruss = "Music Tech Wall Going Through Truss";
+                public const string MusicTechWall_Reveal = "Music Tech Wall Reveal";
+                public const string MusicTechWall_PowerCableTravel = "Music Tech Wall Power Cable Travel";
+                public const string MicrophoneRoom_MotherReveal = "Microphone Room Mother Reveal";
+                public const string MicrophoneChase_FallToGrind = "Microphone Chase Fall To Grind";
+                public const string MicrophoneChase_BrokenTruss = "Microphone Chase Broken Truss";
+                public const string MicrophoneChase_Landing = "Microphone Chase Landing";
+                public const string MicrophoneChase_Ending = "Microphone Chase Ending";
+                public const string LightRoom_Entrance = "Light Room Entrance";
+                public const string LightRoom_EndOfLightRoom = "End Of Light Room";
             }
 
             public struct Symphony {
-                public const string EnterClassic = "EnterClassic";
+                public const string EnterClassic = "Enter Symphony";
                 public const string Flying = "Flying";
                 public const string Reveal = "Reveal";
-                public const string OpenBirdCage = "OpenBirdCage";
-                public const string ReleaseFollowersCage = "ReleaseFollowersCage";
-                public const string OpenCloudRoom = "OpenCloudRoom";
-                public const string ReleaseFollowersCloud = "ReleaseFollowersCloud";
-                public const string LevelEnding = "LevelEnding";
+                public const string OpenBirdCage = "Open Bird Cage";
+                public const string ReleaseFollowersCage = "Release Followers Cage";
+                public const string OpenCloudRoom = "Open Cloud Room";
+                public const string ReleaseFollowersCloud = "Release Followers Cloud";
+                public const string LevelEnding = "Symphony Ending";
             }
 
             public struct TurnUp {
-                public const string RainbowSlide_Intro = "RainbowSlide_Intro";
-                public const string RainbowSlide_RespawnMay1 = "RainbowSlide_RespawnMay1";
-                public const string RainbowSlide_RespawnCody1 = "RainbowSlide_RespawnCody1";
-                public const string Discoball_GroundpoundStart = "Discoball_GroundpoundStart";
-                public const string DiscoRide_BallCrash = "DiscoRide_BallCrash";
-                public const string Basement_DjElevator = "Basement_DjElevator";
-                public const string Basement_Elevator = "Basement_Elevator";
-                public const string DJ_Outro = "DJ_Outro";
+                public const string RainbowSlide_Intro = "Rainbow Slide Intro";
+                public const string RainbowSlide_RespawnMay1 = "Rainbow Slide Respawn May";
+                public const string RainbowSlide_RespawnCody1 = "Rainbow Slide Respawn Cody";
+                public const string Discoball_GroundpoundStart = "Discoball Groundpound Start";
+                public const string DiscoRide_BallCrash = "Disco Ride Ball Crash";
+                public const string Basement_DjElevator = "Basement Dj Elevator";
+                public const string Basement_Elevator = "Basement Elevator";
+                public const string DJ_Outro = "DJ Outro";
             }
 
             public struct AGrandFinale {
-                public const string DropDown_Preparation = "DropDown_Preparation";
-                public const string DressingRoom_Mirror = "DressingRoom_Mirror";
-                public const string FirstCameraRide = "FirstCameraRide";
-                public const string SecondCameraRide = "SecondCameraRide";
-                public const string GrandFinaleEnding = "GrandFinaleEnding";
+                public const string DropDown_Preparation = "Drop Down Preparation";
+                public const string DressingRoom_Mirror = "Dressing Room Mirror";
+                public const string FirstCameraRide = "First Camera Ride";
+                public const string SecondCameraRide = "Second Camera Ride";
+                public const string GrandFinaleEnding = "Grand Finale Ending";
                 public const string Smooch = "Smooch";
-                public const string ClimacticKiss = "Climactic Kiss";
-                public const string RealWorld_House_Study_Wakeup = "RealWorld_House_Study_Wakeup";
-                public const string RealWorld_RoseRoom_Bed_Letter = "RealWorld_RoseRoom_Bed_Letter";
-                public const string RealWorld_Exterior_Busstop_Reunion = "RealWorld_Exterior_Busstop_Reunion";
-                public const string RealWorld_House_Credits_PlaceBook = "RealWorld_House_Credits_PlaceBook";
+                public const string ClimacticKiss = "Climactic Kiss (End of run)";
+                public const string RealWorld_House_Study_Wakeup = "Real World House Study Wakeup";
+                public const string RealWorld_RoseRoom_Bed_Letter = "Real World RoseRoom Bed Letter";
+                public const string RealWorld_Exterior_Busstop_Reunion = "Real World Exterior Busstop Reunion";
+                public const string RealWorld_House_Credits_PlaceBook = "Real World House Credits Place Book";
             }
 
             public struct Basement {
-                public const string TherapyRoom_Session_Theme_Love = "TherapyRoom_Session_Theme_Love";
-                public const string Seekers_Door_Intro = "Seekers_Door_Intro";
-                public const string BossRoom_Argue_Collapse = "BossRoom_Argue_Collapse";
-                public const string BossRoom_Argue_Light = "BossRoom_Argue_Light";
-                public const string Boss_GrayPlace_Letter = "Boss_GrayPlace_Letter";
+                public const string TherapyRoom_Session_Theme_Love = "Therapy Room Basement";
+                public const string Seekers_Door_Intro = "Seekers Door Intro";
+                public const string BossRoom_Argue_Collapse = "Boss Room Argue Collapse";
+                public const string BossRoom_Argue_Light = "Boss Room Argue Light";
+                public const string Boss_GrayPlace_Letter = "Boss Gray Place Letter";
             }
         }
 
@@ -5397,6 +5397,10 @@ namespace LiveSplit.ItTakesTwo {
             [Description("Any player death (Death)"), 
                 ToolTip("Splits on any player death")]
             AnyDead,
+
+            [Description("Manual Split (Misc)"),
+                ToolTip("Won't split automatically. For use in ordered splits.")]
+            ManualSplit,
 
             #endregion
         }
