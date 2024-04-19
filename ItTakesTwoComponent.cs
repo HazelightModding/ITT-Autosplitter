@@ -23,6 +23,7 @@ namespace LiveSplit.ItTakesTwo {
         public IDictionary<string, Action> ContextMenuControls { get { return null; } }
         public ItTakesTwoMemory Memory { get; private set; }
         public ItTakesTwoSettings Settings { get; private set; }
+        public ItTakesTwoCheckpoints Checkpoints { get; private set; }
 
         private int currentSplit = -1;
         private HashSet<SplitName> splitsDone = new HashSet<SplitName>();
@@ -36,6 +37,7 @@ namespace LiveSplit.ItTakesTwo {
             InitLog();
             Memory = new ItTakesTwoMemory(this);
             Settings = new ItTakesTwoSettings(this);
+            Checkpoints = new ItTakesTwoCheckpoints(this);
 
             if (state == null) {
                 return;
@@ -193,6 +195,8 @@ namespace LiveSplit.ItTakesTwo {
             currentSplit = -1;
             Model.CurrentState.IsGameTimePaused = true;
             splitsDone.Clear();
+            Checkpoints.Reset();
+            
             if (failedValues.Count > 0) {
                 WriteLog("---------Splits without match-------------------");
                 foreach (var value in failedValues) {
@@ -232,12 +236,12 @@ namespace LiveSplit.ItTakesTwo {
             Model.CurrentState.SetGameTime(Model.CurrentState.CurrentTime.RealTime);
             splitsDone.Clear();
             failedValues.Clear();
+            Checkpoints.Start();
 
             WriteLog("---------New Game-------------------------------");
         }
         public void OnUndoSplit(object sender, EventArgs e) {
             currentSplit--;
-            //if (!settings.Ordered) splitsDone.Remove(lastSplitDone); Reminder of THIS BREAKS THINGS
         }
         public void OnSkipSplit(object sender, EventArgs e) {
             currentSplit++;
@@ -257,9 +261,8 @@ namespace LiveSplit.ItTakesTwo {
                     Console.WriteLine(data);
                 }
                 if (hasLog) {
-                    using (StreamWriter wr = new StreamWriter(LOGFILE, true)) {
-                        wr.WriteLine(data);
-                    }
+                    using StreamWriter wr = new StreamWriter(LOGFILE, true);
+                    wr.WriteLine(data);
                 }
             }
         }

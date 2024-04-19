@@ -28,6 +28,7 @@
             this.flowMain = new System.Windows.Forms.FlowLayoutPanel();
             this.flowOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.Options_GroupBox = new System.Windows.Forms.GroupBox();
+            this.CSRemoverCheckBox = new System.Windows.Forms.CheckBox();
             this.PresetsButton = new System.Windows.Forms.Button();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.versionLabel = new System.Windows.Forms.Label();
@@ -41,7 +42,7 @@
             this.rdAlpha = new System.Windows.Forms.RadioButton();
             this.rdType = new System.Windows.Forms.RadioButton();
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.CSRemoverCheckBox = new System.Windows.Forms.CheckBox();
+            this.CPCounterCheckBox = new System.Windows.Forms.CheckBox();
             this.flowMain.SuspendLayout();
             this.flowOptions.SuspendLayout();
             this.Options_GroupBox.SuspendLayout();
@@ -91,7 +92,6 @@
             // 
             // Options_GroupBox
             // 
-            this.Options_GroupBox.Controls.Add(this.CSRemoverCheckBox);
             this.Options_GroupBox.Controls.Add(this.PresetsButton);
             this.Options_GroupBox.Controls.Add(this.ClearAllButton);
             this.Options_GroupBox.Controls.Add(this.btnAddSplit);
@@ -104,6 +104,17 @@
             this.Options_GroupBox.TabIndex = 6;
             this.Options_GroupBox.TabStop = false;
             this.Options_GroupBox.Text = "Options";
+            // 
+            // CSRemoverCheckBox
+            // 
+            this.CSRemoverCheckBox.AutoSize = true;
+            this.CSRemoverCheckBox.Location = new System.Drawing.Point(207, 18);
+            this.CSRemoverCheckBox.Name = "CSRemoverCheckBox";
+            this.CSRemoverCheckBox.Size = new System.Drawing.Size(86, 17);
+            this.CSRemoverCheckBox.TabIndex = 10;
+            this.CSRemoverCheckBox.Text = "CS Remover";
+            this.CSRemoverCheckBox.UseVisualStyleBackColor = true;
+            this.CSRemoverCheckBox.CheckedChanged += new System.EventHandler(this.CSRemover_CheckedChanged);
             // 
             // PresetsButton
             // 
@@ -136,6 +147,8 @@
             // 
             // RunBehaviour_GroupBox
             // 
+            this.RunBehaviour_GroupBox.Controls.Add(this.CSRemoverCheckBox);
+            this.RunBehaviour_GroupBox.Controls.Add(this.CPCounterCheckBox);
             this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerComboBox);
             this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerCheckBox);
             this.RunBehaviour_GroupBox.Controls.Add(this.StartTriggerComboBox);
@@ -244,16 +257,16 @@
             // 
             this.ToolTips.ShowAlways = true;
             // 
-            // CSRemoverCheckBox
+            // CPCounterCheckBox
             // 
-            this.CSRemoverCheckBox.AutoSize = true;
-            this.CSRemoverCheckBox.Location = new System.Drawing.Point(205, 119);
-            this.CSRemoverCheckBox.Name = "CSRemoverCheckBox";
-            this.CSRemoverCheckBox.Size = new System.Drawing.Size(86, 17);
-            this.CSRemoverCheckBox.TabIndex = 10;
-            this.CSRemoverCheckBox.Text = "CS Remover";
-            this.CSRemoverCheckBox.UseVisualStyleBackColor = true;
-            this.CSRemoverCheckBox.CheckedChanged += new System.EventHandler(this.CSRemover_CheckedChanged);
+            this.CPCounterCheckBox.AutoSize = true;
+            this.CPCounterCheckBox.Location = new System.Drawing.Point(107, 18);
+            this.CPCounterCheckBox.Name = "CPCounterCheckBox";
+            this.CPCounterCheckBox.Size = new System.Drawing.Size(80, 17);
+            this.CPCounterCheckBox.TabIndex = 10;
+            this.CPCounterCheckBox.Text = "CP Counter";
+            this.CPCounterCheckBox.UseVisualStyleBackColor = true;
+            this.CPCounterCheckBox.CheckedChanged += new System.EventHandler(this.CPCounterCheckBox_CheckedChanged);
             // 
             // ItTakesTwoSettings
             // 
@@ -271,7 +284,6 @@
             this.flowMain.PerformLayout();
             this.flowOptions.ResumeLayout(false);
             this.Options_GroupBox.ResumeLayout(false);
-            this.Options_GroupBox.PerformLayout();
             this.RunBehaviour_GroupBox.ResumeLayout(false);
             this.RunBehaviour_GroupBox.PerformLayout();
             this.SortBy_GroupBox.ResumeLayout(false);
@@ -300,5 +312,6 @@
         private System.Windows.Forms.Button PresetsButton;
         private System.Windows.Forms.Button ClearAllButton;
         private System.Windows.Forms.CheckBox CSRemoverCheckBox;
+        private System.Windows.Forms.CheckBox CPCounterCheckBox;
     }
 }

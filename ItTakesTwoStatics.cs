@@ -21,10 +21,12 @@ namespace LiveSplit.ItTakesTwo {
             public const string CutsceneEnd = " (Cutscene End)";
             public const string Death = " (Death)";
             public const string Minigame = " (Minigame)";
+            public const string Dev = " (Dev)";
         }
         private readonly struct Chapter {
             public const string Format = "Splits on transition to {0}.";
 
+            public const string Intro = "Intro";
             public const string WakeUpCall = "Wake-Up Call";
             public const string BitingTheDust = "Biting the Dust";
             public const string TheDepths = "The Depths";
@@ -210,6 +212,10 @@ namespace LiveSplit.ItTakesTwo {
                 public const string MainMenu = "Main Menu";
             }
 
+            public struct Intro {
+                public const string HouseKitchenDivorce = "RealWorld House Kitchen Divorce";
+            }
+
             public struct WakeUpCall {
                 public const string Start = "Awakening_Start";
                 public const string FirstGameplay = "Awakening_FirstGameplay";
@@ -225,7 +231,9 @@ namespace LiveSplit.ItTakesTwo {
                 public const string SideScroller = "Side Scroller";
                 public const string Stomach = "Stomach";
                 public const string PortalLoop = "Portal Loop";
+                public const string BossBackpack = "Boss Backpack";
                 public const string WeatherVane = "Weather Vane";
+                public const string PistonLauncher = "Piston Launcher";
                 public const string WeightBowl = "Weight Bowl";
                 public const string VacuumBoss = "Vacuum Boss";
                 public const string BossNoIntro = "Boss No Intro";
@@ -234,10 +242,13 @@ namespace LiveSplit.ItTakesTwo {
             public struct Depths {
                 public const string Intro = "MineIntro";
                 public const string IntroNoCS = "MineIntroNoCutscene";
+                public const string MineHammerMeeting = "MineHammerMeeting";
                 public const string TutorialPuzzle1 = "TutorialPuzzle1";
                 public const string MineMainHub = "MineMainHub";
                 public const string WhackACody = "WhackACody";
                 public const string MachineIntroPuzzle1 = "MachineIntroPuzzle1";
+                public const string MineMachineRoom = "MineMachineRoom";
+                public const string MineMachineRoomStarted = "MineMachineRoomStarted";
                 public const string MineMachineRoomHalfway = "MineMachineRoomHalfway";
                 public const string MachineRoomChickenRace = "MachineRoomChickenRace";
                 public const string MachineRoomEnding = "MachineRoomEnding";
@@ -257,12 +268,15 @@ namespace LiveSplit.ItTakesTwo {
                 public const string SwapTracks = "GrindSection_SwapTracks";
                 public const string ConnectCables = "GrindSection_ConnectCables";
                 public const string PostFan = "GrindSection_PostFan";
+                public const string GroundPound = "GrindSection_GroundPound";
                 public const string Stargazing_Meet = "Stargazing_Meet"; // Realworld instead?
             }
 
             public struct FreshAir {
                 public const string Intro = "Tree_Approach_LevelIntro";
                 public const string Start = "Tree_Approach_LevelStart";
+                public const string TreeSwing = "Tree_Approach_TreeSwing";
+                public const string SquirrelHomeEntry = "Tree_Approach_SquirrelHomeEntry";
                 public const string StudyFriends = "RealWorld_StudyFriends"; // Realworld instead?
                 public const string Interrogation = "CS_Interrogation";
             }
@@ -330,6 +344,7 @@ namespace LiveSplit.ItTakesTwo {
             public struct Getaway {
                 public const string Intro = "Intro";
                 public const string AfterSquirrelChaseCS = "AfterSquirrelChaseCS";
+                public const string HouseReveal = "House Reveal";
                 public const string BeforeCatapultRoom = "Before Catapult Room";
                 public const string CanopyLevelSetLoad = "CanopyLevelSetLoad";
                 public const string FightOutsideTree = "Fight outside tree";
@@ -381,6 +396,10 @@ namespace LiveSplit.ItTakesTwo {
                 public const string VoidWorld = "Void World";
                 public const string SpawningFloor = "Spawning Floor";
                 public const string KaleidoscopeIntro = "Kaleidoscope Intro";
+                public const string EndOfKaleidoscope = "End of Kaleidoscope";
+                public const string BeforeMirrorPuzzle = "Before Mirror Puzzle";
+                public const string HomeWorkPen = "HomeWork Pen";
+                public const string SIDECONTENT_PullbackCar = "SIDECONTENT_PullbackCar";
             }
 
             public struct Trainstation {
@@ -391,10 +410,11 @@ namespace LiveSplit.ItTakesTwo {
 
             public struct DinoLand {
                 public const string Start = "Dinoland_Start";
+                public const string LoadDinoLandToPirate = "LoadDInoLandToPirate";
                 public const string SlamDinoPt1 = "Dinoland_SlamDinoPt1";
                 public const string SlamDinoPt2 = "Dinoland_SlamDinoPt2";
+                public const string SlamDinoPt3 = "Dinoland_SlamDinoPt3";
                 public const string Platforming = "Dinoland_Platforming";
-                public const string LoadDinoLandToPirate = "LoadDInoLandToPirate";
             }
 
             public struct PiratesAhoy {
@@ -404,6 +424,7 @@ namespace LiveSplit.ItTakesTwo {
                 public const string PirateShips = "Pirate_Part03_PirateShips";
                 public const string PirateShips_End = "Pirate_Part04_PirateShips_End";
                 public const string Stream = "Pirate_Part05_Stream";
+                public const string BossCutScene = "Pirate_Part06_BossCutScene";
                 public const string BossStart = "Pirate_Part06_BossStart";
                 public const string BossHalfway = "Pirate_Part07_BossHalfway";
                 public const string BossFinalPart = "Pirate_Part08_BossFinalPart";
@@ -424,6 +445,7 @@ namespace LiveSplit.ItTakesTwo {
                 public const string Start = "Castle_Courtyard_Start";
                 public const string StartNoCS = "Courtyard_Start_NoIntro";
                 public const string CranePuzzle = "Castle_Courtyard_CranePuzzle";
+                public const string Painting = "MINIGAME_Painting";
             }
 
             public struct DungeonCrawler {
@@ -440,6 +462,8 @@ namespace LiveSplit.ItTakesTwo {
                 public const string Charger = "Castle_Dungeon_Charger";
                 public const string ChessIntro = "Castle_Chessboard_Intro";
                 public const string ChessBoss = "Castle_Chessboard_BossFIght";
+                public const string DungeonNoTeleport = "Castle_Dungeon_NoTeleport";
+                public const string ChessNoTeleport = "Castle_Chess_NoTeleport";
             }
 
             public struct TheQueen {
@@ -458,7 +482,9 @@ namespace LiveSplit.ItTakesTwo {
                 public const string ClockTown_Valves = "ClockTown_Valves";
                 public const string Forest = "Start Forest";
                 public const string ForestNoCS = "Forest - No Cutscene";
+                public const string LeftTowerPuzzle = "Left Tower Puizzle";
                 public const string LeftTowerDestroyed = "Left_Tower_Destroyed"; // CHECK WITH GLINT
+                public const string RightTowerPuzzle = "Right Tower Puzzle";
                 public const string RightTowerDestroyed = "Right_Tower_Destroyed"; // CHECK WITH GLINT
                 public const string Courtyard = "Tower_Courtyard";
             }
@@ -468,6 +494,8 @@ namespace LiveSplit.ItTakesTwo {
                 public const string IntroNoCS = "Crusher Room - No Intro";
                 public const string Bridge = "Bridge";
                 public const string StatueRoom = "Statue_Room";
+                public const string CageRoom = "Cage Room";
+                public const string MechanicalWallRoom = "Mechanical Wall Room";
                 public const string StatueRoom1 = "Statue Room - Mech Wall Room Done"; // CHECK WITH GLINT
                 public const string StatueRoom2 = "Statue Room - OTHER ROOM"; // CHECK WITH GLINT
                 public const string StatueRoomComplete = "Statue Room - Both Side Rooms Completed";
@@ -475,6 +503,7 @@ namespace LiveSplit.ItTakesTwo {
                 public const string WallJumpCorridor = "Wall Jump Corridor";
                 public const string Elevator_Room = "Elevator_Room";
                 public const string PocketWatch = "Pocket_Watch_Room";
+                public const string PathToEvilBird = "Path to Evil Bird";
                 public const string EvilBirdRoom = "Evil Bird Room";
                 public const string EvilBirdRoomStarted = "Evil Bird Room Started";
             }
@@ -489,6 +518,7 @@ namespace LiveSplit.ItTakesTwo {
                 public const string Explosion = "Explosion";
                 public const string FinalExplosion = "Final Explosion";
                 public const string Sprint = "Sprint To Couple";
+                public const string EndingDev = "Ending Cutscene";
                 public const string Ending = "Clockwork Ending";
                 public const string RealWorld_House_LowerLevel_Clock = "RealWorld_House_LowerLevel_Clock";
                 public const string TherapyRoom_Attraction_Session = "TherapyRoom_Attraction_Session";
@@ -552,12 +582,16 @@ namespace LiveSplit.ItTakesTwo {
                 public const string SecondSpider = "Shrubbery_SecondSpider";
                 public const string SpinningLog = "Shrubbery_SpinningLog";
                 public const string EnteringBigLog = "Shrubbery_EnteringBigLog";
+                public const string BigLogCollapse = "Shrubbery_BigLogCollapse";
                 public const string SinkingLog = "Shrubbery_SinkingLog";
                 public const string PurpleSapWall = "Shrubbery_PurpleSapWall";
+                public const string EnteringBigSpiderCave = "Shrubbery_EnteringBigSpiderCave";
                 public const string AfterLeavingSpiders = "Shrubbery_AfterLeavingSpiders";
                 public const string StartingFinalCombat = "Shrubbery_StartingFinalCombat";
                 public const string StartingFinalCombatSecondWave = "StartingFinalCombatSecondWave";
                 public const string SecondCombatFirstWaveFinished = "SecondCombatFirstWaveFinished";
+                public const string FinalCombatFinished = "Shrubbery_FinalCombatFinished";
+                public const string Outro = "Shrubbery_Outro";
             }
 
             public struct Trespassing {
@@ -627,14 +661,20 @@ namespace LiveSplit.ItTakesTwo {
                 public const string TrussRoom = "Truss_Room";
                 public const string TrussRoomNoSubBassRoom = "Truss_Room_no_SubBassRoom";
                 public const string MusicTechWallStart = "Music_Tech_Wall_Start";
+                public const string MusicTechWallEQSweeper = "Music Tech Wall - EQ Sweeper";
                 public const string SilentRoomIntro = "Silent_Room_Intro";
+                public const string MicrophoneChaseDevDebugFallToGrind = "MicrophoneChaseDevDebugFallToGrind";
                 public const string SilentRoomElevatorPillar = "Silent_Room_Elevator_Pillar";
                 public const string SilentRoomEnd = "Silent_Room_End";
                 public const string MicrophoneChase = "MicrophoneChase";
                 public const string MicrophoneChaseAfterFirstGrind = "MicrophoneChase_After_First_Grind";
                 public const string MicrophoneChaseEnding = "MicrophoneChase_Ending";
                 public const string DrumMachineRoom = "DrumMachineRoom";
+                public const string LightRoomPowerSwitch = "LightRoom PowerSwitch";
                 public const string LightRoom = "LightRoom";
+                public const string MicrophoneChaseDevDebugBreamCrush = "MicrophoneChaseDevDebugBreamCrush";
+                public const string ChaseLanding = "Chase Landing";
+                public const string MicrophoneChaseDoor = "MicrophoneChase Door";
             }
 
             public struct Symphony {
@@ -664,6 +704,8 @@ namespace LiveSplit.ItTakesTwo {
             public struct GrandFinale {
                 public const string EndingIntro = "EndingIntro";
                 public const string MayInDressingRoom = "MayInDressingRoom";
+                public const string CodyBeforeFlipSwitch = "CodyBeforeFlipSwitch";
+                public const string MayBeforeCurtains = "MayBeforeCurtains";
                 public const string RealWorld_WakeUp = "RealWorld_WakeUp";
                 public const string CreditIntro = "CreditIntro";
             }
@@ -1438,6 +1480,11 @@ namespace LiveSplit.ItTakesTwo {
             #endregion
 
             #region Checkpoint Splits
+            #region Intro
+            [Description(Checkpoint.Intro.HouseKitchenDivorce + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Intro.HouseKitchenDivorce, Chapter.Intro)]
+            RealWorld_RealWorld_House_Kitchen_Divorce,
+            #endregion
             #region Wake-up Call
             [Description(Checkpoint.WakeUpCall.Start + Tag.Checkpoint), 
 				ToolTip(Checkpoint.Format + 
@@ -1468,7 +1515,7 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.BitingTheDust.OilPit + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.OilPit, Chapter.BitingTheDust)]
-            Shed_Vacuum_OilPit, 
+            Shed_Vacuum_Oil_Pit, 
 
             [Description(Checkpoint.BitingTheDust.Generator + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.Generator, Chapter.BitingTheDust)]
@@ -1476,7 +1523,7 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.BitingTheDust.SideScroller + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.SideScroller, Chapter.BitingTheDust)]
-            Shed_Vacuum_SideScroller, 
+            Shed_Vacuum_Side_Scroller, 
 
             [Description(Checkpoint.BitingTheDust.Stomach + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.Stomach, Chapter.BitingTheDust)]
@@ -1484,11 +1531,19 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.BitingTheDust.PortalLoop + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.PortalLoop, Chapter.BitingTheDust)]
-            Shed_Vacuum_PortalLoop, 
+            Shed_Vacuum_Portal_Loop,
+
+            [Description(Checkpoint.BitingTheDust.BossBackpack + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.BossBackpack, Chapter.BitingTheDust)]
+            Shed_Vacuum_Boss_Backpack,
 
             [Description(Checkpoint.BitingTheDust.WeatherVane + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.WeatherVane, Chapter.BitingTheDust)]
-            Shed_Vacuum_WeatherVane, 
+            Shed_Vacuum_Weather_Vane,
+
+            [Description(Checkpoint.BitingTheDust.PistonLauncher + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.PistonLauncher, Chapter.BitingTheDust)]
+            Shed_Vacuum_Piston_Launcher,
 
             [Description(Checkpoint.BitingTheDust.WeightBowl + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.BitingTheDust.WeightBowl, Chapter.BitingTheDust)]
@@ -1509,7 +1564,11 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.Depths.IntroNoCS + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.Depths.IntroNoCS, Chapter.TheDepths)]
-            Shed_Main_MineIntroNoCutscene, 
+            Shed_Main_MineIntroNoCutscene,
+
+            [Description(Checkpoint.Depths.MineHammerMeeting + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Depths.MineHammerMeeting, Chapter.TheDepths)]
+            Shed_Main_MineHammerMeeting,
 
             [Description(Checkpoint.Depths.TutorialPuzzle1 + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.Depths.TutorialPuzzle1, Chapter.TheDepths)]
@@ -1521,7 +1580,15 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.Depths.MachineIntroPuzzle1 + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.Depths.MachineIntroPuzzle1, Chapter.TheDepths)]
-            Shed_Main_MachineIntroPuzzle1, 
+            Shed_Main_MachineIntroPuzzle1,
+
+            [Description(Checkpoint.Depths.MineMachineRoom + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Depths.MineMachineRoom, Chapter.TheDepths)]
+            Shed_Main_MineMachineRoom,
+
+            [Description(Checkpoint.Depths.MineMachineRoomStarted + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Depths.MineMachineRoomStarted, Chapter.TheDepths)]
+            Shed_Main_MineMachineRoomStarted,
 
             [Description(Checkpoint.Depths.MineMachineRoomHalfway + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.Depths.MineMachineRoomHalfway, Chapter.TheDepths)]
@@ -1537,7 +1604,7 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.Depths.PreBossDoubleInteract + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.Depths.PreBossDoubleInteract, Chapter.TheDepths)]
-            Shed_Main_PreBossDoubleInteract, 
+            Shed_Main_Pre_Boss_Double_Interact, 
 
             [Description(Checkpoint.Depths.MainAndToolBoxCutscene + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.Depths.MainAndToolBoxCutscene, Chapter.TheDepths)]
@@ -1589,6 +1656,10 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.WiredUp.PostFan, Chapter.WiredUp)]
             Shed_Main_GrindSection_PostFan,
 
+            [Description(Checkpoint.WiredUp.GroundPound + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.WiredUp.GroundPound, Chapter.WiredUp)]
+            Shed_Main_GrindSection_GroundPound,
+
             [Description(Checkpoint.WiredUp.Stargazing_Meet + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.WiredUp.Stargazing_Meet, Chapter.WiredUp)]
             RealWorld_Stargazing_Meet, 
@@ -1602,6 +1673,14 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.FreshAir.Start + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.FreshAir.Start, Chapter.FreshAir)]
             Tree_Approach_Tree_Approach_LevelStart,
+
+            [Description(Checkpoint.FreshAir.TreeSwing + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.FreshAir.TreeSwing, Chapter.FreshAir)]
+            Tree_Approach_Tree_Approach_TreeSwing,
+
+            [Description(Checkpoint.FreshAir.SquirrelHomeEntry + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.FreshAir.SquirrelHomeEntry, Chapter.FreshAir)]
+            Tree_Approach_Tree_Approach_SquirrelHomeEntry,
 
             [Description(Checkpoint.FreshAir.StudyFriends + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.FreshAir.StudyFriends, Chapter.FreshAir)]
@@ -1643,7 +1722,7 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.Captured.FirstContact + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Captured.FirstContact, Chapter.Captured)]
-            Tree_SquirrelHome_FirstContact, 
+            Tree_SquirrelHome_First_Contact, 
 
             [Description(Checkpoint.Captured.Ovens + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Captured.Ovens, Chapter.Captured)]
@@ -1663,7 +1742,7 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.Captured.VaultShieldWasp + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Captured.VaultShieldWasp, Chapter.Captured)]
-            Tree_SquirrelHome_VaultShieldWasp, 
+            Tree_SquirrelHome_Vault_ShieldWasp, 
 
             #endregion
             #region Deeply Rooted
@@ -1827,13 +1906,17 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.Intro, Chapter.Getaway)]
             Tree_Escape_Intro, // Intro
 
-            [Description(Checkpoint.Getaway.AfterSquirrelChaseCS + Tag.Checkpoint), 
+            [Description(Checkpoint.Getaway.BeforeCatapultRoom + Tag.Checkpoint), 
+                ToolTip(Checkpoint.Format, Checkpoint.Getaway.BeforeCatapultRoom, Chapter.Getaway)]
+            Tree_Escape_Before_Catapult_Room,
+
+            [Description(Checkpoint.Getaway.AfterSquirrelChaseCS + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.AfterSquirrelChaseCS, Chapter.Getaway)]
             Tree_Escape_AfterSquirrelChaseCS,
 
-            [Description(Checkpoint.Getaway.BeforeCatapultRoom + Tag.Checkpoint), 
-                ToolTip(Checkpoint.Format, Checkpoint.Getaway.BeforeCatapultRoom, Chapter.Getaway)]
-            Tree_Escape_BeforeCatapultRoom,
+            [Description(Checkpoint.Getaway.HouseReveal + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Getaway.HouseReveal, Chapter.Getaway)]
+            Tree_Escape_House_Reveal,
 
             [Description(Checkpoint.Getaway.CanopyLevelSetLoad + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.CanopyLevelSetLoad, Chapter.Getaway)]
@@ -1841,19 +1924,19 @@ namespace LiveSplit.ItTakesTwo {
 
             [Description(Checkpoint.Getaway.FightOutsideTree + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.FightOutsideTree, Chapter.Getaway)]
-            Tree_Escape_Fightoutsidetree,
+            Tree_Escape_Fight_outside_tree,
 
             [Description(Checkpoint.Getaway.CutsceneBeforeGlider + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.CutsceneBeforeGlider, Chapter.Getaway)]
-            Tree_Escape_Cutscenebeforeglider,
+            Tree_Escape_Cutscene_before_glider,
 
             [Description(Checkpoint.Getaway.Glider + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.Glider, Chapter.Getaway)]
-            Tree_Escape_GliderCheckpoint,
+            Tree_Escape_Glider_Checkpoint,
 
             [Description(Checkpoint.Getaway.GliderInTunnel + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.GliderInTunnel, Chapter.Getaway)]
-            Tree_Escape_Gliderintunnel,
+            Tree_Escape_Glider_in_tunnel,
 
             [Description(Checkpoint.Getaway.GliderHalfway + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Getaway.GliderHalfway, Chapter.Getaway)]
@@ -2005,6 +2088,22 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.Hopscotch.KaleidoscopeIntro, Chapter.Hopscotch)]
             PlayRoom_Hopscotch_Kaleidoscope_Intro,
 
+            [Description(Checkpoint.Hopscotch.EndOfKaleidoscope + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Hopscotch.EndOfKaleidoscope, Chapter.Hopscotch)]
+            PlayRoom_Hopscotch_End_of_Kaleidoscope,
+
+            [Description(Checkpoint.Hopscotch.BeforeMirrorPuzzle + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Hopscotch.BeforeMirrorPuzzle, Chapter.Hopscotch)]
+            PlayRoom_Hopscotch_Before_Mirror_Puzzle,
+
+            [Description(Checkpoint.Hopscotch.HomeWorkPen + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Hopscotch.HomeWorkPen, Chapter.Hopscotch)]
+            PlayRoom_Hopscotch_HomeWork_Pen,
+
+            [Description(Checkpoint.Hopscotch.SIDECONTENT_PullbackCar + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Hopscotch.SIDECONTENT_PullbackCar, Chapter.Hopscotch)]
+            PlayRoom_Hopscotch_SIDECONTENT_PullbackCar,
+
             #endregion
             #region Trainstation
             [Description(Checkpoint.Trainstation.Intro + Tag.Checkpoint), 
@@ -2025,6 +2124,10 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.DinoLand.Start, Chapter.DinoLand)]
             PlayRoom_Goldberg_Dinoland_Start,
 
+            [Description(Checkpoint.DinoLand.LoadDinoLandToPirate + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.DinoLand.LoadDinoLandToPirate, Chapter.DinoLand)]
+            PlayRoom_Goldberg_LoadDInoLandToPirate,
+
             [Description(Checkpoint.DinoLand.SlamDinoPt1 + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.DinoLand.SlamDinoPt1, Chapter.DinoLand)]
             PlayRoom_Goldberg_Dinoland_SlamDinoPt1,
@@ -2033,13 +2136,15 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.DinoLand.SlamDinoPt2, Chapter.DinoLand)]
             PlayRoom_Goldberg_Dinoland_SlamDinoPt2,
 
+            [Description(Checkpoint.DinoLand.SlamDinoPt3 + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.DinoLand.SlamDinoPt3, Chapter.DinoLand)]
+            PlayRoom_Goldberg_Dinoland_SlamDinoPt3,
+
             [Description(Checkpoint.DinoLand.Platforming + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.DinoLand.Platforming, Chapter.DinoLand)]
             PlayRoom_Goldberg_Dinoland_Platforming,
 
-            [Description(Checkpoint.DinoLand.LoadDinoLandToPirate + Tag.Checkpoint), 
-                ToolTip(Checkpoint.Format, Checkpoint.DinoLand.LoadDinoLandToPirate, Chapter.DinoLand)]
-            PlayRoom_Goldberg_LoadDInoLandToPirate,
+            
 
             #endregion
             #region Pirate's Ahoy
@@ -2066,6 +2171,10 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.PiratesAhoy.Stream + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.PiratesAhoy.Stream, Chapter.PiratesAhoy)]
             PlayRoom_Goldberg_Pirate_Part05_Stream,
+
+            [Description(Checkpoint.PiratesAhoy.BossCutScene + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.PiratesAhoy.BossCutScene, Chapter.PiratesAhoy)]
+            PlayRoom_Goldberg_Pirate_Part06_BossCutScene,
 
             [Description(Checkpoint.PiratesAhoy.BossStart + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.PiratesAhoy.BossStart, Chapter.PiratesAhoy)]
@@ -2127,6 +2236,10 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.OnceUponATime.CranePuzzle, Chapter.OnceUponATime)]
             PlayRoom_Courtyard_Castle_Courtyard_CranePuzzle,
 
+            [Description(Checkpoint.OnceUponATime.Painting + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.OnceUponATime.Painting, Chapter.OnceUponATime)]
+            PlayRoom_Courtyard_MINIGAME_Painting,
+
             #endregion
             #region Dungeon Crawler
             [Description(Checkpoint.DungeonCrawler.Intro + Tag.Checkpoint), 
@@ -2181,6 +2294,14 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.DungeonCrawler.ChessBoss, Chapter.DungeonCrawler)]
             PlayRoom_Chessboard_Castle_Chessboard_BossFIght,
 
+            [Description(Checkpoint.DungeonCrawler.DungeonNoTeleport + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.DungeonCrawler.DungeonNoTeleport, Chapter.DungeonCrawler)]
+            PlayRoom_Dungeon_Castle_Dungeon_NoTeleport,
+
+            [Description(Checkpoint.DungeonCrawler.ChessNoTeleport + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.DungeonCrawler.ChessNoTeleport, Chapter.DungeonCrawler)]
+            PlayRoom_Chessboard_Castle_Chess_NoTeleport,
+
             #endregion
             #region The Queen
             [Description(Checkpoint.TheQueen.Intro + Tag.Checkpoint), 
@@ -2233,10 +2354,18 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.GatesOfTime.ForestNoCS, Chapter.GatesOfTime)]
             Clockwork_Outside_Forest_No_Cutscene,
 
+            [Description(Checkpoint.GatesOfTime.LeftTowerPuzzle + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.GatesOfTime.LeftTowerPuzzle, Chapter.GatesOfTime)]
+            Clockwork_Outside_Left_Tower_Puizzle,
+
             [Description(Checkpoint.GatesOfTime.LeftTowerDestroyed + Tag.Checkpoint), 
 				ToolTip(Checkpoint.Format + "\n NOTE: CHECK WITH GLINT - Regarding Right, Left and Courtyard", 
                 Checkpoint.GatesOfTime.LeftTowerDestroyed, Chapter.GatesOfTime)]
             Clockwork_Outside_Left_Tower_Destroyed,
+
+            [Description(Checkpoint.GatesOfTime.RightTowerPuzzle + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.GatesOfTime.RightTowerPuzzle, Chapter.GatesOfTime)]
+            Clockwork_Outside_Right_Tower_Puzzle,
 
             [Description(Checkpoint.GatesOfTime.RightTowerDestroyed + Tag.Checkpoint), 
 				ToolTip(Checkpoint.Format + "\n NOTE: CHECK WITH GLINT - Regarding Right, Left and Courtyard", 
@@ -2264,6 +2393,14 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.Clockworks.StatueRoom + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Clockworks.StatueRoom, Chapter.Clockworks)]
             Clockwork_LowerTower_Statue_Room,
+
+            [Description(Checkpoint.Clockworks.CageRoom + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Clockworks.CageRoom, Chapter.Clockworks)]
+            Clockwork_LowerTower_Cage_Room,
+
+            [Description(Checkpoint.Clockworks.MechanicalWallRoom + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Clockworks.MechanicalWallRoom, Chapter.Clockworks)]
+            Clockwork_LowerTower_Mechanical_Wall_Room,
 
             [Description(Checkpoint.Clockworks.StatueRoom1 + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format + "\n NOTE: CHECK WITH GLINT - Regarding side rooms", 
@@ -2294,6 +2431,10 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.Clockworks.PocketWatch + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Clockworks.PocketWatch, Chapter.Clockworks)]
             Clockwork_LowerTower_Pocket_Watch_Room,
+
+            [Description(Checkpoint.Clockworks.PathToEvilBird + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Clockworks.PathToEvilBird, Chapter.Clockworks)]
+            Clockwork_LowerTower_Path_to_Evil_Bird,
 
             [Description(Checkpoint.Clockworks.EvilBirdRoom + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Clockworks.EvilBirdRoom, Chapter.Clockworks)]
@@ -2340,6 +2481,10 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.ABlastFromThePast.Sprint + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.ABlastFromThePast.Sprint, Chapter.ABlastFromThePast)]
             Clockwork_UpperTower_Sprint_To_Couple,
+
+            [Description(Checkpoint.ABlastFromThePast.EndingDev + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.ABlastFromThePast.EndingDev, Chapter.ABlastFromThePast)]
+            Clockwork_UpperTower_Ending_Cutscene,
 
             [Description(Checkpoint.ABlastFromThePast.Ending + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.ABlastFromThePast.Ending, Chapter.ABlastFromThePast)]
@@ -2533,6 +2678,10 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.EnteringBigLog, Chapter.WeedWhacking)]
             Garden_Shrubbery_Shrubbery_EnteringBigLog,
 
+            [Description(Checkpoint.WeedWhacking.BigLogCollapse + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.BigLogCollapse, Chapter.WeedWhacking)]
+            Garden_Shrubbery_Shrubbery_BigLogCollapse,
+
             [Description(Checkpoint.WeedWhacking.SinkingLog + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.SinkingLog, Chapter.WeedWhacking)]
             Garden_Shrubbery_Shrubbery_SinkingLog,
@@ -2540,6 +2689,10 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.WeedWhacking.PurpleSapWall + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.PurpleSapWall, Chapter.WeedWhacking)]
             Garden_Shrubbery_Shrubbery_PurpleSapWall,
+
+            [Description(Checkpoint.WeedWhacking.EnteringBigSpiderCave + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.EnteringBigSpiderCave, Chapter.WeedWhacking)]
+            Garden_Shrubbery_Shrubbery_EnteringBigSpiderCave,
 
             [Description(Checkpoint.WeedWhacking.AfterLeavingSpiders + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.AfterLeavingSpiders, Chapter.WeedWhacking)]
@@ -2556,6 +2709,14 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.WeedWhacking.SecondCombatFirstWaveFinished + Tag.Checkpoint),
                 ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.SecondCombatFirstWaveFinished, Chapter.WeedWhacking)]
             Garden_Shrubbery_Shrubbery_SecondCombatFirstWaveFinished,
+
+            [Description(Checkpoint.WeedWhacking.FinalCombatFinished + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.FinalCombatFinished, Chapter.WeedWhacking)]
+            Garden_Shrubbery_Shrubbery_FinalCombatFinished,
+
+            [Description(Checkpoint.WeedWhacking.Outro + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.WeedWhacking.Outro, Chapter.WeedWhacking)]
+            Garden_Shrubbery_Shrubbery_Outro,
 
             #endregion
             #region Trespassing
@@ -2767,9 +2928,17 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.MusicTechWallStart, Chapter.Rehearsal)]
             Music_Backstage_Music_Tech_Wall_Start,
 
+            [Description(Checkpoint.Rehearsal.MusicTechWallEQSweeper + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.MusicTechWallEQSweeper, Chapter.Rehearsal)]
+            Music_Backstage_Music_Tech_Wall_EQ_Sweeper,
+
             [Description(Checkpoint.Rehearsal.SilentRoomIntro + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.SilentRoomIntro, Chapter.Rehearsal)]
             Music_Backstage_Silent_Room_Intro,
+
+            [Description(Checkpoint.Rehearsal.MicrophoneChaseDevDebugFallToGrind + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.MicrophoneChaseDevDebugFallToGrind, Chapter.Rehearsal)]
+            Music_Backstage_MicrophoneChaseDevDebugFallToGrind,
 
             [Description(Checkpoint.Rehearsal.SilentRoomElevatorPillar + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.SilentRoomElevatorPillar, Chapter.Rehearsal)]
@@ -2795,9 +2964,25 @@ namespace LiveSplit.ItTakesTwo {
                 ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.DrumMachineRoom, Chapter.Rehearsal)]
             Music_Backstage_DrumMachineRoom,
 
+            [Description(Checkpoint.Rehearsal.LightRoomPowerSwitch + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.LightRoomPowerSwitch, Chapter.Rehearsal)]
+            Music_Backstage_LightRoom_PowerSwitch,
+
             [Description(Checkpoint.Rehearsal.LightRoom + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.LightRoom, Chapter.Rehearsal)]
             Music_Backstage_LightRoom,
+
+            [Description(Checkpoint.Rehearsal.MicrophoneChaseDevDebugBreamCrush + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.MicrophoneChaseDevDebugBreamCrush, Chapter.Rehearsal)]
+            Music_Backstage_MicrophoneChaseDevDebugBreamCrush,
+
+            [Description(Checkpoint.Rehearsal.ChaseLanding + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.ChaseLanding, Chapter.Rehearsal)]
+            Music_Backstage_Chase_Landing,
+
+            [Description(Checkpoint.Rehearsal.MicrophoneChaseDoor + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.Rehearsal.MicrophoneChaseDoor, Chapter.Rehearsal)]
+            Music_Backstage_MicrophoneChase_Door,
 
             #endregion
             #region Symphony
@@ -2900,6 +3085,14 @@ namespace LiveSplit.ItTakesTwo {
             [Description(Checkpoint.GrandFinale.MayInDressingRoom + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.GrandFinale.MayInDressingRoom, Chapter.AGrandFinale)]
             Music_Ending_MayInDressingRoom,
+
+            [Description(Checkpoint.GrandFinale.CodyBeforeFlipSwitch + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.GrandFinale.CodyBeforeFlipSwitch, Chapter.AGrandFinale)]
+            Music_Ending_CodyBeforeFlipSwitch,
+
+            [Description(Checkpoint.GrandFinale.MayBeforeCurtains + Tag.Dev + Tag.Checkpoint),
+                ToolTip(Checkpoint.Format, Checkpoint.GrandFinale.MayBeforeCurtains, Chapter.AGrandFinale)]
+            Music_Ending_MayBeforeCurtains,
 
             [Description(Checkpoint.GrandFinale.RealWorld_WakeUp + Tag.Checkpoint), 
                 ToolTip(Checkpoint.Format, Checkpoint.GrandFinale.RealWorld_WakeUp, Chapter.AGrandFinale)]

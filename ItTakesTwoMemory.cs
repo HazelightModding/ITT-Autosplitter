@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using LiveSplit.ComponentUtil;
+using Newtonsoft.Json.Linq;
 using static LiveSplit.ItTakesTwo.ItTakesTwoStatics;
 
 namespace LiveSplit.ItTakesTwo {
@@ -23,7 +24,7 @@ namespace LiveSplit.ItTakesTwo {
         public MemoryWatcherList Data;
         public MemoryWatcherList[] Players = new MemoryWatcherList[2];
         DeepPointer CutsceneDP, CodyCutsceneDP;
-        public string CurrentCutscene, OldCutscene, CodyCurrentCutscene, CodyOldCutscene;
+        public string CurrentCutscene, OldCutscene, CodyCurrentCutscene, CodyOldCutscene, CurrentSubchapterCheckpoint, OldSubchapterCheckpoint;
         public IntPtr FNamePool;
 
         private Stopwatch stopwatch;
@@ -120,7 +121,6 @@ namespace LiveSplit.ItTakesTwo {
         }
 
         public bool IsLoading() {
-
             return (bool)Data["bIsInLoadingScreen"].Current || Data["Level"].Current.ToString() == "/Game/Maps/Main/Menu_BP";
         }
 
@@ -214,9 +214,10 @@ namespace LiveSplit.ItTakesTwo {
                     if (gWorld == IntPtr.Zero && (gWorld = scanner.Scan(gWorldSig)) != IntPtr.Zero) {
                         WriteLog("Found GWorld at 0x" + gWorld.ToString("X") + ".");
 
+                        
                         Data = new MemoryWatcherList
                         {
-                            new MemoryWatcher<bool>(new DeepPointer(gWorld, 0x180, 0x2b0, 0x0, 0x458, 0xf9)) { Name = "bIsInLoadingScreen"},
+                            new MemoryWatcher<bool>(new DeepPointer(gWorld, 0x180, 0x2b0, 0x0, 0x458, 0xf9)) { Name = "bIsInLoadingScreen", Current = true},
                             new StringWatcher(new DeepPointer(gWorld, 0x180, 0x368, 0x8, 0x1b8, 0x0), 255) { Name = "Level" },
                             new StringWatcher(new DeepPointer(gWorld, 0x180, 0x368, 0x8, 0x1d8, 0x0), 255) { Name = "Checkpoint" },
                             new StringWatcher(new DeepPointer(gWorld, 0x180, 0x368, 0x8, 0x1e8, 0x0), 255) { Name = "Chapter" },
@@ -314,10 +315,13 @@ namespace LiveSplit.ItTakesTwo {
                 ITT.WriteLogWithTime("Level changed: ".PadRight(22, ' ') + "\"" + oldLvl + "\" -> \"" + newLvl + "\"");
             }
             if (Data["Checkpoint"].Changed) {
-                string subchapterCheckpoint = Data["Subchapter"].Current.ToString() + "_" + MakeEnumFriendlyString(Data["Checkpoint"].Current.ToString());
-                string subchapterCheckpointOld = Data["Subchapter"].Old.ToString() + "_" + MakeEnumFriendlyString(Data["Checkpoint"].Old.ToString());
-                splitData.Add(subchapterCheckpoint);
-                ITT.WriteLogWithTime("Checkpoint changed: ".PadRight(22, ' ') + "\"" + subchapterCheckpointOld + "\"  ->  \"" + subchapterCheckpoint + "\"");
+                CurrentSubchapterCheckpoint = Data["Subchapter"].Current.ToString() + "_" + MakeEnumFriendlyString(Data["Checkpoint"].Current.ToString());
+                OldSubchapterCheckpoint = Data["Subchapter"].Old.ToString() + "_" + MakeEnumFriendlyString(Data["Checkpoint"].Old.ToString());
+                if (SplitName.TryParse(CurrentSubchapterCheckpoint, true, out SplitName value)) {
+                    updatedValues.Add(value);
+                    ITT.Checkpoints.HandleCheckpoint(value);
+                }
+                ITT.WriteLogWithTime("Checkpoint changed: ".PadRight(22, ' ') + "\"" + OldSubchapterCheckpoint + "\"  ->  \"" + CurrentSubchapterCheckpoint + "\"");
             }
             if (OldCutscene != CurrentCutscene) {
                 if (CurrentCutscene == null) {

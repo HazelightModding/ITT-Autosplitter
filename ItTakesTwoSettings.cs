@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using LiveSplit.Model;
+using LiveSplit.UI.Components;
 using static System.Windows.Forms.AxHost;
 using static LiveSplit.ItTakesTwo.ItTakesTwoStatics;
 
@@ -161,6 +162,10 @@ namespace LiveSplit.ItTakesTwo {
             xmlCSRemover.InnerText = itt.Memory.CSRemover.ToString();
             xmlSettings.AppendChild(xmlCSRemover);
 
+            XmlElement xmlCPCounter = document.CreateElement("CPCounter");
+            xmlCPCounter.InnerText = CPCounterCheckBox.Checked.ToString();
+            xmlSettings.AppendChild(xmlCPCounter);
+
             XmlElement xmlSplits = document.CreateElement("Splits");
             xmlSettings.AppendChild(xmlSplits);
 
@@ -178,8 +183,10 @@ namespace LiveSplit.ItTakesTwo {
             XmlNode StartTriggerNode = settings.SelectSingleNode(".//StartTrigger");
             XmlNode ResetTriggerNode = settings.SelectSingleNode(".//ResetTrigger");
             XmlNode CSRemoverNode = settings.SelectSingleNode(".//CSRemover");
+            XmlNode CPCounterNode = settings.SelectSingleNode(".//CPCounter");
             bool isOrdered = false;
             bool CSRemover = false;
+            bool CPCounter = false;
 
             if (orderedNode != null) {
                 bool.TryParse(orderedNode.InnerText, out isOrdered);
@@ -189,8 +196,13 @@ namespace LiveSplit.ItTakesTwo {
                 bool.TryParse(CSRemoverNode.InnerText, out CSRemover);
             }
 
+            if (CPCounterNode != null) {
+                bool.TryParse(CPCounterNode.InnerText, out CPCounter);
+            }
+
             CSRemoverCheckBox.Checked = CSRemover;
             itt.Memory.CSRemover = CSRemover;
+            CPCounterCheckBox.Checked = CPCounter;
 
             if (StartTriggerNode != null) {
                 string splitDescription = StartTriggerNode.InnerText.Trim();
@@ -240,6 +252,41 @@ namespace LiveSplit.ItTakesTwo {
                 });
             }
             return rdAlpha.Checked ? availableSplitsAlphaSorted : availableSplits;
+        }
+        
+        private ILayoutComponent FindTextComponent(string id) {
+            foreach (var comp in itt.Model.CurrentState.Layout.LayoutComponents) {
+                if (comp.Component.GetType() != typeof(TextComponent))
+                    continue;
+
+                var textComp = comp.Component as TextComponent;
+                if (textComp.Settings.Text1 == id)
+                    return comp;
+            }
+            return null;
+        }
+
+        public void SetTextComponent(string id, string text) {
+            if (!CPCounterCheckBox.Checked)
+                return;
+            ILayoutComponent comp = FindTextComponent(id);
+
+            if (comp == null) {
+                comp = ComponentManager.LoadLayoutComponent("LiveSplit.Text.dll", itt.Model.CurrentState);
+                itt.Model.CurrentState.Layout.LayoutComponents.Add(comp);
+            }
+
+            var textComp = comp.Component as TextComponent;
+
+            textComp.Settings.Text1 = id;
+            textComp.Settings.Text2 = text;
+        }
+
+        public void RemoveTextComponent(string id) {
+            ILayoutComponent comp = FindTextComponent(id);
+            if (comp == null) return;
+
+            itt.Model.CurrentState.Layout.LayoutComponents.Remove(comp);
         }
 
         #region Event Handlers
@@ -524,6 +571,14 @@ namespace LiveSplit.ItTakesTwo {
 
         private void CSRemover_CheckedChanged(object sender, EventArgs e) {
             itt.Memory.CSRemover = CSRemoverCheckBox.Checked;
+        }
+
+        private void CPCounterCheckBox_CheckedChanged(object sender, EventArgs e) {
+            if (CPCounterCheckBox.Checked) {
+                SetTextComponent("CP: ", "0/0");
+            } else {
+                RemoveTextComponent("CP: ");
+            }
         }
     }
 }
