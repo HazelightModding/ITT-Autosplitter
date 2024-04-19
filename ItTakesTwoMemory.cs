@@ -11,7 +11,6 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using LiveSplit.ComponentUtil;
-using Newtonsoft.Json.Linq;
 using static LiveSplit.ItTakesTwo.ItTakesTwoStatics;
 
 namespace LiveSplit.ItTakesTwo {

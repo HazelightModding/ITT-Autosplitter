@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <updates>
+    <update version="0.0.4">
+        <files>
+            <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
+        </files>
+        <changelog>
+            <change> Added CP Counter </change>
+            <change> Fixed CS 0.02s issue </change>
+            <change> Updated list of splits </change>
+        </changelog>
+    </update>
     <update version="0.0.3">
         <files>
             <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
