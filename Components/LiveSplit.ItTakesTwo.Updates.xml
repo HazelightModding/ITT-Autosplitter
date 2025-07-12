@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <updates>
+	<update version="0.1.0">
+		<files>
+			<file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change> Beta </change>
+		</changelog>
+	</update>
+    <update version="0.0.5">
+        <files>
+            <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
+        </files>
+        <changelog>
+            <change> Overhaul of splits system </change>
+        </changelog>
+    </update>
     <update version="0.0.4">
         <files>
             <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>

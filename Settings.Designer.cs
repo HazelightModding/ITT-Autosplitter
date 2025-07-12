@@ -1,5 +1,5 @@
 ﻿namespace LiveSplit.ItTakesTwo {
-    partial class ItTakesTwoSettings {
+    partial class Settings {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -28,11 +28,12 @@
             this.flowMain = new System.Windows.Forms.FlowLayoutPanel();
             this.flowOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.Options_GroupBox = new System.Windows.Forms.GroupBox();
-            this.CSRemoverCheckBox = new System.Windows.Forms.CheckBox();
             this.PresetsButton = new System.Windows.Forms.Button();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.versionLabel = new System.Windows.Forms.Label();
             this.RunBehaviour_GroupBox = new System.Windows.Forms.GroupBox();
+            this.ResetTriggerStartEnd = new System.Windows.Forms.ComboBox();
+            this.StartTriggerStartEnd = new System.Windows.Forms.ComboBox();
             this.ResetTriggerComboBox = new System.Windows.Forms.ComboBox();
             this.ResetTriggerCheckBox = new System.Windows.Forms.CheckBox();
             this.StartTriggerComboBox = new System.Windows.Forms.ComboBox();
@@ -42,7 +43,7 @@
             this.rdAlpha = new System.Windows.Forms.RadioButton();
             this.rdType = new System.Windows.Forms.RadioButton();
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.CPCounterCheckBox = new System.Windows.Forms.CheckBox();
+            this.WikiButton = new System.Windows.Forms.Button();
             this.flowMain.SuspendLayout();
             this.flowOptions.SuspendLayout();
             this.Options_GroupBox.SuspendLayout();
@@ -72,7 +73,7 @@
             this.flowMain.Location = new System.Drawing.Point(0, 0);
             this.flowMain.Margin = new System.Windows.Forms.Padding(0);
             this.flowMain.Name = "flowMain";
-            this.flowMain.Size = new System.Drawing.Size(456, 149);
+            this.flowMain.Size = new System.Drawing.Size(465, 149);
             this.flowMain.TabIndex = 0;
             this.flowMain.WrapContents = false;
             this.flowMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowMain_DragDrop);
@@ -87,11 +88,12 @@
             this.flowOptions.Location = new System.Drawing.Point(0, 0);
             this.flowOptions.Margin = new System.Windows.Forms.Padding(0);
             this.flowOptions.Name = "flowOptions";
-            this.flowOptions.Size = new System.Drawing.Size(456, 149);
+            this.flowOptions.Size = new System.Drawing.Size(465, 149);
             this.flowOptions.TabIndex = 0;
             // 
             // Options_GroupBox
             // 
+            this.Options_GroupBox.Controls.Add(this.WikiButton);
             this.Options_GroupBox.Controls.Add(this.PresetsButton);
             this.Options_GroupBox.Controls.Add(this.ClearAllButton);
             this.Options_GroupBox.Controls.Add(this.btnAddSplit);
@@ -100,29 +102,18 @@
             this.Options_GroupBox.Controls.Add(this.SortBy_GroupBox);
             this.Options_GroupBox.Location = new System.Drawing.Point(3, 3);
             this.Options_GroupBox.Name = "Options_GroupBox";
-            this.Options_GroupBox.Size = new System.Drawing.Size(450, 143);
+            this.Options_GroupBox.Size = new System.Drawing.Size(459, 143);
             this.Options_GroupBox.TabIndex = 6;
             this.Options_GroupBox.TabStop = false;
             this.Options_GroupBox.Text = "Options";
             // 
-            // CSRemoverCheckBox
-            // 
-            this.CSRemoverCheckBox.AutoSize = true;
-            this.CSRemoverCheckBox.Location = new System.Drawing.Point(207, 18);
-            this.CSRemoverCheckBox.Name = "CSRemoverCheckBox";
-            this.CSRemoverCheckBox.Size = new System.Drawing.Size(86, 17);
-            this.CSRemoverCheckBox.TabIndex = 10;
-            this.CSRemoverCheckBox.Text = "CS Remover";
-            this.CSRemoverCheckBox.UseVisualStyleBackColor = true;
-            this.CSRemoverCheckBox.CheckedChanged += new System.EventHandler(this.CSRemover_CheckedChanged);
-            // 
             // PresetsButton
             // 
-            this.PresetsButton.Location = new System.Drawing.Point(143, 116);
+            this.PresetsButton.Location = new System.Drawing.Point(129, 116);
             this.PresetsButton.Name = "PresetsButton";
             this.PresetsButton.Size = new System.Drawing.Size(55, 21);
             this.PresetsButton.TabIndex = 9;
-            this.PresetsButton.Text = "DEBUG";
+            this.PresetsButton.Text = "Presets";
             this.PresetsButton.UseVisualStyleBackColor = true;
             this.PresetsButton.Click += new System.EventHandler(this.PresetsButton_Click);
             // 
@@ -138,7 +129,7 @@
             // 
             // versionLabel
             // 
-            this.versionLabel.Location = new System.Drawing.Point(263, 114);
+            this.versionLabel.Location = new System.Drawing.Point(271, 114);
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(182, 24);
             this.versionLabel.TabIndex = 7;
@@ -147,19 +138,45 @@
             // 
             // RunBehaviour_GroupBox
             // 
-            this.RunBehaviour_GroupBox.Controls.Add(this.CSRemoverCheckBox);
-            this.RunBehaviour_GroupBox.Controls.Add(this.CPCounterCheckBox);
+            this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerStartEnd);
+            this.RunBehaviour_GroupBox.Controls.Add(this.StartTriggerStartEnd);
             this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerComboBox);
             this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerCheckBox);
             this.RunBehaviour_GroupBox.Controls.Add(this.StartTriggerComboBox);
             this.RunBehaviour_GroupBox.Controls.Add(this.StartTriggerCheckBox);
             this.RunBehaviour_GroupBox.Controls.Add(this.chkOrdered);
-            this.RunBehaviour_GroupBox.Location = new System.Drawing.Point(143, 15);
+            this.RunBehaviour_GroupBox.Location = new System.Drawing.Point(130, 15);
             this.RunBehaviour_GroupBox.Name = "RunBehaviour_GroupBox";
-            this.RunBehaviour_GroupBox.Size = new System.Drawing.Size(301, 95);
+            this.RunBehaviour_GroupBox.Size = new System.Drawing.Size(323, 95);
             this.RunBehaviour_GroupBox.TabIndex = 7;
             this.RunBehaviour_GroupBox.TabStop = false;
             this.RunBehaviour_GroupBox.Text = "Run behaviour";
+            // 
+            // ResetTriggerStartEnd
+            // 
+            this.ResetTriggerStartEnd.AllowDrop = true;
+            this.ResetTriggerStartEnd.FormattingEnabled = true;
+            this.ResetTriggerStartEnd.Items.AddRange(new object[] {
+            "Start",
+            "End"});
+            this.ResetTriggerStartEnd.Location = new System.Drawing.Point(268, 63);
+            this.ResetTriggerStartEnd.Name = "ResetTriggerStartEnd";
+            this.ResetTriggerStartEnd.Size = new System.Drawing.Size(49, 21);
+            this.ResetTriggerStartEnd.TabIndex = 12;
+            this.ResetTriggerStartEnd.Visible = false;
+            // 
+            // StartTriggerStartEnd
+            // 
+            this.StartTriggerStartEnd.AllowDrop = true;
+            this.StartTriggerStartEnd.FormattingEnabled = true;
+            this.StartTriggerStartEnd.Items.AddRange(new object[] {
+            "Start",
+            "End"});
+            this.StartTriggerStartEnd.Location = new System.Drawing.Point(268, 40);
+            this.StartTriggerStartEnd.Name = "StartTriggerStartEnd";
+            this.StartTriggerStartEnd.Size = new System.Drawing.Size(49, 21);
+            this.StartTriggerStartEnd.TabIndex = 11;
+            this.StartTriggerStartEnd.Visible = false;
             // 
             // ResetTriggerComboBox
             // 
@@ -167,7 +184,7 @@
             this.ResetTriggerComboBox.FormattingEnabled = true;
             this.ResetTriggerComboBox.Location = new System.Drawing.Point(107, 63);
             this.ResetTriggerComboBox.Name = "ResetTriggerComboBox";
-            this.ResetTriggerComboBox.Size = new System.Drawing.Size(186, 21);
+            this.ResetTriggerComboBox.Size = new System.Drawing.Size(210, 21);
             this.ResetTriggerComboBox.TabIndex = 9;
             this.ResetTriggerComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSelectedIndexChangedHandler);
             this.ResetTriggerComboBox.TextUpdate += new System.EventHandler(this.ComboBoxTextUpdateHandler);
@@ -190,7 +207,7 @@
             this.StartTriggerComboBox.FormattingEnabled = true;
             this.StartTriggerComboBox.Location = new System.Drawing.Point(107, 40);
             this.StartTriggerComboBox.Name = "StartTriggerComboBox";
-            this.StartTriggerComboBox.Size = new System.Drawing.Size(186, 21);
+            this.StartTriggerComboBox.Size = new System.Drawing.Size(210, 21);
             this.StartTriggerComboBox.TabIndex = 7;
             this.StartTriggerComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSelectedIndexChangedHandler);
             this.StartTriggerComboBox.TextUpdate += new System.EventHandler(this.ComboBoxTextUpdateHandler);
@@ -224,7 +241,7 @@
             this.SortBy_GroupBox.Controls.Add(this.rdType);
             this.SortBy_GroupBox.Location = new System.Drawing.Point(6, 15);
             this.SortBy_GroupBox.Name = "SortBy_GroupBox";
-            this.SortBy_GroupBox.Size = new System.Drawing.Size(131, 95);
+            this.SortBy_GroupBox.Size = new System.Drawing.Size(118, 95);
             this.SortBy_GroupBox.TabIndex = 6;
             this.SortBy_GroupBox.TabStop = false;
             this.SortBy_GroupBox.Text = "Sort Split Selects By";
@@ -257,16 +274,15 @@
             // 
             this.ToolTips.ShowAlways = true;
             // 
-            // CPCounterCheckBox
+            // WikiButton
             // 
-            this.CPCounterCheckBox.AutoSize = true;
-            this.CPCounterCheckBox.Location = new System.Drawing.Point(107, 18);
-            this.CPCounterCheckBox.Name = "CPCounterCheckBox";
-            this.CPCounterCheckBox.Size = new System.Drawing.Size(80, 17);
-            this.CPCounterCheckBox.TabIndex = 10;
-            this.CPCounterCheckBox.Text = "CP Counter";
-            this.CPCounterCheckBox.UseVisualStyleBackColor = true;
-            this.CPCounterCheckBox.CheckedChanged += new System.EventHandler(this.CPCounterCheckBox_CheckedChanged);
+            this.WikiButton.Location = new System.Drawing.Point(190, 116);
+            this.WikiButton.Name = "WikiButton";
+            this.WikiButton.Size = new System.Drawing.Size(55, 21);
+            this.WikiButton.TabIndex = 10;
+            this.WikiButton.Text = "Wiki";
+            this.WikiButton.UseVisualStyleBackColor = true;
+            this.WikiButton.Click += new System.EventHandler(this.WikiButton_Click);
             // 
             // ItTakesTwoSettings
             // 
@@ -278,7 +294,7 @@
             this.Controls.Add(this.flowMain);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ItTakesTwoSettings";
-            this.Size = new System.Drawing.Size(456, 149);
+            this.Size = new System.Drawing.Size(465, 149);
             this.Load += new System.EventHandler(this.Settings_Load);
             this.flowMain.ResumeLayout(false);
             this.flowMain.PerformLayout();
@@ -311,7 +327,8 @@
         private System.Windows.Forms.ComboBox ResetTriggerComboBox;
         private System.Windows.Forms.Button PresetsButton;
         private System.Windows.Forms.Button ClearAllButton;
-        private System.Windows.Forms.CheckBox CSRemoverCheckBox;
-        private System.Windows.Forms.CheckBox CPCounterCheckBox;
+        public System.Windows.Forms.ComboBox ResetTriggerStartEnd;
+        public System.Windows.Forms.ComboBox StartTriggerStartEnd;
+        private System.Windows.Forms.Button WikiButton;
     }
 }

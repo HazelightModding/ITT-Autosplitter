@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LiveSplit.ItTakesTwo</RootNamespace>
     <AssemblyName>LiveSplit.ItTakesTwo</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <LangVersion>latest</LangVersion>
@@ -74,6 +74,10 @@
     <Reference Include="LiveSplit.Text">
       <HintPath>..\..\..\..\Speedrunning\Livesplit\Components\LiveSplit.Text.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\StreamerBot\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -85,26 +89,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component.cs" />
-    <Compile Include="Data.cs" />
-    <Compile Include="Cutscene.cs" />
-    <Compile Include="Splits.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="Statics.cs" />
-    <Compile Include="Factory.cs" />
-    <Compile Include="Memory.cs" />
-    <Compile Include="Settings.cs">
+    <Compile Include="ItTakesTwoCheckpoints.cs" />
+    <Compile Include="ItTakesTwoComponent.cs" />
+    <Compile Include="ItTakesTwoStatics.cs" />
+    <Compile Include="ItTakesTwoFactory.cs" />
+    <Compile Include="ItTakesTwoMemory.cs" />
+    <Compile Include="ItTakesTwoSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <Compile Include="ItTakesTwoSettings.Designer.cs">
+      <DependentUpon>ItTakesTwoSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="SplitSettings.cs">
+    <Compile Include="ItTakesTwoSplitSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SplitSettings.Designer.cs">
-      <DependentUpon>SplitSettings.cs</DependentUpon>
+    <Compile Include="ItTakesTwoSplitSettings.Designer.cs">
+      <DependentUpon>ItTakesTwoSplitSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="LemTesting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -113,12 +115,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <EmbeddedResource Include="ItTakesTwoSettings.resx">
+      <DependentUpon>ItTakesTwoSettings.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SplitSettings.resx">
-      <DependentUpon>SplitSettings.cs</DependentUpon>
+    <EmbeddedResource Include="ItTakesTwoSplitSettings.resx">
+      <DependentUpon>ItTakesTwoSplitSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -135,9 +137,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)Components\$(TargetFileName)"
-copy "$(TargetPath)" "D:\Speedrunning\Livesplit\Components"
-copy "$(TargetDir)LiveSplit.ItTakesTwo.pdb" "D:\Speedrunning\Livesplit\Components"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)Components\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
