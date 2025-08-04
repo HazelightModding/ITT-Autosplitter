@@ -51,7 +51,8 @@ namespace LiveSplit.ItTakesTwo
             var enterCutscene = (May.Cutscene.Changed && May.Cutscene.Current != FName.None) ||
                                 (Cody.Cutscene.Changed && Cody.Cutscene.Current != FName.None);
 
-            var leaveCutscene = (May.Cutscene.Changed && May.Cutscene.Old != FName.None) ||
+            var leaveCutscene = (bIsInLoadingScreen.Changed && bIsInLoadingScreen.Current) ||
+                                (May.Cutscene.Changed && May.Cutscene.Old != FName.None) ||
                                 (Cody.Cutscene.Changed && Cody.Cutscene.Old != FName.None);
 
             var isSkippable = Players.SkippableSetting != EHazeSkippableSetting.None && 
