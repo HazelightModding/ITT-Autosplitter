@@ -103,8 +103,16 @@ namespace LiveSplit.ItTakesTwo
         {
             try
             {
-                if (!Memory.Update()) { return; }
-                if (CurrentRun.Model == null) { return; }
+                if (CurrentRun.Model == null)
+                {
+                    return;
+                }
+
+                if (!Memory.Update()) 
+                {
+                    CurrentRun.Model.CurrentState.IsGameTimePaused = true;
+                    return; 
+                }
 
                 CurrentRun.Model.CurrentState.IsGameTimePaused = GetData().IsLoadingOrCutscene();
 
