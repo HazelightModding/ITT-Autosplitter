@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <updates>
+	<update version="0.1.1">
+		<files>
+			<file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
+		</files>
+		<changelog>
+			<change> Fixed cutscenes being paused through loading screens. </change>
+			<change> Fixed timer not pausing when game isn't running. </change>
+			<change> Fixed cutscenes not splitting when transitioning from another cutscene. </change>
+		</changelog>
+	</update>
 	<update version="0.1.0">
 		<files>
 			<file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
