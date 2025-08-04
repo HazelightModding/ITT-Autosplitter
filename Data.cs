@@ -496,7 +496,7 @@ namespace LiveSplit.ItTakesTwo
                 {
                     OnDataChanged(player.Cutscene, player.Name);
 
-                    if (player.Cutscene.Current != FName.None && player.Cutscene.Old == FName.None)
+                    if (player.Cutscene.Current != FName.None && player.Cutscene.Old != player.Cutscene.Current)
                     {
                         ChangedSplits.Add(SplitInfo["EnteringCutscene"]);
                         if (ITTSplit.TryGet(player.Cutscene.Current.ToString(), out var cs))
@@ -505,7 +505,7 @@ namespace LiveSplit.ItTakesTwo
                         }
                     }
 
-                    if (player.Cutscene.Old != FName.None && player.Cutscene.Current == FName.None)
+                    if (player.Cutscene.Old != FName.None && player.Cutscene.Current != player.Cutscene.Old)
                     {
                         ChangedSplits.Add(SplitInfo["LeavingCutscene"]);
                         if (ITTSplit.TryGet(player.Cutscene.Old.ToString(), out var cs))
