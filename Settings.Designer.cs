@@ -28,10 +28,10 @@
             this.flowMain = new System.Windows.Forms.FlowLayoutPanel();
             this.flowOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.Options_GroupBox = new System.Windows.Forms.GroupBox();
+            this.WikiButton = new System.Windows.Forms.Button();
             this.PresetsButton = new System.Windows.Forms.Button();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.versionLabel = new System.Windows.Forms.Label();
-            this.RunBehaviour_GroupBox = new System.Windows.Forms.GroupBox();
             this.ResetTriggerStartEnd = new System.Windows.Forms.ComboBox();
             this.StartTriggerStartEnd = new System.Windows.Forms.ComboBox();
             this.ResetTriggerComboBox = new System.Windows.Forms.ComboBox();
@@ -43,12 +43,16 @@
             this.rdAlpha = new System.Windows.Forms.RadioButton();
             this.rdType = new System.Windows.Forms.RadioButton();
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.WikiButton = new System.Windows.Forms.Button();
+            this.rdChapter = new System.Windows.Forms.RadioButton();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.flowMain.SuspendLayout();
             this.flowOptions.SuspendLayout();
             this.Options_GroupBox.SuspendLayout();
-            this.RunBehaviour_GroupBox.SuspendLayout();
             this.SortBy_GroupBox.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddSplit
@@ -93,12 +97,12 @@
             // 
             // Options_GroupBox
             // 
+            this.Options_GroupBox.Controls.Add(this.tabControl1);
             this.Options_GroupBox.Controls.Add(this.WikiButton);
             this.Options_GroupBox.Controls.Add(this.PresetsButton);
             this.Options_GroupBox.Controls.Add(this.ClearAllButton);
             this.Options_GroupBox.Controls.Add(this.btnAddSplit);
             this.Options_GroupBox.Controls.Add(this.versionLabel);
-            this.Options_GroupBox.Controls.Add(this.RunBehaviour_GroupBox);
             this.Options_GroupBox.Controls.Add(this.SortBy_GroupBox);
             this.Options_GroupBox.Location = new System.Drawing.Point(3, 3);
             this.Options_GroupBox.Name = "Options_GroupBox";
@@ -106,6 +110,16 @@
             this.Options_GroupBox.TabIndex = 6;
             this.Options_GroupBox.TabStop = false;
             this.Options_GroupBox.Text = "Options";
+            // 
+            // WikiButton
+            // 
+            this.WikiButton.Location = new System.Drawing.Point(190, 116);
+            this.WikiButton.Name = "WikiButton";
+            this.WikiButton.Size = new System.Drawing.Size(55, 21);
+            this.WikiButton.TabIndex = 10;
+            this.WikiButton.Text = "Wiki";
+            this.WikiButton.UseVisualStyleBackColor = true;
+            this.WikiButton.Click += new System.EventHandler(this.WikiButton_Click);
             // 
             // PresetsButton
             // 
@@ -136,22 +150,6 @@
             this.versionLabel.Text = "Autosplitter Version: x.x.x.x";
             this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // RunBehaviour_GroupBox
-            // 
-            this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerStartEnd);
-            this.RunBehaviour_GroupBox.Controls.Add(this.StartTriggerStartEnd);
-            this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerComboBox);
-            this.RunBehaviour_GroupBox.Controls.Add(this.ResetTriggerCheckBox);
-            this.RunBehaviour_GroupBox.Controls.Add(this.StartTriggerComboBox);
-            this.RunBehaviour_GroupBox.Controls.Add(this.StartTriggerCheckBox);
-            this.RunBehaviour_GroupBox.Controls.Add(this.chkOrdered);
-            this.RunBehaviour_GroupBox.Location = new System.Drawing.Point(130, 15);
-            this.RunBehaviour_GroupBox.Name = "RunBehaviour_GroupBox";
-            this.RunBehaviour_GroupBox.Size = new System.Drawing.Size(323, 95);
-            this.RunBehaviour_GroupBox.TabIndex = 7;
-            this.RunBehaviour_GroupBox.TabStop = false;
-            this.RunBehaviour_GroupBox.Text = "Run behaviour";
-            // 
             // ResetTriggerStartEnd
             // 
             this.ResetTriggerStartEnd.AllowDrop = true;
@@ -159,7 +157,7 @@
             this.ResetTriggerStartEnd.Items.AddRange(new object[] {
             "Start",
             "End"});
-            this.ResetTriggerStartEnd.Location = new System.Drawing.Point(268, 63);
+            this.ResetTriggerStartEnd.Location = new System.Drawing.Point(256, 51);
             this.ResetTriggerStartEnd.Name = "ResetTriggerStartEnd";
             this.ResetTriggerStartEnd.Size = new System.Drawing.Size(49, 21);
             this.ResetTriggerStartEnd.TabIndex = 12;
@@ -172,7 +170,7 @@
             this.StartTriggerStartEnd.Items.AddRange(new object[] {
             "Start",
             "End"});
-            this.StartTriggerStartEnd.Location = new System.Drawing.Point(268, 40);
+            this.StartTriggerStartEnd.Location = new System.Drawing.Point(256, 27);
             this.StartTriggerStartEnd.Name = "StartTriggerStartEnd";
             this.StartTriggerStartEnd.Size = new System.Drawing.Size(49, 21);
             this.StartTriggerStartEnd.TabIndex = 11;
@@ -182,7 +180,7 @@
             // 
             this.ResetTriggerComboBox.Enabled = false;
             this.ResetTriggerComboBox.FormattingEnabled = true;
-            this.ResetTriggerComboBox.Location = new System.Drawing.Point(107, 63);
+            this.ResetTriggerComboBox.Location = new System.Drawing.Point(95, 51);
             this.ResetTriggerComboBox.Name = "ResetTriggerComboBox";
             this.ResetTriggerComboBox.Size = new System.Drawing.Size(210, 21);
             this.ResetTriggerComboBox.TabIndex = 9;
@@ -192,7 +190,7 @@
             // ResetTriggerCheckBox
             // 
             this.ResetTriggerCheckBox.AutoSize = true;
-            this.ResetTriggerCheckBox.Location = new System.Drawing.Point(6, 67);
+            this.ResetTriggerCheckBox.Location = new System.Drawing.Point(6, 53);
             this.ResetTriggerCheckBox.Name = "ResetTriggerCheckBox";
             this.ResetTriggerCheckBox.Size = new System.Drawing.Size(89, 17);
             this.ResetTriggerCheckBox.TabIndex = 8;
@@ -205,7 +203,7 @@
             // 
             this.StartTriggerComboBox.Enabled = false;
             this.StartTriggerComboBox.FormattingEnabled = true;
-            this.StartTriggerComboBox.Location = new System.Drawing.Point(107, 40);
+            this.StartTriggerComboBox.Location = new System.Drawing.Point(95, 26);
             this.StartTriggerComboBox.Name = "StartTriggerComboBox";
             this.StartTriggerComboBox.Size = new System.Drawing.Size(210, 21);
             this.StartTriggerComboBox.TabIndex = 7;
@@ -215,7 +213,7 @@
             // StartTriggerCheckBox
             // 
             this.StartTriggerCheckBox.AutoSize = true;
-            this.StartTriggerCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.StartTriggerCheckBox.Location = new System.Drawing.Point(6, 30);
             this.StartTriggerCheckBox.Name = "StartTriggerCheckBox";
             this.StartTriggerCheckBox.Size = new System.Drawing.Size(83, 17);
             this.StartTriggerCheckBox.TabIndex = 6;
@@ -226,7 +224,7 @@
             // 
             // chkOrdered
             // 
-            this.chkOrdered.Location = new System.Drawing.Point(6, 17);
+            this.chkOrdered.Location = new System.Drawing.Point(6, 5);
             this.chkOrdered.Name = "chkOrdered";
             this.chkOrdered.Size = new System.Drawing.Size(92, 19);
             this.chkOrdered.TabIndex = 4;
@@ -237,6 +235,7 @@
             // 
             // SortBy_GroupBox
             // 
+            this.SortBy_GroupBox.Controls.Add(this.rdChapter);
             this.SortBy_GroupBox.Controls.Add(this.rdAlpha);
             this.SortBy_GroupBox.Controls.Add(this.rdType);
             this.SortBy_GroupBox.Location = new System.Drawing.Point(6, 15);
@@ -274,17 +273,54 @@
             // 
             this.ToolTips.ShowAlways = true;
             // 
-            // WikiButton
+            // rdChapter
             // 
-            this.WikiButton.Location = new System.Drawing.Point(190, 116);
-            this.WikiButton.Name = "WikiButton";
-            this.WikiButton.Size = new System.Drawing.Size(55, 21);
-            this.WikiButton.TabIndex = 10;
-            this.WikiButton.Text = "Wiki";
-            this.WikiButton.UseVisualStyleBackColor = true;
-            this.WikiButton.Click += new System.EventHandler(this.WikiButton_Click);
+            this.rdChapter.AutoSize = true;
+            this.rdChapter.Location = new System.Drawing.Point(6, 65);
+            this.rdChapter.Name = "rdChapter";
+            this.rdChapter.Size = new System.Drawing.Size(62, 17);
+            this.rdChapter.TabIndex = 4;
+            this.rdChapter.Text = "Chapter";
+            this.rdChapter.UseVisualStyleBackColor = true;
             // 
-            // ItTakesTwoSettings
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(130, 4);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(329, 106);
+            this.tabControl1.TabIndex = 13;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.StartTriggerStartEnd);
+            this.tabPage1.Controls.Add(this.ResetTriggerStartEnd);
+            this.tabPage1.Controls.Add(this.ResetTriggerComboBox);
+            this.tabPage1.Controls.Add(this.chkOrdered);
+            this.tabPage1.Controls.Add(this.StartTriggerCheckBox);
+            this.tabPage1.Controls.Add(this.StartTriggerComboBox);
+            this.tabPage1.Controls.Add(this.ResetTriggerCheckBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(321, 80);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Run Behavior";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(321, 80);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Debug";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -293,17 +329,18 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.flowMain);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ItTakesTwoSettings";
+            this.Name = "Settings";
             this.Size = new System.Drawing.Size(465, 149);
             this.Load += new System.EventHandler(this.Settings_Load);
             this.flowMain.ResumeLayout(false);
             this.flowMain.PerformLayout();
             this.flowOptions.ResumeLayout(false);
             this.Options_GroupBox.ResumeLayout(false);
-            this.RunBehaviour_GroupBox.ResumeLayout(false);
-            this.RunBehaviour_GroupBox.PerformLayout();
             this.SortBy_GroupBox.ResumeLayout(false);
             this.SortBy_GroupBox.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,7 +356,6 @@
         private System.Windows.Forms.GroupBox Options_GroupBox;
         private System.Windows.Forms.ToolTip ToolTips;
         private System.Windows.Forms.Label versionLabel;
-        private System.Windows.Forms.GroupBox RunBehaviour_GroupBox;
         private System.Windows.Forms.GroupBox SortBy_GroupBox;
         private System.Windows.Forms.CheckBox StartTriggerCheckBox;
         private System.Windows.Forms.ComboBox StartTriggerComboBox;
@@ -330,5 +366,9 @@
         public System.Windows.Forms.ComboBox ResetTriggerStartEnd;
         public System.Windows.Forms.ComboBox StartTriggerStartEnd;
         private System.Windows.Forms.Button WikiButton;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.RadioButton rdChapter;
     }
 }

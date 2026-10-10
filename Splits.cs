@@ -11,7 +11,7 @@ public class Splits
 {
     public enum SplitType
     {
-        
+
         None,
         Chapter,
         Level,
@@ -119,7 +119,7 @@ public class Splits
                     return null;
 
                 Logger.GetLogger("Split").Warning("\"{0}\" isn't a recognized split.", nameID);
-                FailedSplits.Add(nameID); 
+                FailedSplits.Add(nameID);
                 return null;
             }
         }
@@ -136,7 +136,7 @@ public class Splits
             return Name + " (" + (CheckpointType == CheckpointType.Dev ? "Dev " : "") + Type.ToString() + ")";
         }
 
-        
+
 
         public static HashSet<string> FailedSplits = new HashSet<string>();
     }
@@ -4454,4 +4454,18 @@ public class Splits
             },
         #endregion
         };
+
+    public class ITTSplitComboBox
+    {
+        public ITTSplit Split { get; set; }
+        public string GroupHeader { get; set; }
+
+        public bool IsHeader => GroupHeader != null;
+
+        public override string ToString()
+        {
+            if (IsHeader) return GroupHeader;
+            return $"[{Split.ID}]\n{Split.Name} ({Split.Type})";
+        }
+    }
 }

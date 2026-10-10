@@ -30,8 +30,8 @@
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
             this.btnAddBelow = new System.Windows.Forms.Button();
             this.btnAddAbove = new System.Windows.Forms.Button();
-            this.picHandle = new System.Windows.Forms.PictureBox();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.picHandle = new System.Windows.Forms.PictureBox();
             this.cboCSStartEnd = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picHandle)).BeginInit();
             this.SuspendLayout();
@@ -74,6 +74,16 @@
             this.ToolTips.SetToolTip(this.btnAddAbove, "add a split above this");
             this.btnAddAbove.UseVisualStyleBackColor = true;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(333, 2);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(26, 23);
+            this.btnEdit.TabIndex = 6;
+            this.btnEdit.Text = "✏";
+            this.ToolTips.SetToolTip(this.btnEdit, "edit this setting");
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
             // picHandle
             // 
             this.picHandle.Cursor = System.Windows.Forms.Cursors.SizeAll;
@@ -86,16 +96,6 @@
             this.picHandle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picHandle_MouseDown);
             this.picHandle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picHandle_MouseMove);
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(333, 2);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(26, 23);
-            this.btnEdit.TabIndex = 6;
-            this.btnEdit.Text = "✏";
-            this.ToolTips.SetToolTip(this.btnEdit, "edit this setting");
-            this.btnEdit.UseVisualStyleBackColor = true;
-            // 
             // cboCSStartEnd
             // 
             this.cboCSStartEnd.AllowDrop = true;
@@ -106,7 +106,7 @@
             this.cboCSStartEnd.TabIndex = 9;
             this.cboCSStartEnd.Visible = false;
             // 
-            // ItTakesTwoSplitSettings
+            // SplitSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,7 +119,7 @@
             this.Controls.Add(this.cboName);
             this.Controls.Add(this.picHandle);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ItTakesTwoSplitSettings";
+            this.Name = "SplitSettings";
             this.Size = new System.Drawing.Size(460, 30);
             ((System.ComponentModel.ISupportInitialize)(this.picHandle)).EndInit();
             this.ResumeLayout(false);

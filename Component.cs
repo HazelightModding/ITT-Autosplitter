@@ -11,6 +11,7 @@ using System.Xml;
 using static LiveSplit.ItTakesTwo.Statics;
 using static LiveSplit.ItTakesTwo.Splits;
 using System.Diagnostics;
+using LiveSplit.ItTakesTwo;
 
 namespace LiveSplit.ItTakesTwo
 {

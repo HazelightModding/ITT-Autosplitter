@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using static LiveSplit.ItTakesTwo.Splits;
@@ -39,9 +40,13 @@ namespace LiveSplit.ItTakesTwo
 
             Splits = new List<ITTSplit>();
 
-            StartTriggerComboBox.DataSource = GetAvailableSplits();
-            ResetTriggerComboBox.BindingContext = new BindingContext();
-            ResetTriggerComboBox.DataSource = GetAvailableSplits();
+            SortMode mode = SortMode.Alphabetical;
+            if (rdType.Checked) mode = SortMode.Type;
+            else if (rdChapter.Checked) mode = SortMode.Chapter;
+
+            SetupComboBox(StartTriggerComboBox, mode);
+            SetupComboBox(ResetTriggerComboBox, mode);
+
             StartTriggerStartEnd.DataSource = startEnd;
             ResetTriggerStartEnd.BindingContext = new BindingContext();
             ResetTriggerStartEnd.DataSource = startEnd;
@@ -467,33 +472,12 @@ namespace LiveSplit.ItTakesTwo
 
         private void radio_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (Control c in flowMain.Controls)
-            {
-                if (c is SplitSettings)
-                {
-                    SplitSettings setting = (SplitSettings)c;
-                    if (setting.cboName.Enabled)
-                    {
-                        string text = setting.cboName.Text;
-                        setting.cboName.DataSource = GetAvailableSplits();
-                        setting.cboName.Text = text;
-                    }
-                }
-            }
+            SortMode mode = SortMode.Alphabetical;
+            if (rdType.Checked) mode = SortMode.Type;
+            else if (rdChapter.Checked) mode = SortMode.Chapter;
 
-            if (StartTriggerCheckBox.Checked)
-            {
-                string text = StartTriggerComboBox.Text;
-                StartTriggerComboBox.DataSource = GetAvailableSplits();
-                StartTriggerComboBox.Text = text;
-            }
-
-            if (ResetTriggerCheckBox.Checked)
-            {
-                string text = ResetTriggerComboBox.Text;
-                ResetTriggerComboBox.DataSource = GetAvailableSplits();
-                ResetTriggerComboBox.Text = text;
-            }
+            SetupComboBox(StartTriggerComboBox, mode);
+            SetupComboBox(ResetTriggerComboBox, mode);
         }
         private void flowMain_DragDrop(object sender, DragEventArgs e)
         {
@@ -637,6 +621,125 @@ namespace LiveSplit.ItTakesTwo
                 FileName = "https://www.speedrun.com/itt/resources",
                 UseShellExecute = true
             });
+        }
+
+        public enum SortMode
+        {
+            Alphabetical,
+            Type,
+            Chapter
+        }
+        public List<ITTSplitComboBox> GetGroupedSplits(SortMode mode)
+        {
+            var result = new List<ITTSplitComboBox>();
+            IEnumerable<IGrouping<string, ITTSplit>> groups = null;
+
+            switch (mode)
+            {
+                case SortMode.Type:
+                groups = SplitInfo.GroupBy(s => s.Type.ToString());
+                break;
+                case SortMode.Chapter:
+                groups = SplitInfo.GroupBy(s => s.Subchapter);
+                break;
+                default: // Alphabetical
+                return SplitInfo
+                    .OrderBy(s => s.Name)
+                    .Select(s => new ITTSplitComboBox { Split = s })
+                    .ToList();
+            }
+
+            foreach (var group in groups)
+            {
+                result.Add(new ITTSplitComboBox { GroupHeader = group.Key });
+                foreach (var split in group)
+                    result.Add(new ITTSplitComboBox { Split = split });
+            }
+            return result;
+        }
+
+        private void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            if (e.Index < 0) return;
+
+            var item = comboBox.Items[e.Index] as ITTSplitComboBox;
+            e.DrawBackground();
+
+            var font = GetComboBoxFont(item);
+
+            if (item.IsHeader)
+            {
+                e.Graphics.DrawString(item.GroupHeader, font, Brushes.Gray, e.Bounds);
+            }
+            else
+            {
+                var lines = item.ToString().Split('\n');
+                float y = e.Bounds.Top;
+                foreach (var line in lines)
+                {
+                    e.Graphics.DrawString(line, font, Brushes.Black, new RectangleF(e.Bounds.Left, y, e.Bounds.Width, font.Height));
+                    y += font.Height;
+                }
+            }
+
+            e.DrawFocusRectangle();
+        }
+
+        private void SetupComboBox(ComboBox comboBox, SortMode mode)
+        {
+            comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBox.BindingContext = new BindingContext();
+            comboBox.DataSource = GetGroupedSplits(mode);
+            comboBox.SelectedIndex = -1;
+            comboBox.DropDown -= ComboBox_DropDown;
+            comboBox.DropDown += ComboBox_DropDown;
+            comboBox.DrawItem -= ComboBox_DrawItem;
+            comboBox.DrawItem += ComboBox_DrawItem;
+            comboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
+            comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+            comboBox.ItemHeight = 3 * GetComboBoxFont(new ITTSplitComboBox { Split = new ITTSplit("dummy") }).Height;
+        }
+
+        private void ComboBox_DropDown(object sender, EventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            int maxWidth = comboBox.Width;
+            using (var g = comboBox.CreateGraphics())
+            {
+                foreach (var obj in comboBox.Items)
+                {
+                    var item = obj as ITTSplitComboBox;
+                    if (item == null) continue;
+                    string text = item.IsHeader ? item.GroupHeader : item.ToString();
+                    var size = g.MeasureString(text, GetComboBoxFont(item));
+                    if (size.Width > maxWidth)
+                        maxWidth = (int)size.Width;
+                }
+            }
+            comboBox.DropDownWidth = maxWidth + 30; // Add some padding
+        }
+
+        private Font GetComboBoxFont(ITTSplitComboBox item)
+        {
+            if (item.IsHeader)
+                return new Font(SystemFonts.DefaultFont.FontFamily, 20, FontStyle.Bold);
+            return new Font(SystemFonts.DefaultFont.FontFamily, 10, FontStyle.Regular); 
+        }
+
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            var item = comboBox.SelectedItem as ITTSplitComboBox;
+            if (item == null) return;
+            if (item.IsHeader)
+            {
+                comboBox.SelectedIndex = -1;
+            }
+            else if (item.Split != null)
+            {
+                ToolTips.SetToolTip(comboBox, item.Split.Tooltip);
+            }
         }
 
     }
