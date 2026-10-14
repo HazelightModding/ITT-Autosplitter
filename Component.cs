@@ -15,6 +15,7 @@ using LiveSplit.ItTakesTwo;
 
 namespace LiveSplit.ItTakesTwo
 {
+
     public struct CurrentRunInformation()
     {
         public TimerModel Model { get; set; }
@@ -42,11 +43,11 @@ namespace LiveSplit.ItTakesTwo
             return ref Instance.CurrentRun;
         }
 
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
-        private static extern bool AllocConsole();
-
         public Component(LiveSplitState state)
         {
+#if DEBUG
+            ToggleConsole(true);
+#endif
             Instance = this;
             Logger.InitLog(this);
             Log = Logger.GetLogger("Component");
@@ -73,18 +74,26 @@ namespace LiveSplit.ItTakesTwo
             CurrentRun.split = -1;
             CurrentRun.splitsDone = new();
 
-#if DEBUG
-            AllocConsole();
-#endif
-
         }
 
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        private static extern bool AllocConsole();
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        private static extern bool FreeConsole();
+
+        public static void ToggleConsole(bool state)
+        {
+            if (state)
+                AllocConsole();
+            else
+                FreeConsole();
+        }
+
+        // TODO: Adjust this when Game Time without Cutscenes becomes the main timing method
         private static void CheckTimingMethod(LiveSplitState state)
         {
             if (state.CurrentTimingMethod == TimingMethod.GameTime)
-            {
                 return;
-            }
 
             var timingMessage = MessageBox.Show(
                 "It Takes Two uses Time without Loads (Game Time) as the main timing method.\n" +
@@ -102,13 +111,11 @@ namespace LiveSplit.ItTakesTwo
 
         public void Update(IInvalidator invalidator, LiveSplitState lvstate, float width, float height, LayoutMode mode)
         {
+            if (CurrentRun.Model == null)
+                return;
+
             try
             {
-                if (CurrentRun.Model == null)
-                {
-                    return;
-                }
-
                 if (!Memory.Update()) 
                 {
                     CurrentRun.Model.CurrentState.IsGameTimePaused = true;
@@ -130,11 +137,12 @@ namespace LiveSplit.ItTakesTwo
                     CurrentRun.Model.Start();
                 }
             }
+
             catch (Exception e)
             {
-                Log.Error("!!!! UNHANDLED ERROR IN UPDATE !!!!");
+                Log.Error("UNHANDLED ERROR IN UPDATE!");
+                Log.Error("Please report this to the autosplitter developer.");
                 Log.Error(e.ToString());
-                Log.Error("Please report this stack trace to the dev.");
             }
 
         }
@@ -214,23 +222,14 @@ namespace LiveSplit.ItTakesTwo
 
 
 
-
-
-
-
         public Control GetSettingsControl(LayoutMode mode) => Settings;
         public void SetSettings(XmlNode document) => Settings.SetSettings(document);
         public XmlNode GetSettings(XmlDocument document) => Settings.UpdateSettings(document);
         public void DrawHorizontal(Graphics g, LiveSplitState state, float height, Region clipRegion) { }
         public void DrawVertical(Graphics g, LiveSplitState state, float width, Region clipRegion) { }
-        public float HorizontalWidth => 0;
-        public float MinimumHeight => 0;
-        public float MinimumWidth => 0;
-        public float PaddingBottom => 0;
-        public float PaddingLeft => 0;
-        public float PaddingRight => 0;
-        public float PaddingTop => 0;
-        public float VerticalHeight => 0;
+        public float HorizontalWidth => 0; public float MinimumHeight => 0; public float MinimumWidth => 0;
+        public float PaddingBottom => 0; public float PaddingLeft => 0; public float PaddingRight => 0;
+        public float PaddingTop => 0; public float VerticalHeight => 0;
         public void Dispose()
         {
             if (CurrentRun.Model == null) return;

@@ -18,10 +18,10 @@ namespace LiveSplit.ItTakesTwo
         private Thread ScanThread;
         private static Data Data;
 
-        private static Memory a;
+        private static Memory _mem;
         public static Memory GetOrCreate()
         {
-            return a ??= new Memory();
+            return _mem ??= new Memory();
         }
         public Data GetData()
         {

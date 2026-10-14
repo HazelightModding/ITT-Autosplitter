@@ -13,7 +13,7 @@ namespace LiveSplit.ItTakesTwo
         public SplitSettings()
         {
             InitializeComponent();
-            cboName.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
+            splitSettingComboBox.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
         }
 
         private void picHandle_MouseMove(object sender, MouseEventArgs e)

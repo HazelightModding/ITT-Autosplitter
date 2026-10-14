@@ -26,13 +26,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplitSettings));
             this.btnRemove = new System.Windows.Forms.Button();
-            this.cboName = new System.Windows.Forms.ComboBox();
+            this.splitSettingComboBox = new System.Windows.Forms.ComboBox();
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
             this.btnAddBelow = new System.Windows.Forms.Button();
             this.btnAddAbove = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.picHandle = new System.Windows.Forms.PictureBox();
-            this.cboCSStartEnd = new System.Windows.Forms.ComboBox();
+            this.ComboBoxCutsceneCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picHandle)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,13 +46,13 @@
             this.ToolTips.SetToolTip(this.btnRemove, "Remove this setting");
             this.btnRemove.UseVisualStyleBackColor = true;
             // 
-            // cboName
+            // splitSettingComboBox
             // 
-            this.cboName.FormattingEnabled = true;
-            this.cboName.Location = new System.Drawing.Point(22, 3);
-            this.cboName.Name = "cboName";
-            this.cboName.Size = new System.Drawing.Size(305, 21);
-            this.cboName.TabIndex = 0;
+            this.splitSettingComboBox.FormattingEnabled = true;
+            this.splitSettingComboBox.Location = new System.Drawing.Point(22, 3);
+            this.splitSettingComboBox.Name = "splitSettingComboBox";
+            this.splitSettingComboBox.Size = new System.Drawing.Size(305, 21);
+            this.splitSettingComboBox.TabIndex = 0;
             // 
             // btnAddBelow
             // 
@@ -96,44 +96,46 @@
             this.picHandle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picHandle_MouseDown);
             this.picHandle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picHandle_MouseMove);
             // 
-            // cboCSStartEnd
+            // ComboBoxCutsceneCheckBox
             // 
-            this.cboCSStartEnd.AllowDrop = true;
-            this.cboCSStartEnd.FormattingEnabled = true;
-            this.cboCSStartEnd.Location = new System.Drawing.Point(278, 3);
-            this.cboCSStartEnd.Name = "cboCSStartEnd";
-            this.cboCSStartEnd.Size = new System.Drawing.Size(49, 21);
-            this.cboCSStartEnd.TabIndex = 9;
-            this.cboCSStartEnd.Visible = false;
+            this.ComboBoxCutsceneCheckBox.AutoSize = true;
+            this.ComboBoxCutsceneCheckBox.Location = new System.Drawing.Point(312, 7);
+            this.ComboBoxCutsceneCheckBox.Name = "ComboBoxCutsceneCheckBox";
+            this.ComboBoxCutsceneCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.ComboBoxCutsceneCheckBox.TabIndex = 15;
+            this.ToolTips.SetToolTip(this.ComboBoxCutsceneCheckBox, "Split on Start");
+            this.ComboBoxCutsceneCheckBox.UseVisualStyleBackColor = false;
+            this.ComboBoxCutsceneCheckBox.Visible = false;
             // 
             // SplitSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.cboCSStartEnd);
+            this.Controls.Add(this.ComboBoxCutsceneCheckBox);
             this.Controls.Add(this.btnAddBelow);
             this.Controls.Add(this.btnAddAbove);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnRemove);
-            this.Controls.Add(this.cboName);
+            this.Controls.Add(this.splitSettingComboBox);
             this.Controls.Add(this.picHandle);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "SplitSettings";
             this.Size = new System.Drawing.Size(460, 30);
             ((System.ComponentModel.ISupportInitialize)(this.picHandle)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         public System.Windows.Forms.Button btnRemove;
-        public System.Windows.Forms.ComboBox cboName;
+        public System.Windows.Forms.ComboBox splitSettingComboBox;
         private System.Windows.Forms.ToolTip ToolTips;
         private System.Windows.Forms.PictureBox picHandle;
         public System.Windows.Forms.Button btnAddBelow;
         public System.Windows.Forms.Button btnAddAbove;
         public System.Windows.Forms.Button btnEdit;
-        public System.Windows.Forms.ComboBox cboCSStartEnd;
+        public System.Windows.Forms.CheckBox ComboBoxCutsceneCheckBox;
     }
 }

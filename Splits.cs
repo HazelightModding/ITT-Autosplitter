@@ -218,395 +218,493 @@ public class Splits
         #region LEVELS
             new ITTSplit("Menu_BP") {
                 Name = Chapter.MainMenu,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.MainMenu
             },
             new ITTSplit("Awakening_BP") {
                 Name = Chapter.WakeUpCall,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WakeUpCall
             },
             new ITTSplit("Vacuum_BP") {
                 Name = Chapter.BitingTheDust,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.BitingTheDust
             },
             new ITTSplit("Main_Hammernails_BP") {
                 Name = Chapter.TheDepths,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.TheDepths
             },
             new ITTSplit("Main_Bossfight_BP") {
                 Name = "Depths Bossfight",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.TheDepths
             },
             new ITTSplit("Main_Grindsection_BP") {
                 Name = Chapter.WiredUp,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WiredUp
             },
             new ITTSplit("RealWorld_Shed_StarGazing_Meet_BP") {
                 Name = "Intermediary 1",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WiredUp
             },
             new ITTSplit("Approach_BP") {
                 Name = Chapter.FreshAir,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.FreshAir
             },
             new ITTSplit("RealWorld_House_Study_Friends_BP") {
                 Name = "House Study Friends Cutscene",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.FreshAir
             },
             new ITTSplit("SquirrelTurf_WarRoom_BP") {
                 Name = "War Room Cutscene",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Captured
             },
             new ITTSplit("SquirrelHome_BP_Mech") {
                 Name = Chapter.Captured,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Captured
             },
             new ITTSplit("WaspsNest_BP") {
                 Name = Chapter.DeeplyRooted,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("Tree_Boat_BP") {
                 Name = Chapter.Boat,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("Tree_Darkroom_BP") {
                 Name = Chapter.Darkroom,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("WaspsNest_Elevator_BP") {
                 Name = "Deeply Rooted Elevator",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("WaspsNest_Beetle_BP") {
                 Name = "Beetle",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("WaspsNest_BeetleRide_BP") {
                 Name = "Beetle Ride",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("WaspQueenBoss_BP") {
                 Name = Chapter.Extermination,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Extermination
             },
             new ITTSplit("SquirrelTurf_Flight_BP") {
                 Name = "Flight Cutscene",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Extermination
             },
             new ITTSplit("Escape_BP") {
                 Name = Chapter.Getaway,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Getaway
             },
             new ITTSplit("RealWorld_Exterior_Roof_Crash_BP") {
                 Name = "Intermediary 2",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Getaway
             },
             new ITTSplit("PillowFort_BP") {
                 Name = Chapter.PillowFort,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.PillowFort
             },
             new ITTSplit("Spacestation_Hub_BP") {
                 Name = Chapter.SpacedOut,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SpacedOut
             },
             new ITTSplit("SpaceStation_MoonBaboon_BP") {
                 Name = "Moon Baboon",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SpacedOut
             },
             new ITTSplit("Realworld_SpaceStation_Bossfight_BeamOut_BP") {
                 Name = "Beam Out Cutscene",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SpacedOut
             },
             new ITTSplit("Hopscotch_BP") {
                 Name = Chapter.Hopscotch,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("Hopscotch_Homework_BP") {
                 Name = "Homework",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("Hopscotch_Dungeon_BP") {
                 Name = "Hopscotch Dungeon",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("VoidWorld_BP") {
                 Name = "Void World",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("Kaleidoscope_BP") {
                 Name = "Kaleidoscope",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("Goldberg_Trainstation_BP") {
                 Name = Chapter.TrainStation,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.TrainStation
             },
             new ITTSplit("Goldberg_Dinoland_BP") {
                 Name = Chapter.DinoLand,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DinoLand
             },
             new ITTSplit("Goldberg_Pirate_BP") {
                 Name = Chapter.PiratesAhoy,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.PiratesAhoy
             },
             new ITTSplit("Goldberg_Circus_BP") {
                 Name = Chapter.TheGreatestShow,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.TheGreatestShow
             },
             new ITTSplit("Castle_Courtyard_BP") {
                 Name = Chapter.OnceUponATime,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.OnceUponATime
             },
             new ITTSplit("Castle_Dungeon_BP") {
                 Name = Chapter.DungeonCrawler,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DungeonCrawler
             },
             new ITTSplit("Castle_Dungeon_Crusher_BP") {
                 Name = "Dungeon Crusher",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DungeonCrawler
             },
             new ITTSplit("Castle_Dungeon_Charger_BP") {
                 Name = "Dungeon Charger",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DungeonCrawler
             },
             new ITTSplit("Castle_Chessboard_BP") {
                 Name = "Dungeon Chess",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.DungeonCrawler
             },
             new ITTSplit("Shelf_BP") {
                 Name = Chapter.TheQueen,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.TheQueen
             },
             new ITTSplit("RealWorld_RoseRoom_Bed_Tears_BP") {
                 Name = "Intermediary 3",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.TheQueen
             },
             new ITTSplit("TherapyRoom_Session_Theme_Time_BP") {
                 Name = "Therapy Room Time",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.GatesOfTime
             },
             new ITTSplit("Clockwork_Tutorial_BP") {
                 Name = Chapter.GatesOfTime,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.GatesOfTime
             },
             new ITTSplit("Clockwork_ClockTown_BP") {
                 Name = "Clock Town",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.GatesOfTime
             },
             new ITTSplit("Clockwork_Forest_BP") {
                 Name = "Clock Forest",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.GatesOfTime
             },
             new ITTSplit("Clockwork_ClockTowerLower_CrushingTrapRoom_BP") {
                 Name = Chapter.Clockworks,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Clockworks
             },
             new ITTSplit("Clockwork_ClockTowerLower_BridgeIntro_BP") {
                 Name = "Clockworks Bridge",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Clockworks
             },
             new ITTSplit("Clockwork_ClockTowerLower_BP") {
                 Name = "Clockworks Statue Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Clockworks
             },
             new ITTSplit("Clockwork_ClockTowerMiniBossRoom_BP") {
                 Name = "Clockworks Bull Boss",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Clockworks
             },
             new ITTSplit("Clockwork_ClockTowerLower_WallJumpCorridor_BP") {
                 Name = "Clockworks Wall Jump Corridor",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Clockworks
             },
             new ITTSplit("Clockwork_ClockTowerLower_CuckooBirdRoom_BP") {
                 Name = "Clockworks Pocket Watch Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Clockworks
             },
             new ITTSplit("Clockwork_ClockTowerLastBoss_BP") {
                 Name = Chapter.ABlastFromThePast,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.ABlastFromThePast
             },
             new ITTSplit("Clockwork_ClockTowerCourtyardCutscene_BP") {
                 Name = "Clock Ending Cutscene",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.ABlastFromThePast
             },
             new ITTSplit("RealWorld_House_LowerLevel_Clock_BP") {
                 Name = "Realworld Clock Cutscene",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.ABlastFromThePast
             },
             new ITTSplit("TherapyRoom_Session_Theme_Attraction_BP") {
                 Name = "Therapy Room Attraction",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WarmingUp
             },
             new ITTSplit("SnowGlobe_Forest_BP") {
                 Name = Chapter.WarmingUp,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WarmingUp
             },
             new ITTSplit("SnowGlobe_Forest_TownGate_BP") {
                 Name = "Forest Town Gate",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WarmingUp
             },
             new ITTSplit("SnowGlobe_Town_BP") {
                 Name = Chapter.WinterVillage,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WinterVillage
             },
             new ITTSplit("SnowGlobe_Town_BobSled") {
                 Name = "Bobsled",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WinterVillage
             },
             new ITTSplit("Snowglobe_Lake_BP") {
                 Name = Chapter.BeneathTheIce,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.BeneathTheIce
             },
             new ITTSplit("SnowGlobe_Lake_IceCave_BP") {
                 Name = "Ice Cave",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.BeneathTheIce
             },
             new ITTSplit("SnowGlobe_Mountain_BP") {
                 Name = Chapter.SlipperySlopes,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("SnowGlobe_Mountain_Cave_BP") {
                 Name = "Slippery Caves",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("SnowGlobe_Mountain_Collapse_BP") {
                 Name = "Slippery Collapse",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("SnowGlobe_Mountain_PlayerAttraction_BP") {
                 Name = "Slippery Attraction",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("SnowGlobe_Mountain_WindWalk_BP") {
                 Name = "Slippery Wind Walk",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("Tower_BP") {
                 Name = "Tower Cutscene",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("RealWorld_House_Kitchen_Sandwiches_BP") {
                 Name = "Real World Kitchen Sandwiches",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("TherapyRoom_Session_Theme_Garden_BP") {
                 Name = "Therapy Room Garden",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.GreenFingers
             },
             new ITTSplit("Garden_VegetablePatch_BP") {
                 Name = Chapter.GreenFingers,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.GreenFingers
             },
             new ITTSplit("Garden_Shrubbery_BP") {
                 Name = Chapter.WeedWhacking,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WeedWhacking
             },
             new ITTSplit("Garden_Shrubbery_SecondCombat_BP") {
                 Name = "Weed Whacking Second Combat",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.WeedWhacking
             },
             new ITTSplit("Garden_MoleTunnels_Stealth_BP") {
                 Name = Chapter.Trespassing,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Trespassing
             },
             new ITTSplit("Garden_MoleTunnels_Chase_BP") {
                 Name = "Trespassing Chase",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Trespassing
             },
             new ITTSplit("Garden_FrogPond_BP") {
                 Name = Chapter.FrogPond,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.FrogPond
             },
             new ITTSplit("Garden_FrogPond_FountainPuzzle_BP") {
                 Name = "Frog Pond Fountain Puzzle",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.FrogPond
             },
             new ITTSplit("Garden_Greenhouse_BP") {
                 Name = Chapter.Affliction,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Affliction
             },
             new ITTSplit("Garden_Greenhouse_JoysRoom_BP") {
                 Name = "Affliction Joys Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Affliction
             },
             new ITTSplit("RealWorld_RoseRoom_FlowerPot_BP") {
                 Name = "Real World Flower Pot",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Affliction
             },
             new ITTSplit("TherapyRoom_Session_Theme_Music_BP") {
                 Name = "Therapy Room Music",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SettingTheStage
             },
             new ITTSplit("Music_ConcertHall_BP") {
                 Name = Chapter.SettingTheStage,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.SettingTheStage
             },
             new ITTSplit("Music_Backstage_Tutorial_BP") {
                 Name = Chapter.Rehearsal,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_PortableSpeakerRoom_BP") {
                 Name = "Rehearsal Portable Speaker Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_SubBassRoom_BP") {
                 Name = "Rehearsal Sub Bass Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_TrussRoom_BP") {
                 Name = "Rehearsal Truss Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_MusicTechWall_BP") {
                 Name = "Rehearsal Music Tech Wall",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_MurderMicrophoneRoom_BP") {
                 Name = "Rehearsal Murder Microphone Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_MicrophoneChase_BP") {
                 Name = "Rehearsal Microphone Chase",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_DrumMachineRoom_BP") {
                 Name = "Rehearsal Drum Machine Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Backstage_LightRoom_BP") {
                 Name = "Rehearsal Light Room",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Classic_Organ_BP") {
                 Name = Chapter.Symphony,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Symphony
             },
             new ITTSplit("Music_Classic_Ending_BP") {
                 Name = "Symphony Ending",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Symphony
             },
             new ITTSplit("Music_Nightclub_BP") {
                 Name = Chapter.TurnUp,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.TurnUp
             },
             new ITTSplit("Music_Ending_BP") {
                 Name = Chapter.AGrandFinale,
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.AGrandFinale
             },
             new ITTSplit("TherapyRoom_Session_Theme_Love_BP") {
                 Name = "Therapy Room Basement",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Basement
             },
             new ITTSplit("Basement_Seekers_BP") {
                 Name = "Basement Seekers",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Basement
             },
             new ITTSplit("Basement_HouseInterior_BP") {
                 Name = "Basement House Interior",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Basement
             },
             new ITTSplit("Basement_Boss_BP") {
                 Name = "Basement Boss",
-                Type = SplitType.Level
+                Type = SplitType.Level,
+                Subchapter = Chapter.Basement
             },
             #endregion
         #region CHECKPOINTS
@@ -614,7 +712,7 @@ public class Splits
             new ITTSplit("RealWorld_RealWorld_House_Kitchen_Divorce") {
                 Name = "RealWorld House Kitchen Divorce",
                 Type = SplitType.Checkpoint,
-                Subchapter = Chapter.Intro,
+                Subchapter = Chapter.WakeUpCall,
                 CheckpointType = CheckpointType.Excluded
             },
         #endregion
@@ -638,6 +736,7 @@ public class Splits
             new ITTSplit("Shed_Awakening_FusesPutIn") {
                 Name = "FusesPutIn",
                 Type = SplitType.Checkpoint,
+                Subchapter = Chapter.WakeUpCall,
                 Tooltip = "Splits when putting in the last fuse in " + Chapter.WakeUpCall,
                 CheckpointType = CheckpointType.Excluded
             },
@@ -2741,165 +2840,205 @@ public class Splits
         #region SUBCHAPTERS
             new ITTSplit("Shed_Awakening") {
                 Name = Chapter.WakeUpCall,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.WakeUpCall
             },
             new ITTSplit("Shed_Vacuum") {
                 Name = Chapter.BitingTheDust,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.BitingTheDust
             },
             new ITTSplit("Shed_Main") {
                 Name = Chapter.TheDepths,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.TheDepths
             },
             new ITTSplit("Tree_Approach") {
                 Name = Chapter.FreshAir,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.FreshAir
             },
             new ITTSplit("Tree_SquirreTurf") {
                 Name = Chapter.SquirrelTurf,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.FreshAir
             },
             new ITTSplit("Tree_SquirrelHome") {
                 Name = Chapter.Captured,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Captured
             },
             new ITTSplit("Tree_WaspNest") {
                 Name = Chapter.DeeplyRooted,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("Tree_Boat") {
                 Name = Chapter.Boat,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("Tree_Darkroom") {
                 Name = Chapter.Darkroom,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("Tree_Boss") {
                 Name = Chapter.Extermination,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Extermination
             },
             new ITTSplit("Tree_Escape") {
                 Name = Chapter.Getaway,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Getaway
             },
             new ITTSplit("PlayRoom_PillowFort") {
                 Name = Chapter.PillowFort,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.PillowFort
             },
             new ITTSplit("PlayRoom_Spacestation") {
                 Name = Chapter.SpacedOut,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.SpacedOut
             },
             new ITTSplit("PlayRoom_Hopscotch") {
                 Name = Chapter.Hopscotch,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("PlayRoom_Goldberg") {
                 Name = Chapter.Goldberg,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.TrainStation
             },
             new ITTSplit("PlayRoom_Courtyard") {
                 Name = Chapter.OnceUponATime,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.OnceUponATime
             },
             new ITTSplit("PlayRoom_Dungeon") {
                 Name = Chapter.DungeonCrawler,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.DungeonCrawler
             },
             new ITTSplit("PlayRoom_Chessboard") {
                 Name = Chapter.Chessboard,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.DungeonCrawler
             },
             new ITTSplit("PlayRoom_Shelf") {
                 Name = Chapter.TheQueen,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.TheQueen
             },
             new ITTSplit("Clockwork_Outside") {
                 Name = Chapter.GatesOfTime,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.GatesOfTime
             },
             new ITTSplit("Clockwork_LowerTower") {
                 Name = Chapter.Clockworks,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Clockworks
             },
             new ITTSplit("Clockwork_UpperTower") {
                 Name = Chapter.ABlastFromThePast,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.ABlastFromThePast
             },
             new ITTSplit("SnowGlobe_Forest") {
                 Name = Chapter.WarmingUp,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.WarmingUp
             },
             new ITTSplit("SnowGlobe_Town") {
                 Name = Chapter.WinterVillage,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.WinterVillage
             },
             new ITTSplit("SnowGlobe_Lake") {
                 Name = Chapter.BeneathTheIce,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.BeneathTheIce
             },
             new ITTSplit("SnowGlobe_Mountain") {
                 Name = Chapter.SlipperySlopes,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("SnowGlobe_Tower") {
                 Name = Chapter.SnowGlobeTower,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.SlipperySlopes
             },
             new ITTSplit("Garden_VegetablePatch") {
                 Name = Chapter.GreenFingers,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.GreenFingers
             },
             new ITTSplit("Garden_Shrubbery") {
                 Name = Chapter.WeedWhacking,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.WeedWhacking
             },
             new ITTSplit("Garden_MoleTunnels") {
                 Name = Chapter.Trespassing,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Trespassing
             },
             new ITTSplit("Garden_FrogPond") {
                 Name = Chapter.FrogPond,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.FrogPond
             },
             new ITTSplit("Garden_Greenhouse") {
                 Name = Chapter.Affliction,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Affliction
             },
             new ITTSplit("Music_ConcertHall") {
                 Name = Chapter.SettingTheStage,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.SettingTheStage
             },
             new ITTSplit("Music_Backstage") {
                 Name = Chapter.Rehearsal,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Rehearsal
             },
             new ITTSplit("Music_Classic") {
                 Name = Chapter.Symphony,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Symphony
             },
             new ITTSplit("Music_Nightclub") {
                 Name = Chapter.TurnUp,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.TurnUp
             },
             new ITTSplit("Music_Ending") {
                 Name = Chapter.AGrandFinale,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.AGrandFinale
             },
             new ITTSplit("Basement_Seekers") {
                 Name = Chapter.Basement,
-                Type = SplitType.Chapter
+                Type = SplitType.Chapter,
+                Subchapter = Chapter.Basement
             },
         #endregion
         #region CUTSCENES
             new ITTSplit("EnteringCutscene") {
                 Name = "Entering a cutscene",
-                Type = SplitType.Cutscene
+                Type = SplitType.Cutscene,
+                Subchapter = "Other"
             },
             new ITTSplit("LeavingCutscene") {
                 Name = "Leaving a cutscene",
-                Type = SplitType.Cutscene
+                Type = SplitType.Cutscene,
+                Subchapter = "Other"
             },
         #region Wake-Up Call
             new ITTSplit("CS_Shed_Awakening_Divorce_Intro") {
@@ -4332,140 +4471,157 @@ public class Splits
         #region MINIGAMES
             new ITTSplit("Shed_Main_WhackACody") {
                 Name = "Whack-a-Cody",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.TheDepths
             },
             new ITTSplit("Shed_Main_MINIGAME_NailWheel") {
                 Name = "Flip the Switch",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.TheDepths
             },
             new ITTSplit("Tree_SquirrelHome_MINIGAME_TugOfWar") {
                 Name = "Tug of War",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.Captured
             },
             new ITTSplit("Tree_WaspNest_MINIGAME_Plunger") {
                 Name = "Plunger Dunger",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.DeeplyRooted
             },
             new ITTSplit("PlayRoom_PillowFort_MINIGAME_Hazeboy") {
                 Name = "Tank Brothers",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.PillowFort
             },
             new ITTSplit("PlayRoom_Spacestation_MINIGAME_LaserTennis") {
                 Name = "Laser Tennis",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.SpacedOut
             },
             new ITTSplit("PlayRoom_Spacestation_MINIGAME_LowGravity") {
                 Name = "Spacewalk",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.SpacedOut
             },
             new ITTSplit("PlayRoom_Hopscotch_MINIGAME_BaseBall") {
                 Name = "Batting Team",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("PlayRoom_Hopscotch_MINIGAME_ThrowingHoops") {
                 Name = "Feed the Reptile",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("PlayRoom_Hopscotch_MINIGAME_Rodeo") {
                 Name = "Rodeo",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.Hopscotch
             },
             new ITTSplit("PlayRoom_Courtyard_MINIGAME_BirdStar") {
                 Name = "Birdstar",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.OnceUponATime
             },
             new ITTSplit("Clockwork_Outside_MINIGAME_BombRun") {
                 Name = "Bomb Run",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.GatesOfTime
             },
             new ITTSplit("Clockwork_Outside_MINIGAME_HorseDerby") {
                 Name = "Horse Derby",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.GatesOfTime
             },
             new ITTSplit("SnowGlobe_Town_MINIGAME_SnowballFight") {
                 Name = "Snow Warfare",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.WinterVillage
             },
             new ITTSplit("SnowGlobe_Town_MINIGAME_ShuffleBoard") {
                 Name = "Shuffle Board",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.WinterVillage
             },
             new ITTSplit("SnowGlobe_Town_MINIGAME_IcicleThrowing") {
                 Name = "Icicle Throwing",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.WinterVillage
             },
             new ITTSplit("SnowGlobe_Lake_MINIGAME_IceRace") {
                 Name = "Ice Race",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.BeneathTheIce
             },
             new ITTSplit("Garden_Shrubbery_MINIGAME_Basket") {
                 Name = "Larva Basket",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.WeedWhacking
             },
             new ITTSplit("Garden_Shrubbery_MINIGAME_Swings") {
                 Name = "Garden Swings",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.WeedWhacking
             },
             new ITTSplit("Garden_FrogPond_Minigame_SnailRace") {
                 Name = "Snail Race",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.FrogPond
             },
             new ITTSplit("Music_ConcertHall_MINIGAME_MusicalChairs") {
                 Name = "Musical Chairs",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.SettingTheStage
             },
             new ITTSplit("Music_ConcertHall_MINIGAME_TrackRunner") {
                 Name = "Track Runner",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.SettingTheStage
             },
             new ITTSplit("Music_ConcertHall_MINIGAME_SlotCars") {
                 Name = "Slotcars",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.SettingTheStage
             },
             new ITTSplit("Music_ConcertHall_MINIGAME_Chess") {
                 Name = "Chess",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.SettingTheStage
             },
             new ITTSplit("Music_Classic_MINIGAME_VolleyBall") {
                 Name = "Volleyball",
-                Type = SplitType.Minigame
+                Type = SplitType.Minigame,
+                Subchapter = Chapter.Symphony
             },
         #endregion
         #region OTHER
             new ITTSplit("May_bIsDead") {
                 Name = "May is dead",
                 Type = SplitType.Death,
-                Tooltip = "Splits on any May death"
+                Tooltip = "Splits on any May death",
+                Subchapter = "Other"
             },
             new ITTSplit("Cody_bIsDead") {
                 Name = "Cody is dead",
                 Type = SplitType.Death,
-                Tooltip = "Splits on any Cody death"
+                Tooltip = "Splits on any Cody death",
+                Subchapter = "Other"
             },
             new ITTSplit("AnyDead") {
                 Name = "Any player death",
                 Type = SplitType.Death,
-                Tooltip = "Splits on any player death"
+                Tooltip = "Splits on any player death",
+                Subchapter = "Other"
             },
             new ITTSplit("ManualSplit") {
                 Name = "Manual Split",
                 Type = SplitType.Misc,
-                Tooltip = "Autosplitter doesn't split on this. For use in ordered splits."
+                Tooltip = "Autosplitter doesn't split on this. For use in ordered splits.",
+                Subchapter = "Other"
             },
         #endregion
         };
 
-    public class ITTSplitComboBox
-    {
-        public ITTSplit Split { get; set; }
-        public string GroupHeader { get; set; }
-
-        public bool IsHeader => GroupHeader != null;
-
-        public override string ToString()
-        {
-            if (IsHeader) return GroupHeader;
-            return $"[{Split.ID}]\n{Split.Name} ({Split.Type})";
-        }
-    }
+    
 }
