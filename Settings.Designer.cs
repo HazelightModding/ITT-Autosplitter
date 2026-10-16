@@ -302,6 +302,8 @@
             this.rdChapter.TabIndex = 4;
             this.rdChapter.Text = "Chapter";
             this.rdChapter.UseVisualStyleBackColor = true;
+            this.rdChapter.CheckedChanged += new System.EventHandler(this.radio_CheckedChanged);
+
             // 
             // rdAlpha
             // 

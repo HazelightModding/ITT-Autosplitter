@@ -55,14 +55,21 @@ namespace LiveSplit.ItTakesTwo
 
         private void SetDefaultValues()
         {
-            //StartTriggerComboBox.Text = "Awakening_Start (Checkpoint)";
-            //ResetTriggerComboBox.Text = "Awakening_Start (Checkpoint)";
+            //SetSelectedItemTo(StartTriggerComboBox, "Shed_Awakening_Awakening_Start");
+            //SetSelectedItemTo(ResetTriggerComboBox, "Shed_Awakening_Awakening_Start");
+        }
+
+        private void SetSelectedItemTo(ComboBox comboBox, string ID)
+        {
+            var item = comboBox.Items.OfType<ITTSplitComboBoxItem>().FirstOrDefault(s => s.Split != null && s.Split.ID == ID);
+            if (item != null)
+                comboBox.SelectedItem = item;
+            else
+                comboBox.SelectedIndex = -1;
         }
 
         private void Settings_Load(object sender, EventArgs e)
         {
-            Console.WriteLine($"Settings_Load: {Splits.Count}");
-
             isLoading = true;
             flowMain.SuspendLayout();
 
@@ -128,15 +135,9 @@ namespace LiveSplit.ItTakesTwo
         {
             var index = comboBox.SelectedIndex;
             if (index < 0 || index >= comboBox.Items.Count)
-                return null;
+                return new();
 
             var item = comboBox.Items[index] as ITTSplitComboBoxItem;
-
-            // If they clicked on a header, pretend they clicked on the
-            // first item under that header instead
-            if (item.IsHeader)
-                item = comboBox.Items[index + 1] as ITTSplitComboBoxItem;
-
             if (item.Split != null && item.Split.Type == SplitType.Cutscene)
             {
                 if (!checkBox.Visible)
@@ -159,7 +160,7 @@ namespace LiveSplit.ItTakesTwo
 
         public void UpdateSplits()
         {
-            if (isLoading) 
+            if (isLoading)
                 return;
 
             Ordered = OrderedSplitsCheckBox.Checked;
@@ -171,7 +172,7 @@ namespace LiveSplit.ItTakesTwo
 
             if (ResetTriggerCheckBox.Checked)
             {
-                ResetTrigger = UpdateComboBox(ResetTriggerComboBox, ResetTriggerCutsceneCheckBox).Split; 
+                ResetTrigger = UpdateComboBox(ResetTriggerComboBox, ResetTriggerCutsceneCheckBox).Split;
             }
 
             Splits.Clear();
@@ -185,6 +186,7 @@ namespace LiveSplit.ItTakesTwo
                 }
             }
         }
+
         public XmlElement CreateSplitXmlElement(XmlDocument document, ITTSplit split, string elementName)
         {
             XmlElement element = document.CreateElement(elementName);
@@ -319,8 +321,6 @@ namespace LiveSplit.ItTakesTwo
             {
                 Log.Warning("No setting named \"" + split + "\"");
             }
-
-            Console.WriteLine($"SetSettings: {Splits.Count}");
         }
         private SplitSettings CreateSetting()
         {
@@ -378,10 +378,52 @@ namespace LiveSplit.ItTakesTwo
             UpdateSplits();
         }
 
+        private void UpdateDataSource(ComboBox comboBox, List<ITTSplitComboBoxItem> list)
+        {
+            comboBox.BeginUpdate();
+            comboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
+
+            var savedItem = comboBox.SelectedItem as ITTSplitComboBoxItem;
+
+
+            comboBox.DataSource = (new BindingSource().DataSource = list);
+
+            if (savedItem != null && !savedItem.IsHeader && savedItem.Split != null)
+                SetSelectedItemTo(comboBox, savedItem.Split.ID);
+            else
+                comboBox.SelectedIndex = -1;
+
+            comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+            comboBox.EndUpdate();
+        }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern int SendMessage(IntPtr hWnd, int wMsg, bool wParam, int lParam);
+
         private void radio_CheckedChanged(object sender, EventArgs e)
         {
-            SetupComboBox(StartTriggerComboBox);
-            SetupComboBox(ResetTriggerComboBox);
+            var radio = sender as RadioButton;
+            if (radio == null || !radio.Checked)
+                return;
+
+            SendMessage(flowMain.Handle, 11, false, 0);
+            try
+            {
+                var list = GetGroupedSplits(GetSortMode());
+
+                UpdateDataSource(StartTriggerComboBox, list);
+                UpdateDataSource(ResetTriggerComboBox, list);
+
+                foreach (var item in flowMain.Controls.OfType<SplitSettings>())
+                {
+                    UpdateDataSource(item.splitSettingComboBox, list);
+                }
+            }
+            finally
+            {
+                SendMessage(flowMain.Handle, 11, true, 0);
+                flowMain.Refresh();
+            }
         }
         private void flowMain_DragDrop(object sender, DragEventArgs e) => UpdateSplits();
         private void flowMain_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
@@ -492,7 +534,6 @@ namespace LiveSplit.ItTakesTwo
                 return "";
             }
         }
-
         public List<ITTSplitComboBoxItem> GetGroupedSplits(SortMode mode)
         {
             var result = new List<ITTSplitComboBoxItem>();
@@ -508,41 +549,48 @@ namespace LiveSplit.ItTakesTwo
                 groups = SplitInfo.GroupBy(s => s.Subchapter);
                 break;
 
-                default: // Alphabetical
-                return SplitInfo.OrderBy(s => s.Name)
+                case SortMode.Alphabetical:
+                    result = SplitInfo.OrderBy(s => s.Name)
                     .Select(s => new ITTSplitComboBoxItem { Split = s })
                     .ToList();
+                break;
             }
 
-
-            // Add colors and headers to lists that aren't alphabetical, to make them easier to parse
-
-            var backgroundColors = new List<Color>(){
-                Color.FromArgb(230, 216, 173), /* Soft yellow */
-                Color.FromArgb(173, 230, 187), /* Soft green */
-                Color.FromArgb(173, 216, 230), /* Light blue */
-                Color.FromArgb(187, 173, 230), /* Light Purple */
-                Color.FromArgb(230, 173, 187), /* Soft red */
-            };
-
-            foreach (var group in groups)
+            if (groups != null)
             {
-                Color c = backgroundColors[0];
-                result.Add(new ITTSplitComboBoxItem { GroupHeader = group.Key, BackgroundColor = c });
-                foreach (var split in group)
-                    result.Add(new ITTSplitComboBoxItem { Split = split, BackgroundColor = c });
+                // Add colors and headers to lists that aren't alphabetical, to make them easier to parse
+                var backgroundColors = new List<Color>(){
+                    Color.FromArgb(230, 216, 173), /* Soft yellow */
+                    Color.FromArgb(173, 230, 187), /* Soft green */
+                    Color.FromArgb(173, 216, 230), /* Light blue */
+                    Color.FromArgb(187, 173, 230), /* Light Purple */
+                    Color.FromArgb(230, 173, 187), /* Soft red */
+                };
 
-                backgroundColors.Add(c);
-                backgroundColors.RemoveAt(0);
+                foreach (var group in groups)
+                {
+                    Color c = backgroundColors[0];
+                    result.Add(new ITTSplitComboBoxItem { GroupHeader = group.Key, BackgroundColor = c });
+                    foreach (var split in group)
+                        result.Add(new ITTSplitComboBoxItem { Split = split, BackgroundColor = c });
+
+                    backgroundColors.Add(c);
+                    backgroundColors.RemoveAt(0);
+                }
             }
+            
 
             return result;
         }
 
         private void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0) 
+            if (e.Index < 0)
+            {
+                e.DrawBackground();
                 return;
+            }
+
             var comboBox = sender as ComboBox;
             var item = comboBox.Items[e.Index] as ITTSplitComboBoxItem;
             Color backgroundColor = item.BackgroundColor;
@@ -589,18 +637,54 @@ namespace LiveSplit.ItTakesTwo
 
         private void SetupComboBox(ComboBox comboBox)
         {
-            comboBox.DrawMode = DrawMode.OwnerDrawVariable; 
+            comboBox.DrawMode = DrawMode.OwnerDrawVariable;
             comboBox.BindingContext = new BindingContext();
-            comboBox.DataSource = GetGroupedSplits(GetSortMode());
+            var data = GetGroupedSplits(GetSortMode());
+            comboBox.DataSource = data;
             comboBox.SelectedIndex = -1;
-            comboBox.DropDown -= ComboBox_DropDown;
-            comboBox.DropDown += ComboBox_DropDown;
+
+            int maxWidth = comboBox.Width;
+            using (var g = comboBox.CreateGraphics())
+            {
+                foreach (var item in data)
+                {
+                    if (item is null)
+                        continue;
+
+                    var size = g.MeasureString(item.ToString(), GetComboBoxFont());
+                    if (size.Width > maxWidth)
+                        maxWidth = (int)size.Width;
+                }
+            }
+            comboBox.DropDownWidth = maxWidth + 20;
+            comboBox.DropDownHeight = comboBox.DropDownWidth;
+
             comboBox.DrawItem -= ComboBox_DrawItem;
             comboBox.DrawItem += ComboBox_DrawItem;
-            comboBox.SelectedIndexChanged -= ControlChanged;
-            comboBox.SelectedIndexChanged += ControlChanged;
+            comboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
+            comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             comboBox.MeasureItem -= ComboBox_MeasureItem;
             comboBox.MeasureItem += ComboBox_MeasureItem;
+        }
+
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            var index = comboBox.SelectedIndex;
+            if (index < 0 || index >= comboBox.Items.Count)
+                return;
+
+            var item = comboBox.Items[index] as ITTSplitComboBoxItem;
+
+            // If they clicked on a header, pretend they clicked on the
+            // first item under that header instead
+            if (item.IsHeader)
+            {
+                comboBox.SelectedIndex += 1;
+                return;
+            }
+            
+            UpdateSplits();
         }
 
         private void ComboBox_MeasureItem(object sender, MeasureItemEventArgs e)
@@ -614,27 +698,6 @@ namespace LiveSplit.ItTakesTwo
 
             e.ItemHeight = (int)(2.5 * GetComboBoxFont().Height);
 
-        }
-
-        private void ComboBox_DropDown(object sender, EventArgs e)
-        {
-            var comboBox = sender as ComboBox;
-            int maxWidth = comboBox.Width;
-            using (var g = comboBox.CreateGraphics())
-            {
-                foreach (var obj in comboBox.Items)
-                {
-                    if (obj is not ITTSplitComboBoxItem)
-                        continue;
-
-                    var item = obj as ITTSplitComboBoxItem;
-                    var size = g.MeasureString(item.ToString(), GetComboBoxFont());
-                    if (size.Width > maxWidth)
-                        maxWidth = (int)size.Width;
-                }
-            }
-            comboBox.DropDownWidth = maxWidth + 20;
-            comboBox.DropDownHeight = Math.Min(this.Parent.Height, Screen.FromControl(this).WorkingArea.Height);
         }
 
         private Font GetComboBoxFont(int Size = 12, FontStyle Style = FontStyle.Regular)

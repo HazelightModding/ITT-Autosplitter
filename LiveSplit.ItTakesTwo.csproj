@@ -69,10 +69,10 @@
   -->
   <ItemGroup>
     <Reference Include="LiveSplit.Core">
-      <HintPath>..\..\..\..\..\Speedrunning\Livesplit\LiveSplit.Core.dll</HintPath>
+      <HintPath>..\LiveSplit\artifacts\build\debug\LiveSplit.Core.dll</HintPath>
     </Reference>
     <Reference Include="LiveSplit.Text">
-      <HintPath>..\..\..\..\Speedrunning\Livesplit\Components\LiveSplit.Text.dll</HintPath>
+      <HintPath>..\LiveSplit\artifacts\build\debug\Components\LiveSplit.Text.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -82,7 +82,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UpdateManager">
-      <HintPath>..\..\..\..\..\Speedrunning\Livesplit\UpdateManager.dll</HintPath>
+      <HintPath>..\LiveSplit\artifacts\build\debug\UpdateManager.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)Components\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(ProjectDir)Components\$(TargetFileName)"
+copy "$(TargetPath)" "$(ProjectDir)..\LiveSplit\artifacts\build\debug\Components\$(TargetFileName)"
+
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
