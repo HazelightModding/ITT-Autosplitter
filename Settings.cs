@@ -17,6 +17,7 @@ namespace LiveSplit.ItTakesTwo
         public List<ITTSplit> Splits { get; private set; }
         public ITTSplit StartTrigger { get; set; }
         public ITTSplit ResetTrigger { get; set; }
+        public bool TimeWithoutCutscenes { get; set; }
         private bool isLoading;
 
         private static Settings _settings;
@@ -32,6 +33,7 @@ namespace LiveSplit.ItTakesTwo
             string version = typeof(Component).Assembly.GetName().Version.ToString();
 #if DEBUG
             version += "-dev";
+            EnableConsoleCheckBox.Checked = true;
 #endif
             versionLabel.Text = "Autosplitter Version: " + version;
 
@@ -39,7 +41,8 @@ namespace LiveSplit.ItTakesTwo
 
             SetupComboBox(StartTriggerComboBox);
             SetupComboBox(ResetTriggerComboBox);
-            SetDefaultValues();
+            SetSelectedItemTo(StartTriggerComboBox, "Shed_Awakening_Awakening_Start");
+            SetSelectedItemTo(ResetTriggerComboBox, "Shed_Awakening_Awakening_Start");
 
             isLoading = false;
         }
@@ -51,12 +54,6 @@ namespace LiveSplit.ItTakesTwo
             else if (rdChapter.Checked) mode = SortMode.Chapter;
 
             return mode;
-        }
-
-        private void SetDefaultValues()
-        {
-            //SetSelectedItemTo(StartTriggerComboBox, "Shed_Awakening_Awakening_Start");
-            //SetSelectedItemTo(ResetTriggerComboBox, "Shed_Awakening_Awakening_Start");
         }
 
         private void SetSelectedItemTo(ComboBox comboBox, string ID)
@@ -76,9 +73,14 @@ namespace LiveSplit.ItTakesTwo
             try
             {
                 // Keep first control
-                for (int i = flowMain.Controls.Count - 1; i > 0; i--)
+                //for (int i = flowMain.Controls.Count - 1; i > 0; i--)
+                //{
+                //    flowMain.Controls.RemoveAt(i);
+                //}
+
+                foreach (var setting in flowMain.Controls.OfType<SplitSettings>().ToList())
                 {
-                    flowMain.Controls.RemoveAt(i);
+                    DestroySetting(setting);
                 }
 
                 OrderedSplitsCheckBox.Checked = Ordered;
@@ -87,7 +89,7 @@ namespace LiveSplit.ItTakesTwo
 
                 foreach (var split in Splits)
                 {
-                    CreateSetting();
+                    CreateSetting(split);
                 }
             }
             finally 
@@ -209,6 +211,10 @@ namespace LiveSplit.ItTakesTwo
             xmlOrdered.InnerText = Ordered.ToString();
             xmlSettings.AppendChild(xmlOrdered);
 
+            XmlElement xmlTimeWithoutCutscenes = document.CreateElement("TimeWithoutCutscenes");
+            xmlTimeWithoutCutscenes.InnerText = TimeWithoutCutscenes.ToString();
+            xmlSettings.AppendChild(xmlTimeWithoutCutscenes);
+
             xmlSettings.AppendChild(CreateSplitXmlElement(document, StartTrigger, "StartTrigger"));
             xmlSettings.AppendChild(CreateSplitXmlElement(document, ResetTrigger, "ResetTrigger"));
 
@@ -227,14 +233,15 @@ namespace LiveSplit.ItTakesTwo
             List<string> failed = new();
 
             XmlNode orderedNode = settings.SelectSingleNode(".//Ordered");
+            XmlNode timeWithoutCutscenesNode = settings.SelectSingleNode(".//TimeWithoutCutscenes");
             XmlNode StartTriggerNode = settings.SelectSingleNode(".//StartTrigger");
             XmlNode ResetTriggerNode = settings.SelectSingleNode(".//ResetTrigger");
 
-            bool isOrdered = false;
-            if (orderedNode != null)
-            {
-                bool.TryParse(orderedNode.InnerText, out isOrdered);
-            }
+            if (orderedNode != null && bool.TryParse(orderedNode.InnerText, out bool isOrdered))
+                Ordered = isOrdered;
+
+            if (timeWithoutCutscenesNode != null && bool.TryParse(timeWithoutCutscenesNode.InnerText, out bool isTimedWithoutCutscenes))
+                TimeWithoutCutsceneCheckBox.Checked = isTimedWithoutCutscenes;
 
             if (StartTriggerNode != null)
             {
@@ -242,11 +249,11 @@ namespace LiveSplit.ItTakesTwo
                 if (!string.IsNullOrEmpty(splitDescription))
                 {
                     StartTrigger = SplitInfo.GetSplit(splitDescription);
-
                     if (StartTrigger != null)
                     {
-                        StartTriggerComboBox.Text = StartTrigger.GetNameWithTag();
+                        SetSelectedItemTo(StartTriggerComboBox, StartTrigger.ID);
                         StartTriggerCheckBox.Checked = true;
+
                         var SplitAtStart = StartTriggerNode.Attributes["SplitAtStart"];
                         if (SplitAtStart != null)
                         {
@@ -268,11 +275,11 @@ namespace LiveSplit.ItTakesTwo
                 if (!string.IsNullOrEmpty(splitDescription))
                 {
                     ResetTrigger = SplitInfo.GetSplit(splitDescription);
-
                     if (ResetTrigger != null)
                     {
-                        ResetTriggerComboBox.Text = ResetTrigger.GetNameWithTag();
+                        SetSelectedItemTo(ResetTriggerComboBox, ResetTrigger.ID);
                         ResetTriggerCheckBox.Checked = true;
+
                         var SplitAtStart = ResetTriggerNode.Attributes["SplitAtStart"];
                         if (SplitAtStart != null)
                         {
@@ -288,7 +295,6 @@ namespace LiveSplit.ItTakesTwo
 
                 }
             }
-            Ordered = isOrdered;
 
             Splits.Clear();
             XmlNodeList splitNodes = settings.SelectNodes(".//Splits/Split");
@@ -322,7 +328,7 @@ namespace LiveSplit.ItTakesTwo
                 Log.Warning("No setting named \"" + split + "\"");
             }
         }
-        private SplitSettings CreateSetting()
+        private SplitSettings CreateSetting(ITTSplit split = null)
         {
             SplitSettings setting = new SplitSettings();
             SetupComboBox(setting.splitSettingComboBox);
@@ -336,6 +342,14 @@ namespace LiveSplit.ItTakesTwo
             setting.ComboBoxCutsceneCheckBox.CheckedChanged += new EventHandler(ControlChanged);
 
             flowMain.Controls.Add(setting);
+
+            if (split != null)
+            {
+                SetSelectedItemTo(setting.splitSettingComboBox, split.ID);
+
+                if (split.Type == SplitType.Cutscene)
+                    setting.ComboBoxCutsceneCheckBox.Checked = split.SplitAtStart;
+            }
 
             return setting;
         }
@@ -478,15 +492,16 @@ namespace LiveSplit.ItTakesTwo
             if (clearMessage == DialogResult.No)
                 return;
 
-            SetDefaultValues();
+            flowMain.SuspendLayout();
             StartTriggerCheckBox.Checked = false;
             ResetTriggerCheckBox.Checked = false;
-            OrderedSplitsCheckBox.Checked = false;           
+            OrderedSplitsCheckBox.Checked = false;
 
             foreach (var setting in flowMain.Controls.OfType<SplitSettings>())
             {
                 DestroySetting(setting);
             }
+            flowMain.ResumeLayout(true);
 
         }
 
@@ -529,7 +544,7 @@ namespace LiveSplit.ItTakesTwo
                     return GroupHeader;
 
                 if (Split != null)
-                    return $"[{Split.ID}]\n{Split.Name} ({Split.Type})";
+                    return $"[{Split.ID}] \n{Split.Name} ({Split.Type})";
 
                 return "";
             }
@@ -641,6 +656,8 @@ namespace LiveSplit.ItTakesTwo
             comboBox.BindingContext = new BindingContext();
             var data = GetGroupedSplits(GetSortMode());
             comboBox.DataSource = data;
+            // Default is awakening start
+            //SetSelectedItemTo(comboBox, "Shed_Awakening_Awakening_Start");
             comboBox.SelectedIndex = -1;
 
             int maxWidth = comboBox.Width;
@@ -665,6 +682,10 @@ namespace LiveSplit.ItTakesTwo
             comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             comboBox.MeasureItem -= ComboBox_MeasureItem;
             comboBox.MeasureItem += ComboBox_MeasureItem;
+            comboBox.TextUpdate -= ComboBox_TextUpdate;
+            comboBox.TextUpdate += ComboBox_TextUpdate;
+            comboBox.SelectionChangeCommitted -= ComboBox_SelectionChangeCommitted;
+            comboBox.SelectionChangeCommitted += ComboBox_SelectionChangeCommitted;
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -685,6 +706,47 @@ namespace LiveSplit.ItTakesTwo
             }
             
             UpdateSplits();
+        }
+
+        // I'll fix this later, idc atm
+        private void ComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            var item = comboBox.SelectedItem as ITTSplitComboBoxItem;
+            if (item == null || item.IsHeader)
+                return;
+
+            BeginInvoke((MethodInvoker)delegate { comboBox.Text = item.Split.GetNameWithTag(); });
+        }
+
+        private bool isUpdatingComboBoxText = false;
+        private void ComboBox_TextUpdate(object sender, EventArgs e)
+        {
+            if (isUpdatingComboBoxText)
+                return;
+
+            var comboBox = sender as ComboBox;
+            if (comboBox == null)
+                return;
+
+            var items = GetGroupedSplits(GetSortMode());
+            var search = comboBox.Text.ToLower();
+            var filteredItems = string.IsNullOrEmpty(search) ? items :
+                items.Where(item => item.Split != null && (
+                    item.Split.ID.ToLower().Contains(search) ||
+                    item.Split.Name.ToLower().Contains(search) ||
+                    item.Split.Type.ToString().ToLower().Contains(search)
+                )).ToList();
+
+            isUpdatingComboBoxText = true;
+            comboBox.BeginUpdate();
+            comboBox.DataSource = filteredItems;
+            comboBox.Text = search;
+            comboBox.SelectionStart = search.Length;
+            comboBox.SelectionLength = 0;
+            comboBox.EndUpdate();
+            comboBox.DroppedDown = true;
+            isUpdatingComboBoxText = false;
         }
 
         private void ComboBox_MeasureItem(object sender, MeasureItemEventArgs e)
@@ -712,7 +774,8 @@ namespace LiveSplit.ItTakesTwo
 
         private void TimeWithoutCutsceneCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-
+            var checkBox = sender as CheckBox;
+            TimeWithoutCutscenes = checkBox.Checked;
         }
     }
 }

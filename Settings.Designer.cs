@@ -60,7 +60,7 @@
             // 
             // btnAddSplit
             // 
-            this.btnAddSplit.Location = new System.Drawing.Point(6, 143);
+            this.btnAddSplit.Location = new System.Drawing.Point(6, 128);
             this.btnAddSplit.Name = "btnAddSplit";
             this.btnAddSplit.Size = new System.Drawing.Size(57, 24);
             this.btnAddSplit.TabIndex = 0;
@@ -79,7 +79,7 @@
             this.flowMain.Location = new System.Drawing.Point(0, 0);
             this.flowMain.Margin = new System.Windows.Forms.Padding(0);
             this.flowMain.Name = "flowMain";
-            this.flowMain.Size = new System.Drawing.Size(465, 182);
+            this.flowMain.Size = new System.Drawing.Size(465, 167);
             this.flowMain.TabIndex = 0;
             this.flowMain.WrapContents = false;
             this.flowMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowMain_DragDrop);
@@ -94,7 +94,7 @@
             this.flowOptions.Location = new System.Drawing.Point(0, 0);
             this.flowOptions.Margin = new System.Windows.Forms.Padding(0);
             this.flowOptions.Name = "flowOptions";
-            this.flowOptions.Size = new System.Drawing.Size(465, 182);
+            this.flowOptions.Size = new System.Drawing.Size(465, 167);
             this.flowOptions.TabIndex = 0;
             // 
             // Options_GroupBox
@@ -108,7 +108,7 @@
             this.Options_GroupBox.Controls.Add(this.SortBy_GroupBox);
             this.Options_GroupBox.Location = new System.Drawing.Point(3, 3);
             this.Options_GroupBox.Name = "Options_GroupBox";
-            this.Options_GroupBox.Size = new System.Drawing.Size(459, 176);
+            this.Options_GroupBox.Size = new System.Drawing.Size(459, 161);
             this.Options_GroupBox.TabIndex = 6;
             this.Options_GroupBox.TabStop = false;
             this.Options_GroupBox.Text = "Options";
@@ -120,7 +120,7 @@
             this.tabControl1.Location = new System.Drawing.Point(130, 15);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(323, 124);
+            this.tabControl1.Size = new System.Drawing.Size(323, 109);
             this.tabControl1.TabIndex = 13;
             // 
             // tabPage1
@@ -136,7 +136,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(315, 98);
+            this.tabPage1.Size = new System.Drawing.Size(315, 83);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Run Behavior";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -244,7 +244,7 @@
             // 
             // WikiButton
             // 
-            this.WikiButton.Location = new System.Drawing.Point(203, 143);
+            this.WikiButton.Location = new System.Drawing.Point(203, 128);
             this.WikiButton.Name = "WikiButton";
             this.WikiButton.Size = new System.Drawing.Size(55, 24);
             this.WikiButton.TabIndex = 10;
@@ -254,7 +254,7 @@
             // 
             // PresetsButton
             // 
-            this.PresetsButton.Location = new System.Drawing.Point(138, 143);
+            this.PresetsButton.Location = new System.Drawing.Point(138, 128);
             this.PresetsButton.Name = "PresetsButton";
             this.PresetsButton.Size = new System.Drawing.Size(55, 24);
             this.PresetsButton.TabIndex = 9;
@@ -264,7 +264,7 @@
             // 
             // ClearAllButton
             // 
-            this.ClearAllButton.Location = new System.Drawing.Point(73, 143);
+            this.ClearAllButton.Location = new System.Drawing.Point(73, 128);
             this.ClearAllButton.Name = "ClearAllButton";
             this.ClearAllButton.Size = new System.Drawing.Size(55, 24);
             this.ClearAllButton.TabIndex = 8;
@@ -274,7 +274,7 @@
             // 
             // versionLabel
             // 
-            this.versionLabel.Location = new System.Drawing.Point(271, 143);
+            this.versionLabel.Location = new System.Drawing.Point(271, 128);
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(182, 24);
             this.versionLabel.TabIndex = 7;
@@ -288,7 +288,7 @@
             this.SortBy_GroupBox.Controls.Add(this.rdType);
             this.SortBy_GroupBox.Location = new System.Drawing.Point(6, 15);
             this.SortBy_GroupBox.Name = "SortBy_GroupBox";
-            this.SortBy_GroupBox.Size = new System.Drawing.Size(118, 124);
+            this.SortBy_GroupBox.Size = new System.Drawing.Size(118, 105);
             this.SortBy_GroupBox.TabIndex = 6;
             this.SortBy_GroupBox.TabStop = false;
             this.SortBy_GroupBox.Text = "Sort Split Selects By";
@@ -303,7 +303,6 @@
             this.rdChapter.Text = "Chapter";
             this.rdChapter.UseVisualStyleBackColor = true;
             this.rdChapter.CheckedChanged += new System.EventHandler(this.radio_CheckedChanged);
-
             // 
             // rdAlpha
             // 
@@ -343,7 +342,7 @@
             this.Controls.Add(this.flowMain);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "Settings";
-            this.Size = new System.Drawing.Size(465, 182);
+            this.Size = new System.Drawing.Size(465, 167);
             this.Load += new System.EventHandler(this.Settings_Load);
             this.flowMain.ResumeLayout(false);
             this.flowMain.PerformLayout();

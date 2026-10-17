@@ -1,63 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <updates>
-	<update version="0.1.1">
+	
+	<update version="1.0.0">
 		<files>
 			<file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
 		</files>
 		<changelog>
-			<change> Fixed cutscenes being paused through loading screens. </change>
-			<change> Fixed timer not pausing when game isn't running. </change>
-			<change> Fixed cutscenes not splitting when transitioning from another cutscene. </change>
+			<change> Release! </change>
 		</changelog>
 	</update>
-	<update version="0.1.0">
-		<files>
-			<file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
-		</files>
-		<changelog>
-			<change> Beta </change>
-		</changelog>
-	</update>
-    <update version="0.0.5">
-        <files>
-            <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
-        </files>
-        <changelog>
-            <change> Overhaul of splits system </change>
-        </changelog>
-    </update>
-    <update version="0.0.4">
-        <files>
-            <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
-        </files>
-        <changelog>
-            <change> Added CP Counter </change>
-            <change> Fixed CS 0.02s issue </change>
-            <change> Updated list of splits </change>
-        </changelog>
-    </update>
-    <update version="0.0.3">
-        <files>
-            <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
-        </files>
-        <changelog>
-            <change> Fixed some cutscenes not being removed </change>
-        </changelog>
-    </update>
-    <update version="0.0.2">
-        <files>
-            <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
-        </files>
-        <changelog>
-            <change> Added temp CS remover checkbox </change>
-        </changelog>
-    </update>
-    <update version="0.0.1">
-        <files>
-            <file path="Components/LiveSplit.ItTakesTwo.dll" status="changed"/>
-        </files>
-        <changelog>
-            <change> Dev </change>
-        </changelog>
-    </update>
 </updates>

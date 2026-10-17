@@ -48,8 +48,6 @@ namespace LiveSplit.ItTakesTwo
 
         public bool Hook()
         {
-
-            // Think this should work just fine for the trial version too? For reference it's "ItTakesTwo_Trial"
             Process[] processes = Process.GetProcessesByName("ItTakesTwo");
             Game = processes != null && processes.Length > 0 ? processes[0] : null;
             if (Game == null || Game.HasExited)

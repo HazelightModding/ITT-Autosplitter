@@ -137,7 +137,10 @@ namespace LiveSplit.ItTakesTwo
 
         public bool Changed = false;
 
-        public bool IsLoadingOrCutscene() => IsLoading() | IsSkippableCutscene();
+        public bool IsLoadingOrCutscene()
+        {
+            return IsLoading() | (IsSkippableCutscene() && GetSplitSettings().TimeWithoutCutscenes);
+        }
         public bool IsLoading() => bIsInLoadingScreen.Current || Level.Current == "/Game/Maps/Main/Menu_BP";
 
         public bool EnteringLoadingScreen => bIsInLoadingScreen.Current && !bIsInLoadingScreen.Old;

@@ -45,9 +45,7 @@ namespace LiveSplit.ItTakesTwo
 
         public Component(LiveSplitState state)
         {
-#if DEBUG
-            ToggleConsole(true);
-#endif
+
             Instance = this;
             Logger.InitLog(this);
             Log = Logger.GetLogger("Component");
