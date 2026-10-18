@@ -45,22 +45,24 @@ namespace LiveSplit.ItTakesTwo
 
         public Component(LiveSplitState state)
         {
-
             Instance = this;
             Logger.InitLog(this);
             Log = Logger.GetLogger("Component");
-            Memory = GetMemory();
-            Settings = GetSplitSettings();
 
             if (state == null)
             {
                 return;
             }
 
+            CheckForOtherSplitters(state);
             CheckTimingMethod(state);
+            Memory = GetMemory();
+            Settings = GetSplitSettings();
+            
             CurrentRun.Model = new TimerModel() { CurrentState = state };
             CurrentRun.Model.InitializeGameTime();
             CurrentRun.Model.CurrentState.IsGameTimePaused = true;
+
             state.OnReset += OnReset;
             state.OnPause += OnPause;
             state.OnResume += OnResume;
@@ -85,6 +87,23 @@ namespace LiveSplit.ItTakesTwo
                 AllocConsole();
             else
                 FreeConsole();
+        }
+
+        // Sometimes there's another splitter in the layout and it always causes
+        // problems, warn the user and prompt them to remove it
+        public void CheckForOtherSplitters(LiveSplitState state)
+        {
+            var exists = state.Layout.Components.Any(c => 
+                c.ComponentName == this.ComponentName);
+
+            if (exists)
+            {
+                throw (new Exception(
+                    "There's another autosplitter in the layout, " +
+                    "this usually causes problems and erratic behaviour. " +
+                    "Remove the other autosplitter to use this one."
+                    ));
+            }
         }
 
         // TODO: Adjust this when Game Time without Cutscenes becomes the main timing method
