@@ -1,9 +1,13 @@
 ﻿using LiveSplit.UI.Components;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using static LiveSplit.ItTakesTwo.Splits;
@@ -38,13 +42,230 @@ namespace LiveSplit.ItTakesTwo
             versionLabel.Text = "Autosplitter Version: " + version;
 
             Splits = new List<ITTSplit>();
-
+            SetupGridView();
+            SetupSplitContextMenu();
             SetupComboBox(StartTriggerComboBox);
             SetupComboBox(ResetTriggerComboBox);
             SetSelectedItemTo(StartTriggerComboBox, "Shed_Awakening_Awakening_Start");
             SetSelectedItemTo(ResetTriggerComboBox, "Shed_Awakening_Awakening_Start");
 
             isLoading = false;
+        }
+
+        private void SetupGridView()
+        {
+            SplitsDataGridView.VirtualMode = true;
+            SplitsDataGridView.AllowUserToAddRows = false;
+
+            var splitsDropdownColumn = new DataGridViewComboBoxColumn()
+            {
+                HeaderText = "Split",
+                Name = "SplitColumn",
+                MinimumWidth = 305,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                DataSource = GetGroupedSplits(GetSortMode()),
+                ValueType = typeof(ITTSplitComboBoxItem),
+                DisplayMember = nameof(ITTSplitComboBoxItem.DisplayText),
+                ValueMember = nameof(ITTSplitComboBoxItem.ID)
+            };
+            SplitsDataGridView.Columns.Add(splitsDropdownColumn);
+
+            var splitAtStartCheckboxColumn = new DataGridViewCheckBoxColumn()
+            {
+                HeaderText = "at Start",
+                Name = "SplitAtStartCheckboxColumn",
+                Width = 30,
+                ValueType = typeof(bool)
+            };
+            SplitsDataGridView.Columns.Add(splitAtStartCheckboxColumn);
+
+            SplitsDataGridView.CellValueNeeded += CellValueNeeded;
+            SplitsDataGridView.CellValuePushed += CellValuePushed;
+            SplitsDataGridView.EditingControlShowing += EditingControlShowing;
+            SplitsDataGridView.CellPainting += CellPainting;
+            SplitsDataGridView.CellClick += CellClick;
+
+            SplitsDataGridView.CurrentCellDirtyStateChanged += (s, e) =>
+            {
+                if (SplitsDataGridView.IsCurrentCellDirty)
+                    SplitsDataGridView.CommitEdit(
+                        DataGridViewDataErrorContexts.Commit);
+            };
+
+        }
+
+        private ContextMenuStrip SplitContextMenu;
+        private int ContextMenuRowIndex = -1;
+        private void SetupSplitContextMenu()
+        {
+            SplitContextMenu = new ContextMenuStrip();
+            SplitContextMenu.Items.Add(
+                "Add split above", null, (s, e) => AddSplit(null, ContextMenuRowIndex));
+            SplitContextMenu.Items.Add(
+                "Add split below", null, (s, e) => AddSplit(null, ContextMenuRowIndex + 1));
+            SplitContextMenu.Items.Add(
+                "Duplicate split", null, (s, e) =>
+                {
+                    if (ContextMenuRowIndex < 0 || ContextMenuRowIndex >= Splits.Count)
+                        return;
+
+                    var duplicate = SplitInfo.GetSplit(Splits[ContextMenuRowIndex].ID);
+                    if (duplicate != null)
+                    {
+                        duplicate.SplitAtStart = Splits[ContextMenuRowIndex].SplitAtStart;
+                        AddSplit(duplicate, ContextMenuRowIndex + 1);
+                    }
+                });
+            SplitContextMenu.Items.Add(
+                "Remove split", null, (s, e) => RemoveSplitAt(ContextMenuRowIndex));
+
+            SplitsDataGridView.ContextMenuStrip = SplitContextMenu;
+            SplitsDataGridView.CellMouseDown += CellMouseDown;
+        }
+
+        private void RefreshSplitsGrid()
+        {
+            if (Splits.Count <= 0)
+                Splits.Add(new ITTSplit(SplitInfo.GetSplit("ManualSplit")));
+            SplitsDataGridView.RowCount = Splits.Count;
+            SplitsDataGridView.ClearSelection();
+            SplitsDataGridView.Invalidate();
+        }
+
+        private void CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right)
+                return;
+
+            ContextMenuRowIndex = e.RowIndex;
+
+            if (ContextMenuRowIndex >= 0 && ContextMenuRowIndex < Splits.Count)
+            {
+                SplitsDataGridView.ClearSelection();
+                SplitsDataGridView.Rows[ContextMenuRowIndex].Selected = true;
+
+                if (e.ColumnIndex >= 0)
+                {
+                    SplitsDataGridView.CurrentCell = SplitsDataGridView.Rows[ContextMenuRowIndex].Cells[e.ColumnIndex];
+                }
+            }
+        }
+
+        private void CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= Splits.Count)
+                return;
+
+            ITTSplit CellSplit = Splits[e.RowIndex];
+
+            if (e.ColumnIndex == 0) // ComboBox Column
+            {
+                e.Value = CellSplit?.ID;
+            }
+
+            if (e.ColumnIndex == 1)
+            {
+                e.Value = CellSplit?.SplitAtStart;
+            }
+
+
+        }
+
+        private ComboBox CurrentGridComboBox;
+        private void EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            var columnIndex = SplitsDataGridView.CurrentCell.ColumnIndex;
+            var rowIndex = SplitsDataGridView.CurrentCell.RowIndex;
+
+            if (columnIndex == 0 // ComboBox Column
+                && e.Control is ComboBox c)
+            {
+                /*if (CurrentGridComboBox != c)
+                {
+                    if (CurrentGridComboBox != null)
+                    {
+                        CurrentGridComboBox.DrawItem -= ComboBox_DrawItem;
+                        CurrentGridComboBox.MeasureItem -= ComboBox_MeasureItem;
+                    }
+
+                    CurrentGridComboBox = c;
+                    CurrentGridComboBox.DrawMode = DrawMode.OwnerDrawVariable;
+                    CurrentGridComboBox.DrawItem += ComboBox_DrawItem;
+                    CurrentGridComboBox.MeasureItem += ComboBox_MeasureItem;
+                }*/
+                SetupComboBox(c);
+                //SetSelectedItemTo(c, Splits[rowIndex].ID);
+                c.SelectedValue = Splits[rowIndex].ID;
+                RefreshSplitsGrid();
+                
+            }
+        }
+
+        private void CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= Splits.Count)
+                return;
+
+            if (e.ColumnIndex == 0)
+            {
+                BeginInvoke(new MethodInvoker(() =>
+                {
+                    if (SplitsDataGridView.IsDisposed ||
+                        SplitsDataGridView.CurrentCell == null ||
+                        SplitsDataGridView.CurrentCell.RowIndex != e.RowIndex ||
+                        SplitsDataGridView.CurrentCell.ColumnIndex != e.ColumnIndex)
+                        return;
+
+                    if (!SplitsDataGridView.IsCurrentCellInEditMode)
+                        SplitsDataGridView.BeginEdit(true);
+
+                    if (SplitsDataGridView.EditingControl is ComboBox c)
+                        c.DroppedDown = true;
+                }));
+            }
+        }
+
+        private void CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= Splits.Count)
+                return;
+
+            if (e.ColumnIndex == 0)
+            {
+                ITTSplitComboBoxItem item = null;
+                if (e.Value is string id)
+                    item = GetGroupedSplits(GetSortMode()).FirstOrDefault(
+                        s => !s.IsHeader && s.Split?.ID == id); Log.Debug("Value is string");
+
+                if (e.Value is ITTSplitComboBoxItem)
+                    item = e.Value as ITTSplitComboBoxItem;
+
+                if (item?.Split != null)
+                    Splits[e.RowIndex] = item.Split;
+            }
+            else if (e.ColumnIndex == 1 && e.Value is bool value)
+            {
+                var split = Splits[e.RowIndex];
+
+                if (split.Type == SplitType.Cutscene)
+                    split.SplitAtStart = value;
+            }
+
+            RefreshSplitsGrid();
+            //UpdateSplits();
+        }
+
+        private void CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= Splits.Count)
+                return;
+
+            if (e.ColumnIndex == 1 && Splits[e.RowIndex].Type != SplitType.Cutscene)
+            {
+                e.PaintBackground(e.ClipBounds, true);
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.Border);
+                e.Handled = true;
+            }
         }
 
         public SortMode GetSortMode()
@@ -69,55 +290,40 @@ namespace LiveSplit.ItTakesTwo
         {
             Log.Debug("Loading settings");
             isLoading = true;
-            flowMain.SuspendLayout();
 
-            try
-            {
-                // Keep first control
-                //for (int i = flowMain.Controls.Count - 1; i > 0; i--)
-                //{
-                //    flowMain.Controls.RemoveAt(i);
-                //}
+            OrderedSplitsCheckBox.Checked = Ordered;
+            StartTriggerCheckBox.Checked = StartTrigger != null;
+            ResetTriggerCheckBox.Checked = ResetTrigger != null;
 
-                var watch = Stopwatch.StartNew();
-                foreach (var setting in flowMain.Controls.OfType<SplitSettings>().ToList())
-                {
-                    DestroySetting(setting);
-                }
-                Log.Debug($"It took {watch.ElapsedMilliseconds} ms to destroy the settings. ");
+            RefreshSplitsGrid();
 
-                OrderedSplitsCheckBox.Checked = Ordered;
-                StartTriggerCheckBox.Checked = StartTrigger != null;
-                ResetTriggerCheckBox.Checked = ResetTrigger != null;
-
-                watch.Restart();
-                foreach (var split in Splits)
-                {
-                    CreateSetting(split);
-                }
-                watch.Stop();
-                Log.Debug($"It took {watch.ElapsedMilliseconds} ms to create {Splits.Count} settings. ");
-                Log.Debug($"With an average of {watch.ElapsedMilliseconds / Splits.Count} ms per split.");
-            }
-            finally 
-            {
-                flowMain.ResumeLayout(true);
-                isLoading = false;
-            }
-            
+            isLoading = false;
         }
 
-
-
-        private void AddSplit(SplitSettings setting, int addIndex = 0)
+        private void RemoveSplitAt(int index)
         {
-            if (setting == null) 
+            if (index < 0 || index >= Splits.Count)
                 return;
 
-            int index = setting.Parent.Controls.GetChildIndex(setting) + addIndex;
-            SplitSettings newsetting = CreateSetting();
-            flowMain.Controls.SetChildIndex(newsetting, index);
-            UpdateSplits();
+            Splits.RemoveAt(index);
+            RefreshSplitsGrid();
+        }
+        private void AddSplit(ITTSplit inSplit = null, int inIndex = -1)
+        {
+            inSplit ??= new ITTSplit(SplitInfo.GetSplit("ManualSplit"));
+
+            if (inIndex < 0 || inIndex >= Splits.Count)
+            {
+                Splits.Add(inSplit);
+            }
+            else
+            {
+                Splits.Insert(inIndex, inSplit);
+            }
+
+            RefreshSplitsGrid();
+
+            //UpdateSplits();
         }
 
         private SplitSettings GetSplitSetting(object sender)
@@ -127,10 +333,10 @@ namespace LiveSplit.ItTakesTwo
 
             var control = sender as Control;
 
-            if (!flowMain.Controls.Contains(control.Parent))
+            //if (!SplitGroupBox.Controls.Contains(control.Parent))
                 return null;
 
-            return control.Parent as SplitSettings;
+            //return control.Parent as SplitSettings;
         }
 
         private void ToggleEdit(SplitSettings setting, bool enabled)
@@ -162,6 +368,9 @@ namespace LiveSplit.ItTakesTwo
                 checkBox.Visible = false;
             }
 
+            // TODO: somehow add tooltips to each item in a dropped down combobox
+            // Would also be cool to be able to add images to the tooltips.
+            // Doesn't need to be for every split, but some could be useful clarifiers.
             ToolTips.SetToolTip(comboBox, item.Split.Tooltip);
 
             return item;
@@ -171,6 +380,8 @@ namespace LiveSplit.ItTakesTwo
         {
             if (isLoading)
                 return;
+
+            flowMain.SuspendLayout();
 
             Ordered = OrderedSplitsCheckBox.Checked;
 
@@ -184,9 +395,17 @@ namespace LiveSplit.ItTakesTwo
                 ResetTrigger = UpdateComboBox(ResetTriggerComboBox, ResetTriggerCutsceneCheckBox).Split;
             }
 
+            RefreshSplitsGrid();
+
+            flowMain.ResumeLayout();
+
+            /*SplitGroupBox.SuspendLayout();
+
+            
+
             Splits.Clear();
 
-            foreach (Control c in flowMain.Controls)
+            foreach (Control c in SplitGroupBox.Controls)
             {
                 if (c is SplitSettings setting)
                 {
@@ -194,6 +413,8 @@ namespace LiveSplit.ItTakesTwo
                     Splits.Add(split);
                 }
             }
+
+            SplitGroupBox.ResumeLayout(true);*/
         }
 
         public XmlElement CreateSplitXmlElement(XmlDocument document, ITTSplit split, string elementName)
@@ -243,7 +464,7 @@ namespace LiveSplit.ItTakesTwo
                 return false;
 
             string splitDescription = node.InnerText.Trim();
-            split = SplitInfo.GetSplit(splitDescription);
+            split = new ITTSplit(SplitInfo.GetSplit(splitDescription));
             if (split == null)
                 return false;
 
@@ -309,61 +530,6 @@ namespace LiveSplit.ItTakesTwo
                 Log.Warning("No setting named \"" + failedSplit + "\"");
             }
         }
-        private SplitSettings CreateSetting(ITTSplit split = null)
-        {
-            var total = Stopwatch.StartNew();
-            var watch = Stopwatch.StartNew();
-
-            SplitSettings setting = new SplitSettings();
-            SetupComboBox(setting.splitSettingComboBox);
-
-            Log.Debug($"CreateSetting SetupComboBox took {watch.ElapsedMilliseconds} ms to execute. ");
-            watch.Restart();
-
-            setting.btnEdit.Text = "✔";
-            setting.splitSettingComboBox.SelectedIndexChanged += ControlChanged;
-            setting.btnRemove.Click += btnRemove_Click;
-            setting.btnEdit.Click += btnEdit_Click;
-            setting.btnAddAbove.Click += btnAddAbove_Click;
-            setting.btnAddBelow.Click += btnAddBelow_Click;
-            setting.ComboBoxCutsceneCheckBox.CheckedChanged += ControlChanged;
-
-            Log.Debug($"CreateSetting event subscriptions took {watch.ElapsedMilliseconds} ms to execute. ");
-            watch.Restart();
-
-            flowMain.Controls.Add(setting);
-
-            Log.Debug($"CreateSetting adding to control took {watch.ElapsedMilliseconds} ms to execute. ");
-            watch.Restart();
-
-            if (split != null)
-            {
-                SetSelectedItemTo(setting.splitSettingComboBox, split.ID);
-
-                if (split.Type == SplitType.Cutscene)
-                    setting.ComboBoxCutsceneCheckBox.Checked = split.SplitAtStart;
-
-                Log.Debug($"CreateSetting set selected item took {watch.ElapsedMilliseconds} ms to execute. ");
-                watch.Stop();
-            }
-
-            watch.Stop();
-            Log.Debug($"CreateSetting took {total.ElapsedMilliseconds} ms to execute. ");
-
-            return setting;
-        }
-
-        private void DestroySetting(SplitSettings setting)
-        {
-            setting.splitSettingComboBox.SelectedIndexChanged -= ControlChanged;
-            setting.btnRemove.Click -= btnRemove_Click;
-            setting.btnEdit.Click -= btnEdit_Click;
-            setting.btnAddAbove.Click -= btnAddAbove_Click;
-            setting.btnAddBelow.Click -= btnAddBelow_Click;
-            setting.ComboBoxCutsceneCheckBox.CheckedChanged -= ControlChanged;
-
-            flowMain.Controls.Remove(setting);
-        }
 
         #region Event Handlers
 
@@ -377,41 +543,11 @@ namespace LiveSplit.ItTakesTwo
 
             ToggleEdit(setting, !setting.splitSettingComboBox.Enabled);
         }
-        public void btnRemove_Click(object sender, EventArgs e)
-        {
-            DestroySetting(GetSplitSetting(sender));
-            UpdateSplits();
-        }
-        private void btnAddAbove_Click(object sender, EventArgs e) => AddSplit(GetSplitSetting(sender));
-        private void btnAddBelow_Click(object sender, EventArgs e) => AddSplit(GetSplitSetting(sender), 1);
 
         private void btnAddSplit_Click(object sender, EventArgs e)
         {
-            CreateSetting();
-            UpdateSplits();
+            AddSplit();
         }
-
-        private void UpdateDataSource(ComboBox comboBox, List<ITTSplitComboBoxItem> list)
-        {
-            comboBox.BeginUpdate();
-            comboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
-
-            var savedItem = comboBox.SelectedItem as ITTSplitComboBoxItem;
-
-
-            comboBox.DataSource = (new BindingSource().DataSource = list);
-
-            if (savedItem != null && !savedItem.IsHeader && savedItem.Split != null)
-                SetSelectedItemTo(comboBox, savedItem.Split.ID);
-            else
-                comboBox.SelectedIndex = -1;
-
-            comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
-            comboBox.EndUpdate();
-        }
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern int SendMessage(IntPtr hWnd, int wMsg, bool wParam, int lParam);
 
         private void radio_CheckedChanged(object sender, EventArgs e)
         {
@@ -419,24 +555,6 @@ namespace LiveSplit.ItTakesTwo
             if (radio == null || !radio.Checked)
                 return;
 
-            SendMessage(flowMain.Handle, 11, false, 0);
-            try
-            {
-                var list = GetGroupedSplits(GetSortMode());
-
-                UpdateDataSource(StartTriggerComboBox, list);
-                UpdateDataSource(ResetTriggerComboBox, list);
-
-                foreach (var item in flowMain.Controls.OfType<SplitSettings>())
-                {
-                    UpdateDataSource(item.splitSettingComboBox, list);
-                }
-            }
-            finally
-            {
-                SendMessage(flowMain.Handle, 11, true, 0);
-                flowMain.Refresh();
-            }
         }
         private void flowMain_DragDrop(object sender, DragEventArgs e) => UpdateSplits();
         private void flowMain_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
@@ -491,16 +609,19 @@ namespace LiveSplit.ItTakesTwo
             if (clearMessage == DialogResult.No)
                 return;
 
-            flowMain.SuspendLayout();
+            Splits.Clear();
+            RefreshSplitsGrid();
+
+            /*SplitGroupBox.SuspendLayout();
             StartTriggerCheckBox.Checked = false;
             ResetTriggerCheckBox.Checked = false;
             OrderedSplitsCheckBox.Checked = false;
 
-            foreach (var setting in flowMain.Controls.OfType<SplitSettings>())
+            foreach (var setting in SplitGroupBox.Controls.OfType<SplitSettings>())
             {
                 DestroySetting(setting);
             }
-            flowMain.ResumeLayout(true);
+            SplitGroupBox.ResumeLayout(true);*/
 
         }
 
@@ -537,6 +658,18 @@ namespace LiveSplit.ItTakesTwo
             public string GroupHeader { get; set; }
             public bool IsHeader => GroupHeader != null;
             public Color BackgroundColor = Color.FromArgb(230, 216, 173);
+            public string DisplayText => GetNameAndType();
+            public string ID => Split?.ID;
+            public string GetNameAndType()
+            {
+                if (IsHeader)
+                    return GroupHeader;
+
+                if (Split != null)
+                    return $"{Split.Name} ({Split.Type})";
+
+                return "";
+            }
             public override string ToString()
             {
                 if (IsHeader) 
@@ -598,14 +731,35 @@ namespace LiveSplit.ItTakesTwo
 
         private void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
+            var comboBox = sender as ComboBox;
+
+            if (comboBox == null)
+                return;
+
             if (e.Index < 0)
             {
                 e.DrawBackground();
                 return;
             }
 
-            var comboBox = sender as ComboBox;
             var item = comboBox.Items[e.Index] as ITTSplitComboBoxItem;
+
+            if (!comboBox.DroppedDown)
+            {
+                if (item?.Split != null)
+                {
+                    e.DrawBackground();
+
+                    TextRenderer.DrawText(e.Graphics, item.Split.GetNameWithTag(),
+                        comboBox.Font, e.Bounds, comboBox.ForeColor,
+                        TextFormatFlags.Left | TextFormatFlags.VerticalCenter |
+                        TextFormatFlags.EndEllipsis);
+
+                    e.DrawFocusRectangle();
+                    return;
+                }
+            }
+            
             Color backgroundColor = item.BackgroundColor;
 
            
@@ -630,17 +784,17 @@ namespace LiveSplit.ItTakesTwo
 
                 if (item.IsHeader)
                 {
-                    e.Graphics.DrawString(item.GroupHeader, Font20Bold, Brushes.Black, e.Bounds);
+                    e.Graphics.DrawString(item.GroupHeader, GetFont(20), Brushes.Black, e.Bounds);
                 }
                 else
                 {
                     var lines = item.ToString().Split('\n');
-                    float y = e.Bounds.Top + (Font.GetHeight(g) / 4);
+                    float y = e.Bounds.Top + (Font.Height / 4);
 
                     for (int i = 0; i < lines.Length; i++)
                     {
-                        var font = i == 0 ? Font10Reg : Font12Bold;
-                        float height = font.GetHeight(g);
+                        var font = i == 0 ? GetFont(10) : GetFont(12);
+                        float height = font.Height;
 
                         e.Graphics.DrawString(lines[i], font, Brushes.Black, new RectangleF(e.Bounds.Left + 3, y, e.Bounds.Width, height));
                         y += height;
@@ -660,7 +814,7 @@ namespace LiveSplit.ItTakesTwo
 
             int maxWidth = comboBox.Width;
             using (var g = comboBox.CreateGraphics())
-            using (var font = Font12Bold)
+            using (var font = GetFont(12))
             {
                 foreach (var item in GetGroupedSplits(GetSortMode()))
                 {
@@ -679,30 +833,29 @@ namespace LiveSplit.ItTakesTwo
 
         private void SetupComboBox(ComboBox comboBox)
         {
-            var watch = Stopwatch.StartNew();
-
             comboBox.DrawMode = DrawMode.OwnerDrawVariable;
 
             comboBox.BindingContext = new BindingContext();
             comboBox.DataSource = GetGroupedSplits(GetSortMode());
-            // Default is awakening start
-            //SetSelectedItemTo(comboBox, "Shed_Awakening_Awakening_Start");
             comboBox.SelectedIndex = -1;
 
             comboBox.DropDownWidth = GetCalculatedDropDownWidth(comboBox) + 20;
             comboBox.DropDownHeight = comboBox.DropDownWidth;
 
-            // Idk why this subscription takes forever?? 
+            comboBox.MeasureItem -= ComboBox_MeasureItem;
             comboBox.MeasureItem += ComboBox_MeasureItem;
 
+            comboBox.DrawItem -= ComboBox_DrawItem;
             comboBox.DrawItem += ComboBox_DrawItem;
+
+            comboBox.SelectedIndexChanged -= ComboBox_SelectedIndexChanged;
             comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             
+            comboBox.TextUpdate -= ComboBox_TextUpdate;
             comboBox.TextUpdate += ComboBox_TextUpdate;
-            comboBox.SelectionChangeCommitted += ComboBox_SelectionChangeCommitted;
 
-            watch.Stop();
-            Log.Debug($"SetupComboBox took {watch.ElapsedMilliseconds} ms to execute. ");
+            comboBox.SelectionChangeCommitted -= ComboBox_SelectionChangeCommitted;
+            comboBox.SelectionChangeCommitted += ComboBox_SelectionChangeCommitted;
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -729,11 +882,9 @@ namespace LiveSplit.ItTakesTwo
         private void ComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             var comboBox = sender as ComboBox;
-            var item = comboBox.SelectedItem as ITTSplitComboBoxItem;
-            if (item == null || item.IsHeader)
+            var value = comboBox.SelectedValue as string;
+            if (string.IsNullOrEmpty(value))
                 return;
-
-            BeginInvoke((MethodInvoker)delegate { comboBox.Text = item.Split.GetNameWithTag(); });
         }
 
         private bool isUpdatingComboBoxText = false;
@@ -773,17 +924,23 @@ namespace LiveSplit.ItTakesTwo
             if (comboBox == null || e.Index < 0)
                 return;
 
-            if (comboBox.SelectedItem is not ITTSplitComboBoxItem item)
+            if (comboBox.Items[e.Index] is not ITTSplitComboBoxItem item)
                 return;
 
-            e.ItemHeight = item.IsHeader ? Font20Bold.Height + 6 : Font10Reg.Height + Font12Bold.Height + 6;
+            e.ItemHeight = item.IsHeader ? GetFont(20).Height + 6 : GetFont(10).Height + GetFont(12).Height + 6;
         }
 
-        private static readonly Font Font10Reg  = new Font(SystemFonts.DefaultFont.FontFamily, 10, FontStyle.Regular);
-        private static readonly Font Font12Bold = new Font(SystemFonts.DefaultFont.FontFamily, 12, FontStyle.Bold);
-        private static readonly Font Font14Bold = new Font(SystemFonts.DefaultFont.FontFamily, 14, FontStyle.Bold);
-        private static readonly Font Font20Bold = new Font(SystemFonts.DefaultFont.FontFamily, 20, FontStyle.Bold);
+        private static Font GetFont(int size)
+        {
+            if (size == 20)
+                return new Font(SystemFonts.DefaultFont.FontFamily, 20, FontStyle.Bold);
+            if (size == 10)
+                return new Font(SystemFonts.DefaultFont.FontFamily, 10, FontStyle.Regular);
+            if (size == 12)
+                return new Font(SystemFonts.DefaultFont.FontFamily, 12, FontStyle.Bold);
 
+            return new Font(SystemFonts.DefaultFont.FontFamily, 14, FontStyle.Bold);
+        }
         private void EnableConsoleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             Component.ToggleConsole(EnableConsoleCheckBox.Checked);
@@ -793,6 +950,24 @@ namespace LiveSplit.ItTakesTwo
         {
             var checkBox = sender as CheckBox;
             TimeWithoutCutscenes = checkBox.Checked;
+        }
+
+        private void removeSplitButton_Click(object sender, EventArgs e)
+        {
+            if (SplitsDataGridView.SelectedCells.Count <= 0)
+                return;
+
+            foreach (DataGridViewCell cell in SplitsDataGridView.SelectedCells)
+            {
+                SplitsDataGridView.Rows[cell.RowIndex].Selected = true;
+            }
+
+            for (int i = SplitsDataGridView.SelectedRows.Count - 1; i >= 0; i--)
+            {
+                Splits.RemoveAt(SplitsDataGridView.SelectedRows[i].Index);
+            }
+
+            RefreshSplitsGrid();
         }
     }
 }

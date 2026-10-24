@@ -24,10 +24,12 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnAddSplit = new System.Windows.Forms.Button();
             this.flowMain = new System.Windows.Forms.FlowLayoutPanel();
             this.flowOptions = new System.Windows.Forms.FlowLayoutPanel();
             this.Options_GroupBox = new System.Windows.Forms.GroupBox();
+            this.SplitsDataGridView = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ResetTriggerCutsceneCheckBox = new System.Windows.Forms.CheckBox();
@@ -49,9 +51,11 @@
             this.rdAlpha = new System.Windows.Forms.RadioButton();
             this.rdType = new System.Windows.Forms.RadioButton();
             this.ToolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.removeSplitButton = new System.Windows.Forms.Button();
             this.flowMain.SuspendLayout();
             this.flowOptions.SuspendLayout();
             this.Options_GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitsDataGridView)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -79,7 +83,7 @@
             this.flowMain.Location = new System.Drawing.Point(0, 0);
             this.flowMain.Margin = new System.Windows.Forms.Padding(0);
             this.flowMain.Name = "flowMain";
-            this.flowMain.Size = new System.Drawing.Size(465, 167);
+            this.flowMain.Size = new System.Drawing.Size(465, 501);
             this.flowMain.TabIndex = 0;
             this.flowMain.WrapContents = false;
             this.flowMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowMain_DragDrop);
@@ -94,24 +98,57 @@
             this.flowOptions.Location = new System.Drawing.Point(0, 0);
             this.flowOptions.Margin = new System.Windows.Forms.Padding(0);
             this.flowOptions.Name = "flowOptions";
-            this.flowOptions.Size = new System.Drawing.Size(465, 167);
+            this.flowOptions.Size = new System.Drawing.Size(465, 501);
             this.flowOptions.TabIndex = 0;
             // 
             // Options_GroupBox
             // 
+            this.Options_GroupBox.Controls.Add(this.versionLabel);
+            this.Options_GroupBox.Controls.Add(this.removeSplitButton);
+            this.Options_GroupBox.Controls.Add(this.SplitsDataGridView);
             this.Options_GroupBox.Controls.Add(this.tabControl1);
             this.Options_GroupBox.Controls.Add(this.WikiButton);
             this.Options_GroupBox.Controls.Add(this.PresetsButton);
             this.Options_GroupBox.Controls.Add(this.ClearAllButton);
             this.Options_GroupBox.Controls.Add(this.btnAddSplit);
-            this.Options_GroupBox.Controls.Add(this.versionLabel);
             this.Options_GroupBox.Controls.Add(this.SortBy_GroupBox);
             this.Options_GroupBox.Location = new System.Drawing.Point(3, 3);
             this.Options_GroupBox.Name = "Options_GroupBox";
-            this.Options_GroupBox.Size = new System.Drawing.Size(459, 161);
+            this.Options_GroupBox.Size = new System.Drawing.Size(459, 495);
             this.Options_GroupBox.TabIndex = 6;
             this.Options_GroupBox.TabStop = false;
             this.Options_GroupBox.Text = "Options";
+            // 
+            // SplitsDataGridView
+            // 
+            this.SplitsDataGridView.AllowUserToResizeColumns = false;
+            this.SplitsDataGridView.AllowUserToResizeRows = false;
+            this.SplitsDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.SplitsDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.SplitsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.SplitsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.SplitsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.SplitsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.SplitsDataGridView.ColumnHeadersVisible = false;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.SplitsDataGridView.DefaultCellStyle = dataGridViewCellStyle10;
+            this.SplitsDataGridView.GridColor = System.Drawing.SystemColors.Control;
+            this.SplitsDataGridView.Location = new System.Drawing.Point(6, 158);
+            this.SplitsDataGridView.Name = "SplitsDataGridView";
+            this.SplitsDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.SplitsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.SplitsDataGridView.RowTemplate.Height = 25;
+            this.SplitsDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SplitsDataGridView.Size = new System.Drawing.Size(447, 300);
+            this.SplitsDataGridView.TabIndex = 14;
+            this.SplitsDataGridView.VirtualMode = true;
             // 
             // tabControl1
             // 
@@ -227,7 +264,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(315, 98);
+            this.tabPage2.Size = new System.Drawing.Size(315, 83);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Debug";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -244,7 +281,7 @@
             // 
             // WikiButton
             // 
-            this.WikiButton.Location = new System.Drawing.Point(203, 128);
+            this.WikiButton.Location = new System.Drawing.Point(351, 128);
             this.WikiButton.Name = "WikiButton";
             this.WikiButton.Size = new System.Drawing.Size(55, 24);
             this.WikiButton.TabIndex = 10;
@@ -254,7 +291,7 @@
             // 
             // PresetsButton
             // 
-            this.PresetsButton.Location = new System.Drawing.Point(138, 128);
+            this.PresetsButton.Location = new System.Drawing.Point(290, 128);
             this.PresetsButton.Name = "PresetsButton";
             this.PresetsButton.Size = new System.Drawing.Size(55, 24);
             this.PresetsButton.TabIndex = 9;
@@ -264,19 +301,21 @@
             // 
             // ClearAllButton
             // 
-            this.ClearAllButton.Location = new System.Drawing.Point(73, 128);
+            this.ClearAllButton.Location = new System.Drawing.Point(8, 464);
             this.ClearAllButton.Name = "ClearAllButton";
-            this.ClearAllButton.Size = new System.Drawing.Size(55, 24);
+            this.ClearAllButton.Size = new System.Drawing.Size(76, 24);
             this.ClearAllButton.TabIndex = 8;
-            this.ClearAllButton.Text = "Clear";
+            this.ClearAllButton.Text = "Clear Splits";
             this.ClearAllButton.UseVisualStyleBackColor = true;
             this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
             // 
             // versionLabel
             // 
-            this.versionLabel.Location = new System.Drawing.Point(271, 128);
+            this.versionLabel.Location = new System.Drawing.Point(274, -6);
+            this.versionLabel.MaximumSize = new System.Drawing.Size(195, 24);
+            this.versionLabel.MinimumSize = new System.Drawing.Size(145, 24);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(182, 24);
+            this.versionLabel.Size = new System.Drawing.Size(175, 24);
             this.versionLabel.TabIndex = 7;
             this.versionLabel.Text = "Autosplitter Version: x.x.x.x";
             this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -332,6 +371,16 @@
             // 
             this.ToolTips.ShowAlways = true;
             // 
+            // removeSplitButton
+            // 
+            this.removeSplitButton.Location = new System.Drawing.Point(70, 128);
+            this.removeSplitButton.Name = "removeSplitButton";
+            this.removeSplitButton.Size = new System.Drawing.Size(79, 24);
+            this.removeSplitButton.TabIndex = 15;
+            this.removeSplitButton.Text = "Remove Split";
+            this.removeSplitButton.UseVisualStyleBackColor = true;
+            this.removeSplitButton.Click += new System.EventHandler(this.removeSplitButton_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,12 +391,13 @@
             this.Controls.Add(this.flowMain);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "Settings";
-            this.Size = new System.Drawing.Size(465, 167);
+            this.Size = new System.Drawing.Size(465, 501);
             this.Load += new System.EventHandler(this.Settings_Load);
             this.flowMain.ResumeLayout(false);
             this.flowMain.PerformLayout();
             this.flowOptions.ResumeLayout(false);
             this.Options_GroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitsDataGridView)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -385,5 +435,7 @@
         private System.Windows.Forms.CheckBox EnableConsoleCheckBox;
         private System.Windows.Forms.CheckBox StartTriggerCutsceneCheckBox;
         private System.Windows.Forms.CheckBox ResetTriggerCutsceneCheckBox;
+        private System.Windows.Forms.DataGridView SplitsDataGridView;
+        private System.Windows.Forms.Button removeSplitButton;
     }
 }

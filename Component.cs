@@ -163,6 +163,7 @@ namespace LiveSplit.ItTakesTwo
             }
 
         }
+        private SortedSet<string> uniqueFailedSplits = new SortedSet<string>();
 
         public void OnReset(object sender, TimerPhase e)
         {
@@ -175,10 +176,15 @@ namespace LiveSplit.ItTakesTwo
             Console.ForegroundColor = ConsoleColor.Red;
             Log.Header(LogLevel.INFO, "Reset");
 
+            var startedTime = lastRun.Started?.Time;
+            var endedTime = lastRun.Ended?.Time;
+            var duration = endedTime - startedTime;
+
             string[] resetLines = {
                 "Run Reset! Here's some stats: ",
-               $"Started: {lastRun.Started?.Time.ToString()}",
-               $"Ended: {lastRun.Ended?.Time.ToString()}",
+               $"Started: {startedTime.ToString()}",
+               $"Ended: {endedTime.ToString()}",
+               $"Duration: {duration.ToString()}",
                 "",
                $"This run had {GetData().SkippableCutsceneCount} skippable cutscenes, with an average of {GetData().AvgCutsceneLength.ToString(@"ss\s\ fff\m\s")} per cutscene. ",
                 "" ,
@@ -191,6 +197,8 @@ namespace LiveSplit.ItTakesTwo
                 Log.Header(LogLevel.INFO, "Splits without match");
                 foreach (var value in ITTSplit.FailedSplits)
                 {
+                    if (!uniqueFailedSplits.Contains(value))
+                        uniqueFailedSplits.Add(value);
                     Log.Info("\"" + value.ToString() + "\" - does not have a defined SplitName value");
                 }
                 ITTSplit.FailedSplits.Clear();
@@ -250,6 +258,13 @@ namespace LiveSplit.ItTakesTwo
         public void Dispose()
         {
             if (CurrentRun.Model == null) return;
+
+            if (uniqueFailedSplits.Count > 0)
+            {
+                string[] lines = ["All unique splits without a defined value: ", .. uniqueFailedSplits];
+                Log.Info("\n" + FormatAsBox(lines));
+            }
+            
 
             CurrentRun.Model.CurrentState.OnReset -= OnReset;
             CurrentRun.Model.CurrentState.OnPause -= OnPause;

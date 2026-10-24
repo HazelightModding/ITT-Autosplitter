@@ -105,6 +105,8 @@ public class Splits
 
         public static implicit operator ITTSplit(string nameID) => Get(nameID);
 
+        private static HashSet<string> _ignoredSplits = [
+            ];
         public static ITTSplit Get(string nameID)
         {
             if (nameID == string.Empty) return null;
@@ -115,7 +117,7 @@ public class Splits
             }
             catch (Exception)
             {
-                if (nameID == string.Empty || nameID.ToLower() == "none")
+                if (nameID == string.Empty || nameID.ToLower() == "none" || _ignoredSplits.Contains(nameID))
                     return null;
 
                 Logger.GetLogger("Split").Warning("\"{0}\" isn't a recognized split.", nameID);
@@ -214,6 +216,7 @@ public class Splits
         public const string MainMenu = "Main Menu";
     }
 
+    // TODO: Make this a json or something
     public static readonly ITTSplitList SplitInfo = new() {
         #region LEVELS
             new ITTSplit("Menu_BP") {
